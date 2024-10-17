@@ -1,43 +1,81 @@
-# Inicijalne upute za prijavu projekta iz Razvoja aplikacija za mobilne i pametne uređaje
+# Naziv projekta 
 
-Poštovane kolegice i kolege, 
+(u redak iznad navedite kratki proizvoljni naziv projekta prikladan akademskoj zajednici, a ovaj tekst kao i uvodni tekst iznad obrišite 
 
-čestitamo vam jer ste uspješno prijavili svoj projektni tim na kolegiju Razvoj aplikacija za mobilne i pametne uređaje, te je za vas automatski kreiran repozitorij koji ćete koristiti za verzioniranje vašega koda i za jednostavno dokumentiranje istoga.
+ 
 
-Ovaj dokument (README.md) predstavlja **osobnu iskaznicu vašeg projekta**. Vaš prvi zadatak je **prijaviti vlastiti projektni prijedlog** na način da ćete prijavu vašeg projekta, sukladno uputama danim u ovom tekstu, napisati upravo u ovaj dokument, umjesto ovoga teksta.
+## Projektni tim 
 
-Za upute o sintaksi koju možete koristiti u ovom dokumentu i kod pisanje vaše projektne dokumentacije pogledajte [ovaj link](https://guides.github.com/features/mastering-markdown/).
-Sav programski kod potrebno je verzionirati u glavnoj **master** grani i **obvezno** smjestiti u mapu Software. Sve artefakte (npr. slike) koje ćete koristiti u vašoj dokumentaciju obvezno verzionirati u posebnoj grani koja je već kreirana i koja se naziva **master-docs** i smjestiti u mapu Documentation.
+ 
 
-Nakon vaše prijave bit će vam dodijeljen mentor s kojim ćete tijekom semestra raditi na ovom projektu. Mentor će vam slati povratne informacije kroz sekciju Discussions također dostupnu na GitHubu vašeg projekta. A sada, vrijeme je da prijavite vaš projekt. Za prijavu vašeg projektnog prijedloga molimo vas koristite **predložak** koji je naveden u nastavku, a započnite tako da kliknete na *olovku* u desnom gornjem kutu ovoga dokumenta :) 
+Ime i prezime | E-mail adresa (FOI) | JMBAG | Github korisničko ime | Seminarska grupa 
 
-# Naziv projekta
-(u redak iznad navedite kratki proizvoljni naziv projekta prikladan akademskoj zajednici, a ovaj tekst kao i uvodni tekst iznad obrišite)
+------------  | ------------------- | ----- | --------------------- | ---------------- 
 
-## Projektni tim
-(svi članovi tima moraju biti iz iste seminarske grupe)
+Emanuel Valec | evalec21@foi.hr | 0016156391 | EmanuelValec | G02 
 
-Ime i prezime | E-mail adresa (FOI) | JMBAG | Github korisničko ime | Seminarska grupa
-------------  | ------------------- | ----- | --------------------- | ----------------
-Ime i prezime | mojaadresa@foi.hr | 000000000 | githubuser | G01
-Ime i prezime | ... | ... | ... | ...
+Dominik Černjević | dcernjevi21@foi.hr | 0016155459 | dcernjevi21 | G02 
 
-## Opis domene
-Umjesto ovih uputa opišite domenu ili problem koji pokrivate vašim projektom. Domena može biti proizvoljna, ali obratite pozornost da sukladno ishodima učenja, domena omogući primjenu zahtijevanih koncepata kako je to navedeno u sljedećem poglavlju. Priložite odgovarajuće skice gdje je to prikladno.
+Nikola Huzjak | nhuzjak20@foi.hr | ------------- | nhuzjak20 | G02 
 
-## Specifikacija projekta
-Umjesto ovih uputa opišite zahtjeve za funkcionalnošću mobilne aplikacije ili aplikacije za pametne uređaje. Pobrojite osnovne funkcionalnosti i za svaku naznačite ime odgovornog člana tima. Opišite osnovnu buduću arhitekturu programskog proizvoda. Obratite pozornost da mobilne aplikacije često zahtijevaju pozadinske servise. Također uzmite u obzir da bi svaki član tima trebao biti odgovoran za otprilike 3 funkcionalnosti, te da bi opterećenje članova tima trebalo biti ujednačeno. Priložite odgovarajuće dijagrame i skice gdje je to prikladno. Funkcionalnosti sustava bobrojite u tablici ispod koristeći predložak koji slijedi:
+ 
 
-Oznaka | Naziv | Kratki opis | Odgovorni član tima
------- | ----- | ----------- | -------------------
-F01 | Login | Za pristup dnevniku potrebnba je autentikacija korisnika pomoću login funkcionalnosti. Korisnik se logira s podacima koji su mu dodijeljeni prilikom ... | Zlatko Stapić
-F02 | Pregled dnevnika | .... | ...
+## Opis domene 
 
-## Tehnologije i oprema
-Umjesto ovih uputa jasno popišite sve tehnologije, alate i opremu koju ćete koristiti pri implementaciji vašeg rješenja. Vaše rješenje može biti implementirano u bilo kojoj tehnologiji za razvoj mobilnih aplikacija ili aplikacija za pametne uređaje osim u hibridnim web tehnologijama kao što su React Native ili HTML+CSS+JS. Tehnologije koje ćete koristiti bi trebale biti javno dostupne, a ako ih ne budemo obrađivali na vježbama u vašoj dokumentaciji ćete morati navesti način preuzimanja, instaliranja i korištenja onih tehnologija koje su neopbodne kako bi se vaš programski proizvod preveo i pokrenuo. Pazite da svi alati koje ćete koristiti moraju imati odgovarajuću licencu. Što se tiče zahtjeva nastavnika, obvezno je koristiti git i GitHub za verzioniranje programskog koda, GitHub Wiki za pisanje jednostavne dokumentacije sukladno uputama mentora, a projektne zadatke je potrebno planirati i pratiti u alatu GitHub projects.
+DJ-i imaju ključnu ulogu u stvaranju atmosfere na raznim glazbenim eventima, festivalima, klubovima i privatnim zabavama. Korisnici koji prisustvuju događanjima često traže način da brzo i lako pronađu informacije o nadolazećim glazbenim događajima, DJ-ima, lokacijama i mogućnosti interakcije, kao što je naručivanje pjesama tijekom nastupa. 
 
-## Baza podataka i web server
-Nastavnici vam mogu pripremiti MySQL bazu podataka i web server na kojem možete postaviti jednostavne web servise. Ako želite da vam pripremimo ove sustave obavezno to navedite umjesto ovog teksta s napomenom "Tražimo pristup serveru na kojemu ćemo moći imati bazu podataka". Alternativno, možete koristiti bilo koji online dostupan sustav kao i studentske licence na pojedinim platformama kao što su Heroku ili Azure. Međutim, budite spremni da vas nastavnici navedu na to da lokalno stvorite okruženje na kojemu se server pokreće i da se aplikacija na istoj mreži spaja na server.
+ 
 
-## .gitignore
-Uzmite u obzir da je u mapi Software .gitignore konfiguriran za nekoliko tehnologija, ali samo ako će projekti biti smješteni direktno u mapu Software ali ne i u neku pod mapu. Nakon odabira konačne tehnologije i projekta obavezno dopunite/premjestite gitignore kako bi vaš projekt zadovoljavao kriterije koji su opisani u ReadMe.md dokumentu dostupnom u mapi Software.
+Problem se očituje u nedostatku jedinstvene platforme koja omogućava DJ-evima da na jednom mjestu efikasno upravljaju svojim angažmanima, financijama, promocijom i interakcijom s publikom, te koji istovremeno nude publici jednostavan pristup relevantnim informacijama i uslugama vezanim uz glazbene događaje. 
+
+ 
+
+## Specifikacija projekta 
+
+Opišite osnovnu buduću arhitekturu programskog proizvoda. Obratite pozornost da mobilne aplikacije često zahtijevaju pozadinske servise. Priložite odgovarajuće dijagrame i skice gdje je to prikladno.  
+
+ 
+
+Oznaka | Naziv | Kratki opis | Odgovorni član tima 
+
+------ | ----- | ----------- | ------------------- 
+
+F01 | Registracija | Za pristup aplikaciji prvo treba stvoriti korisnički račun tako što korisnik upisuje valjanu e-mail adresu i lozinku koji se spremaju u bazu podataka. Korisniku se šalje e-mail za potvrdu računa. | -- 
+
+F02 | Prijava | Za pristup aplikaciji potrebnba je autentikacija korisnika pomoću login funkcionalnosti. Korisnik se logira s podacima koje si je dodijelio prilikom registracije u aplikaciju | -- 
+
+F03 | Evidencija DJ angažmana | DJ može unositi podatke o svojim nastupima (datum, lokaciju, vrijeme i honorar. Unosom angažmana omogućuje mu se pregled statistike. | -- 
+
+F04 | Kalendar događanja | DJ može pregledavati i uređivati kalendar svojih nastupa, dok korisnici mogu pretraživati događaje po datumu, lokaciji ili DJ-u. | . 
+
+F05 | Pretraživanje DJ-a i događanja | Korisnici mogu pretraživati DJ profile prema različitim kriterijama (naziv, lokacija, žanr). Prikazivanje informacija uključuje popis događa i biografije DJ-eva. | . 
+
+F06 | Export DJ statistike | DJ može izvesti izvještaj svojih gaža i financijskih podataka u PDF formatu | . 
+
+F07 | Statistike DJ-a | DJ može pregledavati statistiku za broj gaža kroz proizvoljno vremensko razdoblje, zarade, najčešće gaže... | . 
+
+F08 | Recenziranje DJ-eva | Korisnici mogu ostavljati recenzije i ocjene za DJ-eve nakon njihovih nastupa, a DJ-evi mogu pratiti povratne informacije kako bi se poboljšali. | . 
+
+F09 | Izvještavanje korisnika o budućim događajima | Korisnici mogu postaviti notifikacije za nadolazeće DJ nastupe ili događanja prema njihovim interesima (omiljeni DJ, omiljeni žanr). | . 
+
+F10 | Plaćanje za narudžbu pjemse online karticom | Korisnici mogu naručiti pjesmu od DJ-a tijekom nastupa putem aplikacije i izvršiti online plaćanje karticom. Prije nego se obavi prijenos sredstava DJ mora odobriti zahtjev, ukoliko odbije rezervirana sredstva sve otključavaju korisniku. | . 
+
+F11 | Osnovna implementacija profila DJ-a | DJ može na svoj profil postaviti profilnu sliku i baner, dodati svoju biografiju, žanrove koje svira...  Korisnik na svojem profilu može postaviti profilnu sliku te preference .... | . 
+
+ 
+
+## Tehnologije i oprema 
+
+Umjesto ovih uputa jasno popišite sve tehnologije, alate i opremu koju ćete koristiti pri implementaciji vašeg rješenja. Vaše rješenje može biti implementirano u bilo kojoj tehnologiji za razvoj mobilnih aplikacija ili aplikacija za pametne uređaje osim u hibridnim web tehnologijama kao što su React Native ili HTML+CSS+JS. Tehnologije koje ćete koristiti bi trebale biti javno dostupne, a ako ih ne budemo obrađivali na vježbama u vašoj dokumentaciji ćete morati navesti način preuzimanja, instaliranja i korištenja onih tehnologija koje su neopbodne kako bi se vaš programski proizvod preveo i pokrenuo. Pazite da svi alati koje ćete koristiti moraju imati odgovarajuću licencu. Što se tiče zahtjeva nastavnika, obvezno je koristiti git i GitHub za verzioniranje programskog koda, GitHub Wiki za pisanje jednostavne dokumentacije sukladno uputama mentora, a projektne zadatke je potrebno planirati i pratiti u alatu GitHub projects. 
+
+ 
+
+## Baza podataka i web server 
+
+Nastavnici vam mogu pripremiti MySQL bazu podataka i web server na kojem možete postaviti jednostavne web servise. Ako želite da vam pripremimo ove sustave obavezno to navedite umjesto ovog teksta s napomenom "Tražimo pristup serveru na kojemu ćemo moći imati bazu podataka". Alternativno, možete koristiti bilo koji online dostupan sustav kao i studentske licence na pojedinim platformama kao što su Heroku ili Azure. Međutim, budite spremni da vas nastavnici navedu na to da lokalno stvorite okruženje na kojemu se server pokreće i da se aplikacija na istoj mreži spaja na server. 
+
+ 
+
+## .gitignore 
+
+Uzmite u obzir da je u mapi Software .gitignore konfiguriran za nekoliko tehnologija, ali samo ako će projekti biti smješteni direktno u mapu Software ali ne i u neku pod mapu. Nakon odabira konačne tehnologije i projekta obavezno dopunite/premjestite gitignore kako bi vaš projekt zadovoljavao kriterije koji su opisani u ReadMe.md dokumentu dostupnom u mapi Software. 

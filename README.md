@@ -7,7 +7,7 @@ Ime i prezime | E-mail adresa (FOI) | JMBAG | Github korisničko ime | Seminarsk
 ------------  | ------------------- | ----- | ----------------------| ----------------
 Emanuel Valec | evalec21@foi.hr | 0016156391 | evalec21 | G02 
 Dominik Černjević | dcernjevi21@foi.hr | 0016155459 | dcernjevi21 | G02 
-Nikola Huzjak | nhuzjak20@foi.hr | ------------- | nhuzjak20 | G02 
+Nikola Huzjak | nhuzjak20@foi.hr | 0016147728 | nhuzjak20 | G02 
 
 
 ## Opis domene 

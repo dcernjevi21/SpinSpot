@@ -25,13 +25,13 @@ Opišite osnovnu buduću arhitekturu programskog proizvoda. Obratite pozornost d
 | ----------- | ----------- | ----| ---------------------|
 | F01      | Registracija i prijava | Za pristup aplikaciji prvo treba stvoriti korisnički račun tako što korisnik upisuje valjanu e-mail adresu i lozinku koji se spremaju u bazu podataka. Korisniku se šalje e-mail za potvrdu računa uz sve to za pristup aplikaciji potrebna je autentikacija korisnika pomoću login funkcionalnosti. Korisnik se logira s podacima koje si je dodijelio prilikom registracije u aplikaciju ||
 | F02  | Evidencija DJ angažmana | DJ može unositi podatke o svojim nastupima (datum, lokaciju, vrijeme i honorar. Unosom angažmana omogućuje mu se pregled statistike. | |
-| FO4 | Kalendar događanja | DJ može pregledavati i uređivati kalendar svojih nastupa, dok korisnici mogu pretraživati događaje po datumu, lokaciji ili DJ-u. | |
-|F05| Pretraživanje DJ-a i događanja | Korisnici mogu pretraživati DJ profile prema različitim kriterijama (naziv, lokacija, žanr). Prikazivanje informacija uključuje popis događa i biografije DJ-eva. | |
-|F06|Export DJ statistike | DJ može izvesti izvještaj svojih gaža i financijskih podataka u PDF formatu i uz to DJ može pregledavati statistiku za broj gaža kroz proizvoljno vremensko razdoblje, zarade, najčešće gaže... ||
-|F08 | Recenziranje DJ-eva | Korisnici mogu ostavljati recenzije i ocjene za DJ-eve nakon njihovih nastupa, a DJ-evi mogu pratiti povratne informacije kako bi se poboljšali.||
-|F09 | Izvještavanje korisnika o budućim događajima | Korisnici mogu postaviti notifikacije za nadolazeće DJ nastupe ili događanja prema njihovim interesima (omiljeni DJ, omiljeni žanr). ||
-|F10 | Plaćanje za narudžbu pjemse online karticom | Korisnici mogu naručiti pjesmu od DJ-a tijekom nastupa putem aplikacije i izvršiti online plaćanje karticom. Prije nego se obavi prijenos sredstava DJ mora odobriti zahtjev, ukoliko odbije rezervirana sredstva sve otključavaju korisniku. | |
-|F11 | Osnovna implementacija profila DJ-a | DJ može na svoj profil postaviti profilnu sliku i baner, dodati svoju biografiju, žanrove koje svira... Korisnik na svojem profilu može postaviti profilnu sliku te preference .... | |
+| F03| Kalendar događanja | DJ može pregledavati i uređivati kalendar svojih nastupa, dok korisnici mogu pretraživati događaje po datumu, lokaciji ili DJ-u. | |
+|F04| Pretraživanje DJ-a i događanja | Korisnici mogu pretraživati DJ profile prema različitim kriterijama (naziv, lokacija, žanr). Prikazivanje informacija uključuje popis događa i biografije DJ-eva. | |
+|F05|Export DJ statistike | DJ može izvesti izvještaj svojih gaža i financijskih podataka u PDF formatu i uz to DJ može pregledavati statistiku za broj gaža kroz proizvoljno vremensko razdoblje, zarade, najčešće gaže... ||
+|F06 | Recenziranje DJ-eva | Korisnici mogu ostavljati recenzije i ocjene za DJ-eve nakon njihovih nastupa, a DJ-evi mogu pratiti povratne informacije kako bi se poboljšali.||
+|F07 | Izvještavanje korisnika o budućim događajima | Korisnici mogu postaviti notifikacije za nadolazeće DJ nastupe ili događanja prema njihovim interesima (omiljeni DJ, omiljeni žanr). ||
+|F08 | Plaćanje za narudžbu pjemse online karticom | Korisnici mogu naručiti pjesmu od DJ-a tijekom nastupa putem aplikacije i izvršiti online plaćanje karticom. Prije nego se obavi prijenos sredstava DJ mora odobriti zahtjev, ukoliko odbije rezervirana sredstva sve otključavaju korisniku. | |
+|F09 | Osnovna implementacija profila DJ-a | DJ može na svoj profil postaviti profilnu sliku i baner, dodati svoju biografiju, žanrove koje svira... Korisnik na svojem profilu može postaviti profilnu sliku te preference .... | |
 
 
 ## Tehnologije i oprema 

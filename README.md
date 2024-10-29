@@ -27,11 +27,11 @@ Opišite osnovnu buduću arhitekturu programskog proizvoda. Obratite pozornost d
 | F02  | Evidencija DJ angažmana | DJ može unositi podatke o svojim nastupima (datum, lokaciju, vrijeme i honorar. Unosom angažmana omogućuje mu se pregled statistike. | Dominik Černjević |
 | F03| Kalendar događanja | DJ može pregledavati i uređivati kalendar svojih nastupa, dok korisnici mogu pretraživati događaje po datumu, lokaciji ili DJ-u. | |
 |F04| Pretraživanje DJ-a i događanja | Korisnici mogu pretraživati DJ profile prema različitim kriterijama (naziv, lokacija, žanr). Prikazivanje informacija uključuje popis događa i biografije DJ-eva. | |
-|F05| Export DJ statistike | DJ može izvesti izvještaj svojih gaža i financijskih podataka u PDF formatu i uz to DJ može pregledavati statistiku za broj gaža kroz proizvoljno vremensko razdoblje, zarade, najčešći angažmani... | Dominik Černjević |
+|F05| Export DJ statistike | DJ može izvesti izvještaj svojih gaža i financijskih podataka u PDF formatu i uz to DJ može pregledavati statistiku za broj gaža kroz proizvoljno vremensko razdoblje, zarade, najčešći angažmani i sl. | Dominik Černjević |
 |F06 | Recenziranje DJ-eva | Korisnici mogu ostavljati recenzije i ocjene za DJ-eve nakon njihovih nastupa, a DJ-evi mogu pratiti povratne informacije kako bi se poboljšali.||
 |F07 | Izvještavanje korisnika o budućim događajima | Korisnici mogu postaviti notifikacije za nadolazeće DJ nastupe ili događanja prema njihovim interesima (omiljeni DJ, omiljeni žanr). | Dominik Černjević |
 |F08 | Plaćanje za narudžbu pjesme Paypalom | Korisnici mogu naručiti pjesmu od DJ-a tijekom nastupa putem aplikacije i izvršiti online plaćanje preko Paypala. Prije nego se obavi prijenos sredstava DJ mora odobriti zahtjev, ukoliko odbije rezervirana sredstva sve otključavaju korisniku. | |
-|F09 | Osnovna implementacija profila DJ-a | DJ može na svoj profil postaviti profilnu sliku i baner, dodati svoju biografiju, žanrove koje svira... Korisnik na svojem profilu može postaviti profilnu sliku te preference .... | |
+|F09 | Osnovna implementacija profila DJ-a | DJ može na svoj profil postaviti profilnu sliku i baner, dodati svoju biografiju, žanrove koje svira i sl. Korisnik na svojem profilu može postaviti profilnu sliku te preference i sl. | |
 
 
 ## Tehnologije i oprema 
@@ -46,11 +46,7 @@ Verzioniranje koda: Git i GitHub
 
 Upravljanje zadacima: GitHub Projects
 
-Obrada platnih transakcija: Stripe
-
-...
-
-Umjesto ovih uputa jasno popišite sve tehnologije, alate i opremu koju ćete koristiti pri implementaciji vašeg rješenja. Vaše rješenje može biti implementirano u bilo kojoj tehnologiji za razvoj mobilnih aplikacija ili aplikacija za pametne uređaje osim u hibridnim web tehnologijama kao što su React Native ili HTML+CSS+JS. Tehnologije koje ćete koristiti bi trebale biti javno dostupne, a ako ih ne budemo obrađivali na vježbama u vašoj dokumentaciji ćete morati navesti način preuzimanja, instaliranja i korištenja onih tehnologija koje su neopbodne kako bi se vaš programski proizvod preveo i pokrenuo. Pazite da svi alati koje ćete koristiti moraju imati odgovarajuću licencu. Što se tiče zahtjeva nastavnika, obvezno je koristiti git i GitHub za verzioniranje programskog koda, GitHub Wiki za pisanje jednostavne dokumentacije sukladno uputama mentora, a projektne zadatke je potrebno planirati i pratiti u alatu GitHub projects. 
+Obrada platnih transakcija: Stripe ili Paypal
 
  
 

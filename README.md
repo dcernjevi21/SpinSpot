@@ -1,5 +1,4 @@
-# Naziv projekta 
-
+# SpinSpot
 
 ## Projektni tim 
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,12 @@ class MainActivity : AppCompatActivity() {
 
     //za dodavanje gaže
     private lateinit var btnAddGig: FloatingActionButton
+    private lateinit var txt1: TextView
+    private lateinit var txt2: TextView
+    private lateinit var txt3: TextView
+    private lateinit var txt4: TextView
+    private lateinit var txt5: TextView
+    private lateinit var txt6: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         btnAddGig = findViewById(R.id.fab_add_gig)
         btnAddGig.setOnClickListener {
             showDialog()
-            Log.i("ispis","test")
         }
     }
 
@@ -47,10 +53,24 @@ class MainActivity : AppCompatActivity() {
             .setTitle(getString(R.string.add_new_gig))
             .setPositiveButton(getString(R.string.add_new_gig)) { _, _ ->
                 val newGig = dialogHelper.buildGig()
-                Log.d("ispis","test")
                 Log.d("ispis", "Gig Info: Date: ${newGig.gigDate}, Location: ${newGig.location}, Type: ${newGig.gigType}, Name: ${newGig.name}, Start Time: ${newGig.gigStartTime}, Fee: ${newGig.gigFee}")
+                txt1 = findViewById(R.id.textView2)
+                txt2 = findViewById(R.id.textView3)
+                txt3 = findViewById(R.id.textView4)
+                txt4 = findViewById(R.id.textView5)
+                txt5 = findViewById(R.id.textView6)
+                txt6 = findViewById(R.id.textView7)
+                txt1.text = newGig.gigDate
+                txt2.text = newGig.location
+                txt3.text = newGig.gigType
+                txt4.text = newGig.name
+                txt5.text = newGig.gigStartTime
+                txt6.text = newGig.gigFee.toString()
             }
             .show()
         dialogHelper.activateDateTimeListeners()
     }
 }
+
+
+

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">BassByteCreators</string>
+    <string name="gig_date"> Datum  </string>
+    <string name="location"> Lokacija </string>
+    <string name="gigType"> Tip </string>
+    <string name="gig_host_name"> Ime organizatora </string>
+    <string name="gig_start_time"> Početak </string>
+    <string-array name="gig_types">
+        <item> Klub </item>
+        <item> Privatni događaj </item>
+    </string-array>
 </resources>

@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:labelFor="@id/et_add_djgig_dialog_gigFee"
-        android:text="@string/gig_host_name" />
+        android:text="@string/gig_fee" />
     <EditText
         android:id="@+id/et_add_djgig_dialog_gigFee"
         android:layout_width="match_parent"

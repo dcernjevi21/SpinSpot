@@ -10,11 +10,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.Console
 
 class MainActivity : AppCompatActivity() {
+
 
     //za dodavanje gaže
     private lateinit var btnAddGig: FloatingActionButton

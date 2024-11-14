@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.adapters.SearchAdapter
 import com.example.bassbytecreators.entities.DJperson
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
 import com.example.bassbytecreators.helpers.MockDataLoader
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var djRecyclerView : RecyclerView
     var djList : List<DJperson> = MockDataLoader().getDemoDJdata()
     lateinit var searchAdapter: SearchAdapter
+
 
     //za dodavanje gaže
     private lateinit var btnAddGig: FloatingActionButton

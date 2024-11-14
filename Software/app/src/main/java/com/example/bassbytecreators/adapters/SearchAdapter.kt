@@ -21,8 +21,8 @@ class SearchAdapter(private var DJlist : ArrayList<DJperson> ): RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.djName.text = DJlist.get(position).toString()
-        holder.djGenre.text = DJlist.get(position).toString()
+        holder.djName.text = DJlist.get(position).name
+        holder.djGenre.text = DJlist.get(position).genre
 
     }
 

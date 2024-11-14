@@ -1,5 +1,6 @@
 package com.example.bassbytecreators.entities
 
-class DJperson(name: String, genre: String, imagePath: String?) {
+data class DJperson(val name: String, val genre: String, val imagePath: String?) {
+
 
 }

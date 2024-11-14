@@ -1,9 +1,11 @@
 package com.example.bassbytecreators
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bassbytecreators.Fragments.DjSearch
 import com.example.bassbytecreators.adapters.SearchAdapter
 import com.example.bassbytecreators.entities.DJperson
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
@@ -19,9 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.Console
 
 class MainActivity : AppCompatActivity() {
-    lateinit var djRecyclerView : RecyclerView
-    var djList : List<DJperson> = MockDataLoader().getDemoDJdata()
-    lateinit var searchAdapter: SearchAdapter
+
 
     //za dodavanje gaže
     private lateinit var btnAddGig: FloatingActionButton
@@ -41,6 +42,12 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val intent = Intent(this, SearchActivity::class.java)
+        val gumbic: Button = findViewById(R.id.button)
+        gumbic.setOnClickListener{
+            startActivity(intent)
         }
 
         //za dodavanje gaže

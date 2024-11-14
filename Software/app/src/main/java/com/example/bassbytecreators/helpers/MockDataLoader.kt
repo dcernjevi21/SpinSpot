@@ -17,11 +17,11 @@ class MockDataLoader {
         )
     }
 
-    public fun getDemoDJdata(): List<DJperson> {
-        return listOf(
-            DJperson("Aviici", "Techno", "image"),
-            DJperson("DeadMau5", "Techno", "image"),
-            DJperson("Skrillex", "Dubstep", "image")
-        )
+    public fun getDemoDJdata(): ArrayList<DJperson> {
+        val djList = ArrayList<DJperson>()
+        djList.add(DJperson("Aviici", "Techno", "image"))
+        djList.add(DJperson("DeadMau5", "Techno", "image"))
+        djList.add(DJperson("Skrillex", "Dubstep", "image"))
+        return djList
     }
 }

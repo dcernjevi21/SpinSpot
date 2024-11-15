@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,6 +35,7 @@ class RegistrationActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 val newUser = User(email, password, userType)
                 MainActivity.users.add(newUser)
+
                 Toast.makeText(this, "Registracija uspješna!", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, MainActivity::class.java)
@@ -42,6 +44,13 @@ class RegistrationActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Molimo ispunite sva polja", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        val loginLink = findViewById<TextView>(R.id.tvLoginLink)
+        loginLink.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }

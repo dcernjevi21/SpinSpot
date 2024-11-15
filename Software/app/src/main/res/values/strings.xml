@@ -1,8 +1,16 @@
 <resources>
     <string name="app_name">BassByteCreators</string>
-    <string name="Registracija_Link">Nemaš račun? Registriraj se ovdje</string>
-    <string name="prijava_naslov">PRIJAVA</string>
-    <string name="unesite_mail">Unesite email</string>
+    <string name="unesite_mail">Unesite mail</string>
     <string name="unesite_lozinku">Unesite lozinku</string>
     <string name="prijavi_se">Prijavi se</string>
+    <string name="prijava_reg_link">Nemaš račun? Registriraj se ovdje</string>
+    <string name="prijava_naslov">PRIJAVA</string>
+    <string name="registracija_naslov">REGISTRACIJA</string>
+    <string name="registriraj_se">Registriraj se</string>
+    <string name="registracija_prijava_Link">Imate račun? Prijavite se ovdje</string>
+
+    <string-array name="user_types">
+        <item>Korisnik</item>
+        <item>DJ</item>
+    </string-array>
 </resources>

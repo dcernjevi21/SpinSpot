@@ -2,6 +2,7 @@ package com.example.bassbytecreators
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.snackbar.Snackbar
 
 class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,25 +24,35 @@ class RegistrationActivity : AppCompatActivity() {
             insets
         }
 
+        val nameEditText = findViewById<EditText>(R.id.etImePrezime)
         val emailEditText = findViewById<EditText>(R.id.etEmailRegister)
         val passwordEditText = findViewById<EditText>(R.id.etPasswordRegister)
         val userTypeSpinner = findViewById<Spinner>(R.id.spinnerUserType)
         val registerButton = findViewById<Button>(R.id.btnRegister)
 
         registerButton.setOnClickListener {
+            val name = nameEditText.text.toString().trim()
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
             val userType = userTypeSpinner.selectedItem.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
+            if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && userType != "Odaberi ulogu") {
                 val newUser = User(email, password, userType)
                 MainActivity.users.add(newUser)
-                Toast.makeText(this, "Registracija uspješna!", Toast.LENGTH_SHORT).show()
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Uspješna registracija!",
+                    Snackbar.LENGTH_LONG
+                ).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this, "Molimo ispunite sva polja", Toast.LENGTH_SHORT).show()
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Molimo ispunite sva polja!",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
 

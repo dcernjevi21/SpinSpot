@@ -2,13 +2,14 @@ package com.example.bassbytecreators
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,14 +33,22 @@ class MainActivity : AppCompatActivity() {
         val registerLink = findViewById<TextView>(R.id.tvRegistracijaLink)
 
         loginButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
             val user = users.find { it.email == email && it.password == password }
             if (user != null) {
-                Toast.makeText(this, "Prijava uspješna!", Toast.LENGTH_SHORT).show()
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Uspješna prijava!",
+                    Snackbar.LENGTH_LONG
+                ).show()
             } else {
-                Toast.makeText(this, "Neispravni podaci!", Toast.LENGTH_SHORT).show()
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Neispravni podaci!",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
 

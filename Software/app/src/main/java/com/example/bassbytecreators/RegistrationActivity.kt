@@ -2,12 +2,10 @@ package com.example.bassbytecreators
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -38,13 +36,13 @@ class RegistrationActivity : AppCompatActivity() {
 
             if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && userType != "Odaberi ulogu") {
                 val newUser = User(email, password, userType)
-                MainActivity.users.add(newUser)
+                LoginActivity.users.add(newUser)
                 Snackbar.make(
                     findViewById(android.R.id.content),
                     "Uspješna registracija!",
                     Snackbar.LENGTH_LONG
                 ).show()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
@@ -58,7 +56,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         val loginLink = findViewById<TextView>(R.id.tvLoginLink)
         loginLink.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

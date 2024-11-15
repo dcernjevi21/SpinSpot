@@ -10,31 +10,33 @@
         android:id="@+id/tvRegisterTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
         android:text="@string/registracija_naslov"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etEmailRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/registarcija_unesite_mail"
+        android:layout_marginTop="112dp"
+        android:hint="@string/unesite_mail"
         android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:padding="12dp"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle" />
 
     <EditText
         android:id="@+id/etPasswordRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/prijava_unesite_lozinku"
+        android:hint="@string/unesite_lozinku"
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/etEmailRegister"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,35 +48,38 @@
         android:id="@+id/spinnerUserType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:entries="@array/user_types"
-        app:layout_constraintTop_toBottomOf="@id/etPasswordRegister"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        android:padding="12dp"/>
+        android:entries="@array/user_types"
+        android:minHeight="48dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPasswordRegister" />
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:padding="12dp"
         android:text="@string/registriraj_se"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/spinnerUserType"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:padding="12dp"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerUserType" />
 
     <TextView
         android:id="@+id/tvLoginLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:clickable="true"
         android:focusable="true"
+        android:minHeight="48dp"
         android:text="@string/registracija_prijava_Link"
-        android:textColor="@android:color/holo_blue_light"
-        app:layout_constraintTop_toBottomOf="@id/btnRegister"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>

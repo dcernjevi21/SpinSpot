@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        val users = mutableListOf<User>() // Lista za pohranu korisnika
+        val users = mutableListOf<User>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val emailEditText = findViewById<EditText>(R.id.etEmailPrijava)
         val passwordEditText = findViewById<EditText>(R.id.etPasswordPrijava)
         val loginButton = findViewById<Button>(R.id.btnPrijava)
-        val registerLink = findViewById<TextView>(R.id.tvPrijavaLink)
+        val registerLink = findViewById<TextView>(R.id.tvRegistracijaLink)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()

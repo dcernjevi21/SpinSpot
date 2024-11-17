@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/et_add_djgig_dialog_date"
+        android:text="@string/gig_date" />
+    <EditText
+        android:id="@+id/et_add_djgig_dialog_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="date" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/et_add_djgig_dialog_location"
+        android:text="@string/location" />
+    <EditText
+        android:id="@+id/et_add_djgig_dialog_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="text"  />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/spn_add_djgig_gigType"
+        android:text="@string/gigType"
+        />
+    <Spinner
+        android:id="@+id/spn_add_djgig_gigType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/gig_types"
+        android:minHeight="48dp"
+        android:minWidth="48dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/et_add_djgig_dialog_name"
+        android:text="@string/gig_host_name" />
+    <EditText
+        android:id="@+id/et_add_djgig_dialog_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/et_add_djgig_dialog_gigStartTime"
+        android:text="@string/gig_start_time" />
+    <EditText
+        android:id="@+id/et_add_djgig_dialog_gigStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="time" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/et_add_djgig_dialog_gigFee"
+        android:text="@string/gig_fee" />
+    <EditText
+        android:id="@+id/et_add_djgig_dialog_gigFee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal" />
+
+
+</LinearLayout>

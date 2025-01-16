@@ -3,7 +3,6 @@ package com.example.bassbytecreators
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
@@ -12,20 +11,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bassbytecreators.Fragments.DjSearch
-import com.example.bassbytecreators.adapters.SearchAdapter
-import com.example.bassbytecreators.entities.DJperson
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
-import com.example.bassbytecreators.helpers.MockDataLoader
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.io.Console
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
-
-
-
+    //navigation drawer
+    lateinit var navDrawerLayout: DrawerLayout
+    lateinit var navView: NavigationView
     //za dodavanje gaže
     private lateinit var btnAddGig: FloatingActionButton
     private lateinit var txt1: TextView
@@ -46,6 +40,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        //navigation drawer
+        navDrawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+
+
+        //pretrazivanje DJ-eva
         val intent = Intent(this, SearchActivity::class.java)
         val gumbic: Button = findViewById(R.id.button)
         gumbic.setOnClickListener{

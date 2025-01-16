@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/statistics_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DJStatisticsActivity">
+
+
+        <!--on below line we are creating
+            a simple text view for heading-->
+    <TextView
+        android:id="@+id/tvStatistikaNaslov"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="PDF Generator"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <!--on below line we are creating a
+            button to generate a pdf file-->
+    <Button
+        android:id="@+id/btnGenerirajPdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:padding="4dp"
+        android:text="Generate PDF"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatistikaNaslov"
+        tools:layout_editor_absoluteX="24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

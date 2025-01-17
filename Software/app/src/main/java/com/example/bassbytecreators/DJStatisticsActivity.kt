@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,11 +28,19 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+//za rad s bazom
+import com.example.bassbytecreators.helpers.RetrofitClient
+import com.example.bassbytecreators.entities.DJGig
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 class DJStatisticsActivity : AppCompatActivity() {
 
     private val selectedStartDate: Calendar = Calendar.getInstance()
     private val selectedEndDate: Calendar = Calendar.getInstance()
     private val sdfDate = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+    private val sdfDate2 = SimpleDateFormat("dd_MM_yyyy", Locale.US)
     lateinit var startDateSelection: EditText
     lateinit var endDateSelection: EditText
 
@@ -74,7 +83,7 @@ class DJStatisticsActivity : AppCompatActivity() {
 
     fun generatePDF() {
 
-        //dodati logiku da ispise podatke za dani datum, ako datum nije dati onda defaultno za trenutnu godinu
+        //ako datum nije dati onda defaultno za trenutnu godinu, dodati da kad generira PDF da uzima u obzir taj datum
 
         var pdfDocument: PdfDocument = PdfDocument()
 
@@ -93,29 +102,33 @@ class DJStatisticsActivity : AppCompatActivity() {
         //stil
         title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
         //velicina fonta
-        title.textSize = 15F
+        title.textSize = 20F
         //boja teksta
         title.setColor(ContextCompat.getColor(this, R.color.black))
-
-        canvas.drawText("Početni datum: ${sdfDate.format(selectedStartDate.time)}", 209F, 100F, title)
-        canvas.drawText("Krajnji datum: ${sdfDate.format(selectedEndDate.time)}", 209F, 80F, title)
-
         //pisanje teksta u pdf, prvo ide tekst, pa startna pozicija pa pozicija gledano od gore i title je za boju
-        canvas.drawText("Testni tekst...", 209F, 150F, title)
-        canvas.drawText("Dominik Černjević", 209F, 120F, title)
+        title.textAlign = Paint.Align.CENTER
+        canvas.drawText("DJ Statistika", 50F, 85F, title)
+        title.textAlign = Paint.Align.LEFT
+        canvas.drawText("DJ: (Domzz)", 50F, 105F, title)
+        canvas.drawText("Početni datum: ${sdfDate.format(selectedStartDate.time)}", 50F, 125F, title)
+        canvas.drawText("Krajnji datum: ${sdfDate.format(selectedEndDate.time)}", 50F, 145F, title)
+
         title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL))
         title.setColor(ContextCompat.getColor(this, R.color.black))
         title.textSize = 15F
 
         //sad pisem tekst na sredini
         title.textAlign = Paint.Align.CENTER
-        canvas.drawText("This is sample document which we have created.", 396F, 560F, title)
+        canvas.drawText("Ukupan broj gaži: ", 396F, 540F, title)
+        canvas.drawText("Ukupna zarada: ", 396F, 560F, title)
+        canvas.drawText("Najčešći tip gaže: ", 396F, 580F, title)
+        canvas.drawText("Ovo je probni pdf dokument.", 396F, 600F, title)
 
         //za odrediti kraj stranice
         pdfDocument.finishPage(myPage)
 
         //naziv i putanja datoteke
-        val file: File = File(getExternalFilesDir(null), "TestniPDF.pdf")
+        val file: File = File(getExternalFilesDir(null), "dj_statistika_${sdfDate2.format(selectedStartDate.time)}.pdf")
 
         try {
             pdfDocument.writeTo(FileOutputStream(file))
@@ -158,7 +171,7 @@ class DJStatisticsActivity : AppCompatActivity() {
                             selectedEndDate.time = selectedStartDate.time // Resetuj krajnji datum
                         } else {
                             endDateSelection.setText(sdfDate.format(selectedEndDate.time).toString())
-                            onDateSelected()
+                            onDateRangeSelected()
                         }
                     },
                     selectedEndDate.get(Calendar.YEAR),
@@ -171,11 +184,10 @@ class DJStatisticsActivity : AppCompatActivity() {
 
     }
 
-    fun onDateSelected() {
-        Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedStartDate.time)}", Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedEndDate.time)}", Toast.LENGTH_LONG).show()
-        //dodati ažurirana polja vezano uz taj datum, dodati da kad generira PDF da uzima u obzir taj datum
-
+    fun onDateRangeSelected() {
+        fetchGigsAndUpdateUI()
+        //Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedStartDate.time)}", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedEndDate.time)}", Toast.LENGTH_LONG).show()
     }
 
     fun checkPermission(): Boolean {
@@ -221,5 +233,39 @@ class DJStatisticsActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun fetchGigsAndUpdateUI() {
+        val startDate = sdfDate.format(selectedStartDate.time)
+        val endDate = sdfDate.format(selectedEndDate.time)
+
+        RetrofitClient.apiService.getGigs(startDate, endDate).enqueue(object : Callback<List<DJGig>> {
+            override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
+                if (response.isSuccessful) {
+                    val gigs = response.body()
+                    if (gigs != null) {
+                        updateUIWithGigs(gigs)
+                    }
+                } else {
+                    Toast.makeText(this@DJStatisticsActivity, "Greška: ${response.code()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<DJGig>>, t: Throwable) {
+                t.printStackTrace()
+                Toast.makeText(this@DJStatisticsActivity, "Greška kod povezivanja s API-jem", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun updateUIWithGigs(gigs: List<DJGig>) {
+        var totalGigs = gigs.size
+        var totalFee = gigs.sumOf { it.gigFee }
+        val mostCommonType = gigs.groupingBy { it.gigType }.eachCount().maxByOrNull { it.value }?.key ?: "N/A"
+
+        // Ažuriranje TextView-ova
+        findViewById<TextView>(R.id.tv_dj_statistics_gig_number).text = "Ukupan broj gaži: $totalGigs"
+        findViewById<TextView>(R.id.tv_dj_statistics_zarada).text = "Ukupna zarada: $totalFee"
+        findViewById<TextView>(R.id.tv_dj_statistics_gig_type).text = "Najčešći tip gaže: $mostCommonType"
     }
 }

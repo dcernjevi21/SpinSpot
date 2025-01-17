@@ -8,22 +8,73 @@
     tools:context=".DJStatisticsActivity">
 
 
-        <!--on below line we are creating
-            a simple text view for heading-->
+    <!--on below line we are creating a
+            button to generate a pdf file-->
+
     <TextView
         android:id="@+id/tvStatistikaNaslov"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:padding="8dp"
-        android:text="PDF Generator"
+        android:text="Statistika"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <!--on below line we are creating a
-            button to generate a pdf file-->
+    <TextView
+        android:id="@+id/tv_dj_statistics_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Odaberite vremensko razdoblje"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatistikaNaslov" />
+
+    <EditText
+        android:id="@+id/et_dj_statistics_date"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dj_statistics_date" />
+
+    <TextView
+        android:id="@+id/tv_dj_statistics_gig_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:text="Vaš broj gaži iznosi:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_dj_statistics_date" />
+
+    <TextView
+        android:id="@+id/tv_dj_statistics_zarada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="44dp"
+        android:text="Ukupna zarada:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dj_statistics_gig_number" />
+
+    <TextView
+        android:id="@+id/tv_dj_statistics_gig_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Najčešći tip gaže:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dj_statistics_zarada"
+        tools:layout_editor_absoluteX="23dp" />
+
     <Button
         android:id="@+id/btnGenerirajPdf"
         android:layout_width="match_parent"
@@ -33,7 +84,7 @@
         android:padding="4dp"
         android:text="Generate PDF"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatistikaNaslov"
-        tools:layout_editor_absoluteX="24dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

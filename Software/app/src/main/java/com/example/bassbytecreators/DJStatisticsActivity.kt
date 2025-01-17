@@ -2,14 +2,17 @@ package com.example.bassbytecreators
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.app.DatePickerDialog
 import android.content.pm.PackageManager
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.os.Environment
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,8 +23,15 @@ import androidx.core.view.WindowInsetsCompat
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.reflect.Type
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DJStatisticsActivity : AppCompatActivity() {
+
+    private val selectedDateTime: Calendar = Calendar.getInstance()
+    private val sdfDate = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+    private var dateSelection: EditText? = null
 
     lateinit var generatePDFBtn: Button
     var pageHeight = 1120
@@ -41,6 +51,8 @@ class DJStatisticsActivity : AppCompatActivity() {
             insets
         }
 
+        dateSelection = findViewById<EditText>(R.id.et_dj_statistics_date)
+
         generatePDFBtn = findViewById(R.id.btnGenerirajPdf)
 
         if(checkPermission()) {
@@ -49,12 +61,17 @@ class DJStatisticsActivity : AppCompatActivity() {
             requestPermission()
         }
 
+        activateDateTimeListeners()
+
         generatePDFBtn.setOnClickListener {
             generatePDF()
         }
     }
 
     fun generatePDF() {
+
+        //dodati logiku da ispise podatke za dani datum, ako datum nije dati onda defaultno za trenutnu godinu
+
         var pdfDocument: PdfDocument = PdfDocument()
 
         //za crtanje oblika i title za dodavanje teksta u pdf datoteku
@@ -102,6 +119,32 @@ class DJStatisticsActivity : AppCompatActivity() {
         }
 
         pdfDocument.close()
+    }
+
+    fun activateDateTimeListeners() {
+        dateSelection?.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                DatePickerDialog(
+                    view.context,
+                    { _, year, monthOfYear, dayOfMonth ->
+                        selectedDateTime.set(year, monthOfYear, dayOfMonth)
+                        dateSelection!!.setText(sdfDate.format(selectedDateTime.time).toString())
+                        onDateSelected()
+                    },
+                    selectedDateTime.get(Calendar.YEAR),
+                    selectedDateTime.get(Calendar.MONTH),
+                    selectedDateTime.get(Calendar.DAY_OF_MONTH)
+                ).show()
+                view.clearFocus()
+            }
+        }
+
+    }
+
+    fun onDateSelected() {
+        Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedDateTime.time)}", Toast.LENGTH_SHORT).show()
+        //dodati ažurirana polja vezano uz taj datum, dodati da kad generira PDF da uzima u obzir taj datum
+
     }
 
     fun checkPermission(): Boolean {

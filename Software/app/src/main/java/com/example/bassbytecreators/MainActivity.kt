@@ -3,7 +3,6 @@ package com.example.bassbytecreators
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
@@ -12,20 +11,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.example.bassbytecreators.Fragments.DjSearch
-import com.example.bassbytecreators.adapters.SearchAdapter
-import com.example.bassbytecreators.entities.DJperson
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
-import com.example.bassbytecreators.helpers.MockDataLoader
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.io.Console
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
-
-
-
+    //navigation drawer
+    lateinit var navDrawerLayout: DrawerLayout
+    lateinit var navView: NavigationView
     //za dodavanje gaže
     private lateinit var btnAddGig: FloatingActionButton
     private lateinit var txt1: TextView
@@ -34,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var txt4: TextView
     private lateinit var txt5: TextView
     private lateinit var txt6: TextView
+    private lateinit var txt7: TextView
+    private lateinit var txt8: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +42,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        //navigation drawer
+        navDrawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+
+
+        //pretrazivanje DJ-eva
         val intent = Intent(this, SearchActivity::class.java)
         val gumbic: Button = findViewById(R.id.button)
         gumbic.setOnClickListener{
@@ -77,12 +79,16 @@ class MainActivity : AppCompatActivity() {
                 txt4 = findViewById(R.id.textView5)
                 txt5 = findViewById(R.id.textView6)
                 txt6 = findViewById(R.id.textView7)
+                txt7 = findViewById(R.id.textView8)
+                txt8 = findViewById(R.id.textView9)
                 txt1.text = newGig.gigDate
                 txt2.text = newGig.location
                 txt3.text = newGig.gigType
                 txt4.text = newGig.name
                 txt5.text = newGig.gigStartTime
                 txt6.text = newGig.gigFee.toString()
+                txt7.text = newGig.gigEndTime
+                txt8.text = newGig.description
             }
             .show()
         dialogHelper.activateDateTimeListeners()

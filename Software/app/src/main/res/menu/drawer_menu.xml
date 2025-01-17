@@ -9,4 +9,10 @@
         android:id="@+id/nav_registration"
         android:icon="@drawable/ic_registration"
         android:title="Registracija" />
+    <item
+        android:id="@+id/nav_djstatistics"
+        android:title="DJ statistika" />
+        <!-- android:icon="@drawable/ic_dj_statistics" -->
+
+
 </menu>

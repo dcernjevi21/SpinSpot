@@ -29,9 +29,11 @@ import java.util.Locale
 
 class DJStatisticsActivity : AppCompatActivity() {
 
-    private val selectedDateTime: Calendar = Calendar.getInstance()
+    private val selectedStartDate: Calendar = Calendar.getInstance()
+    private val selectedEndDate: Calendar = Calendar.getInstance()
     private val sdfDate = SimpleDateFormat("dd.MM.yyyy", Locale.US)
-    private var dateSelection: EditText? = null
+    lateinit var startDateSelection: EditText
+    lateinit var endDateSelection: EditText
 
     lateinit var generatePDFBtn: Button
     var pageHeight = 1120
@@ -51,9 +53,11 @@ class DJStatisticsActivity : AppCompatActivity() {
             insets
         }
 
-        dateSelection = findViewById<EditText>(R.id.et_dj_statistics_date)
+        startDateSelection = findViewById(R.id.et_dj_statistics_start_date)
+        endDateSelection = findViewById(R.id.et_dj_statistics_end_date)
 
         generatePDFBtn = findViewById(R.id.btnGenerirajPdf)
+
 
         if(checkPermission()) {
             Toast.makeText(this, "Dozvola data...", Toast.LENGTH_SHORT).show()
@@ -61,7 +65,7 @@ class DJStatisticsActivity : AppCompatActivity() {
             requestPermission()
         }
 
-        activateDateTimeListeners()
+        activateDateRangeListeners()
 
         generatePDFBtn.setOnClickListener {
             generatePDF()
@@ -93,9 +97,12 @@ class DJStatisticsActivity : AppCompatActivity() {
         //boja teksta
         title.setColor(ContextCompat.getColor(this, R.color.black))
 
+        canvas.drawText("Početni datum: ${sdfDate.format(selectedStartDate.time)}", 209F, 100F, title)
+        canvas.drawText("Krajnji datum: ${sdfDate.format(selectedEndDate.time)}", 209F, 80F, title)
+
         //pisanje teksta u pdf, prvo ide tekst, pa startna pozicija pa pozicija gledano od gore i title je za boju
-        canvas.drawText("Testni tekst...", 209F, 100F, title)
-        canvas.drawText("Dominik Černjević", 209F, 80F, title)
+        canvas.drawText("Testni tekst...", 209F, 150F, title)
+        canvas.drawText("Dominik Černjević", 209F, 120F, title)
         title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL))
         title.setColor(ContextCompat.getColor(this, R.color.black))
         title.textSize = 15F
@@ -121,19 +128,42 @@ class DJStatisticsActivity : AppCompatActivity() {
         pdfDocument.close()
     }
 
-    fun activateDateTimeListeners() {
-        dateSelection?.setOnFocusChangeListener { view, hasFocus ->
+    fun activateDateRangeListeners() {
+        startDateSelection.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 DatePickerDialog(
                     view.context,
                     { _, year, monthOfYear, dayOfMonth ->
-                        selectedDateTime.set(year, monthOfYear, dayOfMonth)
-                        dateSelection!!.setText(sdfDate.format(selectedDateTime.time).toString())
-                        onDateSelected()
+                        selectedStartDate.set(year, monthOfYear, dayOfMonth)
+                        startDateSelection.setText(sdfDate.format(selectedStartDate.time).toString())
+                        endDateSelection.requestFocus()
                     },
-                    selectedDateTime.get(Calendar.YEAR),
-                    selectedDateTime.get(Calendar.MONTH),
-                    selectedDateTime.get(Calendar.DAY_OF_MONTH)
+                    selectedStartDate.get(Calendar.YEAR),
+                    selectedStartDate.get(Calendar.MONTH),
+                    selectedStartDate.get(Calendar.DAY_OF_MONTH)
+                ).show()
+                view.clearFocus()
+            }
+        }
+
+        endDateSelection.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                DatePickerDialog(
+                    view.context,
+                    { _, year, monthOfYear, dayOfMonth ->
+                        selectedEndDate.set(year, monthOfYear, dayOfMonth)
+
+                        if(selectedEndDate.before(selectedStartDate)) {
+                            Toast.makeText(this, "Krajnji datum ne može biti pre početnog!", Toast.LENGTH_SHORT).show()
+                            selectedEndDate.time = selectedStartDate.time // Resetuj krajnji datum
+                        } else {
+                            endDateSelection.setText(sdfDate.format(selectedEndDate.time).toString())
+                            onDateSelected()
+                        }
+                    },
+                    selectedEndDate.get(Calendar.YEAR),
+                    selectedEndDate.get(Calendar.MONTH),
+                    selectedEndDate.get(Calendar.DAY_OF_MONTH)
                 ).show()
                 view.clearFocus()
             }
@@ -142,7 +172,8 @@ class DJStatisticsActivity : AppCompatActivity() {
     }
 
     fun onDateSelected() {
-        Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedDateTime.time)}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedStartDate.time)}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedEndDate.time)}", Toast.LENGTH_LONG).show()
         //dodati ažurirana polja vezano uz taj datum, dodati da kad generira PDF da uzima u obzir taj datum
 
     }

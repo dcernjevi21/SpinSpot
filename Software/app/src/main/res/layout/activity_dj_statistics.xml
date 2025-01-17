@@ -26,24 +26,43 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/tv_dj_statistics_date"
+        android:id="@+id/tv_dj_statistics_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Odaberite vremensko razdoblje"
+        android:text="Odaberite početni datum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStatistikaNaslov" />
 
     <EditText
-        android:id="@+id/et_dj_statistics_date"
+        android:id="@+id/et_dj_statistics_start_date"
         android:layout_width="253dp"
         android:layout_height="42dp"
         android:importantForAutofill="no"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dj_statistics_date" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_dj_statistics_start_date" />
+    <TextView
+        android:id="@+id/tv_dj_statistics_end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Odaberite završni datum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_dj_statistics_start_date" />
+
+    <EditText
+        android:id="@+id/et_dj_statistics_end_date"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dj_statistics_end_date" />
 
     <TextView
         android:id="@+id/tv_dj_statistics_gig_number"
@@ -53,7 +72,7 @@
         android:layout_marginTop="36dp"
         android:text="Vaš broj gaži iznosi:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_dj_statistics_date" />
+        app:layout_constraintTop_toBottomOf="@+id/et_dj_statistics_end_date" />
 
     <TextView
         android:id="@+id/tv_dj_statistics_zarada"

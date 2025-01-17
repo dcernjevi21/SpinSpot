@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var txt4: TextView
     private lateinit var txt5: TextView
     private lateinit var txt6: TextView
+    private lateinit var txt7: TextView
+    private lateinit var txt8: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,12 +79,16 @@ class MainActivity : AppCompatActivity() {
                 txt4 = findViewById(R.id.textView5)
                 txt5 = findViewById(R.id.textView6)
                 txt6 = findViewById(R.id.textView7)
+                txt7 = findViewById(R.id.textView8)
+                txt8 = findViewById(R.id.textView9)
                 txt1.text = newGig.gigDate
                 txt2.text = newGig.location
                 txt3.text = newGig.gigType
                 txt4.text = newGig.name
                 txt5.text = newGig.gigStartTime
                 txt6.text = newGig.gigFee.toString()
+                txt7.text = newGig.gigEndTime
+                txt8.text = newGig.description
             }
             .show()
         dialogHelper.activateDateTimeListeners()

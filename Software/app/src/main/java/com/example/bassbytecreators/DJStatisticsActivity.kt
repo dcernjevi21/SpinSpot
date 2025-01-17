@@ -11,6 +11,7 @@ import android.graphics.pdf.PdfDocument
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -31,6 +32,7 @@ import java.util.Locale
 //za rad s bazom
 import com.example.bassbytecreators.helpers.RetrofitClient
 import com.example.bassbytecreators.entities.DJGig
+import com.example.bassbytecreators.helpers.RetrofitClient.apiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,7 +42,7 @@ class DJStatisticsActivity : AppCompatActivity() {
     private val selectedStartDate: Calendar = Calendar.getInstance()
     private val selectedEndDate: Calendar = Calendar.getInstance()
     private val sdfDate = SimpleDateFormat("dd.MM.yyyy", Locale.US)
-    private val sdfDate2 = SimpleDateFormat("dd_MM_yyyy", Locale.US)
+    private val sdfDate2 = SimpleDateFormat("yyyy-MM-dd", Locale.US)
     lateinit var startDateSelection: EditText
     lateinit var endDateSelection: EditText
 
@@ -236,31 +238,38 @@ class DJStatisticsActivity : AppCompatActivity() {
     }
 
     private fun fetchGigsAndUpdateUI() {
-        val startDate = sdfDate.format(selectedStartDate.time)
-        val endDate = sdfDate.format(selectedEndDate.time)
-
+        val startDate = sdfDate2.format(selectedStartDate.time)
+        val endDate = sdfDate2.format(selectedEndDate.time)
+        Log.d("DJStatistics", "Šaljem datum start: $startDate, end: $endDate")
         RetrofitClient.apiService.getGigs(startDate, endDate).enqueue(object : Callback<List<DJGig>> {
             override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
+                Log.d("API_CALL", "URL: ${call.request()}")
                 if (response.isSuccessful) {
                     val gigs = response.body()
                     if (gigs != null) {
+                        gigs.forEach {
+                            Log.d("DJStatistics", "Ispis gigova redom: ${it.gigFee}, ${it.gigType}, ${it.gigDate}")
+                        }
                         updateUIWithGigs(gigs)
                     }
                 } else {
-                    Toast.makeText(this@DJStatisticsActivity, "Greška: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Log.e("API_ERROR", "Greška kod odgovora: ${response.code()} - ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<List<DJGig>>, t: Throwable) {
+                Log.e("API_ERROR", "Greška kod povezivanja s API-jem: ${t.message}")
                 t.printStackTrace()
-                Toast.makeText(this@DJStatisticsActivity, "Greška kod povezivanja s API-jem", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun updateUIWithGigs(gigs: List<DJGig>) {
-        var totalGigs = gigs.size
-        var totalFee = gigs.sumOf { it.gigFee }
+
+        val totalGigs = gigs.size
+        val totalFee = gigs.sumOf { gig ->
+            Log.d("DJStatistics", "Dodajem gigFee: ${gig.gigFee},")
+            gig.gigFee}
         val mostCommonType = gigs.groupingBy { it.gigType }.eachCount().maxByOrNull { it.value }?.key ?: "N/A"
 
         // Ažuriranje TextView-ova

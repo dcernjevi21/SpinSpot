@@ -23,12 +23,12 @@ class SearchAdapter(private var djList: List<DJperson>):  RecyclerView.Adapter<S
     override fun onBindViewHolder(holder: DJViewHolder, position: Int) {
         val dj = djList[position]
         holder.nazivTextView.text = dj.dj_name
-        holder.zanrTextView.text = dj.genre
+        holder.zanrTextView.text = dj.genres
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DJDetailActivity::class.java)
             intent.putExtra("DJ_NAME", dj.dj_name)
-            intent.putExtra("DJ_GENRE", dj.genre)
+            intent.putExtra("DJ_GENRE", dj.genres)
             context.startActivity(intent)
         }
     }

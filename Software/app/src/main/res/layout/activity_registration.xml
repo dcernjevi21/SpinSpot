@@ -37,13 +37,27 @@
         android:id="@+id/etEmailRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/text_border"
         android:hint="@string/unesite_mail"
         android:inputType="textEmailAddress"
         android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etImePrezime" />
+
+    <EditText
+        android:id="@+id/etUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/text_border"
+        android:hint="@string/unesite_korisnicko_ime"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etImePrezime" />
 

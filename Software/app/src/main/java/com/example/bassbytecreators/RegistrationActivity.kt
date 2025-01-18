@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.bassbytecreators.entities.User
 import com.google.android.material.snackbar.Snackbar
 
 class RegistrationActivity : AppCompatActivity() {
@@ -21,8 +22,9 @@ class RegistrationActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        var userId = 2;
         val nameEditText = findViewById<EditText>(R.id.etImePrezime)
+        val userNameEditText = findViewById<EditText>(R.id.etUserName)
         val emailEditText = findViewById<EditText>(R.id.etEmailRegister)
         val passwordEditText = findViewById<EditText>(R.id.etPasswordRegister)
         val userTypeSpinner = findViewById<Spinner>(R.id.spinnerUserType)
@@ -30,13 +32,14 @@ class RegistrationActivity : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             val name = nameEditText.text.toString().trim()
+            val userName = userNameEditText.text.toString().trim()
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
-            val userType = userTypeSpinner.selectedItem.toString()
+            val role = userTypeSpinner.selectedItem.toString()
+            userId++
+            if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && role != "Odaberi ulogu") {
+                val newUser = User(userId, userName, name, email, password, role)
 
-            if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && userType != "Odaberi ulogu") {
-                val newUser = User(email, password, userType)
-                LoginActivity.users.add(newUser)
                 Snackbar.make(
                     findViewById(android.R.id.content),
                     "Uspješna registracija!",

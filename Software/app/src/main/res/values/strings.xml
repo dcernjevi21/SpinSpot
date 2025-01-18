@@ -23,8 +23,10 @@
     <string name="registriraj_se">Registriraj se</string>
     <string name="registracija_prijava_Link">Imate račun? Prijavite se ovdje</string>
     <string name="unesite_ime_prezime">Unesite ime i prezime</string>
+    <string name="unesite_korisnicko_ime">Unesite korisničko ime</string>
     <string-array name="user_types">
         <item>Odaberi ulogu</item>
         <item>Korisnik</item>
+        <item>DJ</item>
     </string-array>
 </resources>

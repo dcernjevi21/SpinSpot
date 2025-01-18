@@ -24,6 +24,8 @@
     <string name="registracija_prijava_Link">Imate račun? Prijavite se ovdje</string>
     <string name="unesite_ime_prezime">Unesite ime i prezime</string>
     <string name="unesite_korisnicko_ime">Unesite korisničko ime</string>
+    <string name="objavi_recenziju">Objavi recenziju</string>
+    <string name="napisite_svoju_recenziju">Napišite svoju recenziju...</string>
     <string-array name="user_types">
         <item>Odaberi ulogu</item>
         <item>Korisnik</item>

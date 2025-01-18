@@ -1,10 +1,12 @@
 package com.example.bassbytecreators.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bassbytecreators.Fragments.DJDetailActivity
 import com.example.bassbytecreators.R
 import com.example.bassbytecreators.adapters.SearchAdapter.DJViewHolder
 import com.example.bassbytecreators.entities.DJperson
@@ -22,7 +24,13 @@ class SearchAdapter(private var djList: List<DJperson>):  RecyclerView.Adapter<S
         val dj = djList[position]
         holder.nazivTextView.text = dj.name
         holder.zanrTextView.text = dj.genre
-
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, DJDetailActivity::class.java)
+            intent.putExtra("DJ_NAME", dj.name)
+            intent.putExtra("DJ_GENRE", dj.genre)
+            context.startActivity(intent)
+        }
     }
     override fun getItemCount(): Int = djList.size
 

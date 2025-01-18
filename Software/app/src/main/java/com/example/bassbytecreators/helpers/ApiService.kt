@@ -1,6 +1,7 @@
 package com.example.bassbytecreators.helpers
 
 import com.example.bassbytecreators.entities.DJGig
+import com.example.bassbytecreators.entities.Review
 import com.example.bassbytecreators.entities.User
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -24,5 +25,11 @@ interface ApiService {
 
     @POST("users.php")
     fun registerUser(@Body user: User): Call<ResponseBody>
+
+    @POST("reviews.php")
+    fun submitReview(@Body review: Review): Call<ResponseBody>
+
+    @GET("reviews.php")
+    fun fetchReviews(@Query("dj_id") djId: Int): Call<List<Review>>
 }
 

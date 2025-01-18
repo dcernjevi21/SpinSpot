@@ -3,6 +3,7 @@ package com.example.bassbytecreators
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -15,39 +16,49 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.adapters.SearchAdapter
 import com.example.bassbytecreators.entities.DJperson
 import com.example.bassbytecreators.helpers.MockDataLoader
+import com.example.bassbytecreators.helpers.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchEditText: EditText
     private lateinit var djAdapter: SearchAdapter
+    private var djList = ArrayList<DJperson>()
 
-    private val djList = listOf(
-        DJperson("DJ Snake", "EDM",""),
-        DJperson("David Guetta", "House",""),
-        DJperson("Armin van Buuren", "Trance",""),
-        DJperson("Tiesto", "Trance",""),
-        DJperson("Carl Cox", "Techno","")
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dj_search_layout)
-
         recyclerView = findViewById(R.id.dj_recyclerview_search)
         searchEditText = findViewById(R.id.pretrazivanjeTekst)
 
         djAdapter = SearchAdapter(djList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = djAdapter
+        RetrofitClient.apiService.getDJs("").enqueue(object : Callback<List<DJperson>>{
+            override fun onResponse(call: Call<List<DJperson>>, response: Response<List<DJperson>>) {
+                if(response.isSuccessful){
+                    var djevi = response.body()
+                    djList = djevi as ArrayList<DJperson>
+                    Log.d("djevi", djList[0].dj_name)
+                    djAdapter.updateList(djList)
+                }
+            }
+
+            override fun onFailure(call: Call<List<DJperson>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
 
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val filteredList = djList.filter {
-                    it.name.contains(s.toString(), ignoreCase = true) ||
-                            it.genre.contains(s.toString(), ignoreCase = true)
-                }
-                djAdapter.updateList(filteredList)
+
+                //djAdapter.updateList(filteredList)
             }
             override fun afterTextChanged(s: Editable?) {}
         })
@@ -58,7 +69,7 @@ class SearchActivity : AppCompatActivity() {
 
         val filteredList: ArrayList<DJperson> = ArrayList()
         for (item in djList){
-            if (item.name.lowercase().contains(text.lowercase())){
+            if (item.dj_name.lowercase().contains(text.lowercase())){
                 filteredList.add(item)
             }
         }

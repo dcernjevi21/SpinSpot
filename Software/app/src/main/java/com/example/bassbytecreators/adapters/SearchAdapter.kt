@@ -1,6 +1,7 @@
 package com.example.bassbytecreators.adapters
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,8 @@ class SearchAdapter(private var djList: List<DJperson>):  RecyclerView.Adapter<S
             val intent = Intent(context, DJDetailActivity::class.java)
             intent.putExtra("DJ_NAME", dj.dj_name)
             intent.putExtra("DJ_GENRE", dj.genres)
+            Log.d("DJ ID Search adapter", dj.user_id.toString())
+            intent.putExtra("DJ_ID", dj.user_id.toString())
             context.startActivity(intent)
         }
     }

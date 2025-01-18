@@ -13,6 +13,11 @@ interface ApiService {
         @Query("end_date") endDate: String
     ): Call<List<DJGig>>
 
+    @GET("get_single_dj.php")
+    fun getDj(
+        @Query("id") id: String
+    ): Call<List<DJperson>>
+
     @GET("get_DJs.php")
     fun getDJs(
         @Query("name") name: String?

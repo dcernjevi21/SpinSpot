@@ -2,8 +2,11 @@ package com.example.bassbytecreators.helpers
 
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.User
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
@@ -13,10 +16,13 @@ interface ApiService {
         @Query("end_date") endDate: String
     ): Call<List<DJGig>>
 
-    @GET("login.php")
+    @GET("users.php")
     fun loginUser(
         @Query("username") username: String,
         @Query("password") password: String
     ): Call<User>
+
+    @POST("users.php")
+    fun registerUser(@Body user: User): Call<ResponseBody>
 }
 

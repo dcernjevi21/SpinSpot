@@ -92,15 +92,32 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val user = response.body()
                     if (user != null) {
-                        Log.d("LoginActivity", "Login successful: ${user.username}")
+                        Log.d("LoginActivity", "Login successful: ${user.username}, Role: ${user.role}")
                         Snackbar.make(
                             findViewById(android.R.id.content),
-                            "Dobrodošli, ${user.username}!",
+                            "Dobrodošli, ${user.username}! Ulogirani ste kao ${user.role}.",
                             Snackbar.LENGTH_LONG
                         ).show()
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+
+                        // Navigate based on the role
+                        when (user.role) {
+                            "DJ" -> {
+                                // Open DJ-specific activity (for now, MainActivity)
+                                navigateToMainActivity("DJ")
+                            }
+                            "Korisnik" -> {
+                                // Open Korisnik-specific activity (for now, MainActivity)
+                                navigateToMainActivity("Korisnik")
+                            }
+                            else -> {
+                                Log.e("LoginActivity", "Unknown role: ${user.role}")
+                                Snackbar.make(
+                                    findViewById(android.R.id.content),
+                                    "Neispravan role: ${user.role}",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                        }
                     } else {
                         Log.e("LoginActivity", "Invalid credentials")
                         Snackbar.make(
@@ -130,5 +147,12 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-
+    // Function to navigate to MainActivity (you can customize this for role-specific activities later)
+    private fun navigateToMainActivity(role: String) {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            putExtra("USER_ROLE", role) // Pass the role to MainActivity
+        }
+        startActivity(intent)
+        finish()
+    }
 }

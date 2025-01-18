@@ -57,7 +57,22 @@ class SearchActivity : AppCompatActivity() {
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                RetrofitClient.apiService.getDJs(searchEditText.text.toString()).enqueue(object : Callback<List<DJperson>>{
+                    override fun onResponse(
+                        call: Call<List<DJperson>>,
+                        response: Response<List<DJperson>>
+                    ) {
+                        var djevi = response.body()
+                        djList = djevi as ArrayList<DJperson>
+                        //Log.d("djevi", djList[0].dj_name)
+                        djAdapter.updateList(djList)
+                    }
 
+                    override fun onFailure(call: Call<List<DJperson>>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
                 //djAdapter.updateList(filteredList)
             }
             override fun afterTextChanged(s: Editable?) {}

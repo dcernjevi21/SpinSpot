@@ -1,5 +1,6 @@
 package com.example.bassbytecreators
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -99,14 +100,17 @@ class LoginActivity : AppCompatActivity() {
                             Snackbar.LENGTH_LONG
                         ).show()
 
+                        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                        sharedPreferences.edit()
+                            .putInt("logged_in_user_id", user.user_id) // Store user_id
+                            .apply()
+
                         // Navigate based on the role
                         when (user.role) {
                             "DJ" -> {
-                                // Open DJ-specific activity (for now, MainActivity)
                                 navigateToMainActivity("DJ")
                             }
                             "Korisnik" -> {
-                                // Open Korisnik-specific activity (for now, MainActivity)
                                 navigateToMainActivity("Korisnik")
                             }
                             else -> {

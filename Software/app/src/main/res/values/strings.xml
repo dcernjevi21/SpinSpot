@@ -23,8 +23,17 @@
     <string name="registriraj_se">Registriraj se</string>
     <string name="registracija_prijava_Link">Imate račun? Prijavite se ovdje</string>
     <string name="unesite_ime_prezime">Unesite ime i prezime</string>
+    <string name="unesite_korisnicko_ime">Unesite korisničko ime</string>
+    <string name="objavi_recenziju">Objavi recenziju</string>
+    <string name="napisite_svoju_recenziju">Napišite svoju recenziju...</string>
+    <string name="recenzije_dj_a">Vaše recenzije</string>
+    <string name="povratak">Povratak</string>
+    <string name="reviewer_name">Reviewer Name</string>
+    <string name="rating">Rating: ⭐⭐⭐⭐⭐</string>
+    <string name="review_text_in_review_list">This is a review text.</string>
     <string-array name="user_types">
         <item>Odaberi ulogu</item>
         <item>Korisnik</item>
+        <item>DJ</item>
     </string-array>
 </resources>

@@ -35,6 +35,10 @@ class LoginActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.navigation_view)
 
+        val menu = navigationView.menu
+        menu.findItem(R.id.nav_my_profile)?.isVisible = false
+        menu.findItem(R.id.nav_djstatistics)?.isVisible = false
+
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_login -> {
@@ -102,10 +106,9 @@ class LoginActivity : AppCompatActivity() {
 
                         val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
                         sharedPreferences.edit()
-                            .putInt("logged_in_user_id", user.user_id) // Store user_id
+                            .putInt("logged_in_user_id", user.user_id)
                             .apply()
 
-                        // Navigate based on the role
                         when (user.role) {
                             "DJ" -> {
                                 navigateToMainActivity("DJ")
@@ -151,10 +154,9 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    // Function to navigate to MainActivity (you can customize this for role-specific activities later)
     private fun navigateToMainActivity(role: String) {
         val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra("USER_ROLE", role) // Pass the role to MainActivity
+            putExtra("USER_ROLE", role)
         }
         startActivity(intent)
         finish()

@@ -9,8 +9,39 @@
         <item> Klub </item>
         <item> Privatni događaj </item>
     </string-array>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_new_gig"> Dodaj novi angažman </string>
     <string name="gig_fee">Cijena</string>
+
     <string name="home">Početna</string>
+
+    <string name="unesite_mail">Unesite mail</string>
+    <string name="unesite_lozinku">Unesite lozinku</string>
+    <string name="prijavi_se">Prijavi se</string>
+    <string name="prijava_reg_link">Nemaš račun? Registriraj se ovdje</string>
+    <string name="prijava_naslov">PRIJAVA</string>
+    <string name="registracija_naslov">REGISTRACIJA</string>
+    <string name="registriraj_se">Registriraj se</string>
+    <string name="registracija_prijava_Link">Imate račun? Prijavite se ovdje</string>
+    <string name="unesite_ime_prezime">Unesite ime i prezime</string>
+    <string name="unesite_korisnicko_ime">Unesite korisničko ime</string>
+    <string name="objavi_recenziju">Objavi recenziju</string>
+    <string name="napisite_svoju_recenziju">Napišite svoju recenziju...</string>
+    <string name="recenzije_dj_a">Vaše recenzije</string>
+    <string name="povratak">Povratak</string>
+    <string name="reviewer_name">Reviewer Name</string>
+    <string name="rating">Rating: ⭐⭐⭐⭐⭐</string>
+    <string name="review_text_in_review_list">This is a review text.</string>
+    <string name="profile_element_reviews">Recenzije</string>
+    <string name="personal_details_icon">Osobni podaci</string>
+    <string name="personal_details">Osobni podaci</string>
+    <string name="my_profile">Moj profil</string>
+    <string name="settings">Postavke</string>
+    <string name="deleteAcc">Izbriši račun</string>
+    <string name="odjaviSe">Odjavi se</string>
+    <string name="verzijaAplikacije">Verzija aplikacije: 1.0.0</string>
+    <string-array name="user_types">
+        <item>Odaberi ulogu</item>
+        <item>Korisnik</item>
+        <item>DJ</item>
+    </string-array>
 </resources>

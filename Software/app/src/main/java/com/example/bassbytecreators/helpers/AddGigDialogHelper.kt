@@ -59,6 +59,7 @@ class AddGigDialogHelper(private val view: View) {
         val locationEt = view.findViewById<EditText>(R.id.et_add_djgig_dialog_location)
         val gigTypeEt = view.findViewById<Spinner>(R.id.spn_add_djgig_gigType)
         val nameEt = view.findViewById<EditText>(R.id.et_add_djgig_dialog_name)
+        val descriptionEt = view.findViewById<EditText>(R.id.et_add_djgig_dialog_description)
 
         val feeEt = view.findViewById<EditText>(R.id.et_add_djgig_dialog_gigFee)
         var feeDouble: Double
@@ -84,8 +85,10 @@ class AddGigDialogHelper(private val view: View) {
             gigDate = dateOnly,
             location = locationEt.text.toString(),
             gigType = gigTypeEt.selectedItem.toString(),
+            description = descriptionEt.text.toString(),
             name = nameEt.text.toString(),
             gigStartTime = timeOnly,
+            gigEndTime = timeOnly,
             gigFee = feeDouble
         )
     }

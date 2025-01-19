@@ -18,9 +18,7 @@ class MockDataLoader {
 
     public fun getDemoDJdata(): ArrayList<DJperson> {
         val djList = ArrayList<DJperson>()
-        djList.add(DJperson("Aviici", "Techno", "image"))
-        djList.add(DJperson("DeadMau5", "Techno", "image"))
-        djList.add(DJperson("Skrillex", "Dubstep", "image"))
+
         return djList
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="14sp"
+        android:paddingBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textSize="14sp"
+        android:textColor="@android:color/holo_green_dark"/>
+</LinearLayout>

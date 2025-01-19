@@ -10,8 +10,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.entities.User
 import com.example.bassbytecreators.helpers.RetrofitClient
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -19,9 +21,34 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RegistrationActivity : AppCompatActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_login -> {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout.closeDrawers()
+
+                }
+                R.id.nav_registration -> {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Već ste na ekranu za registraciju.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            true
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.registration_layout)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

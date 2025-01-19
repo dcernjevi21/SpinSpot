@@ -102,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
 
                         val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
                         sharedPreferences.edit()
-                            .putInt("logged_in_user_id", user.user_id) // Store user_id
+                            .putInt("logged_in_user_id", user.user_id)
                             .apply()
 
                         // Navigate based on the role

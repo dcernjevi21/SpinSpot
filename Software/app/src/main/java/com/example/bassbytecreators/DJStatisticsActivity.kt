@@ -4,6 +4,7 @@ import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -23,6 +24,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.reflect.Type
@@ -34,11 +36,15 @@ import java.util.Locale
 import com.example.bassbytecreators.helpers.RetrofitClient
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.helpers.RetrofitClient.apiService
+import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DJStatisticsActivity : AppCompatActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private var userId: Int = -1
 
     private val selectedStartDate: Calendar = Calendar.getInstance()
     private val selectedEndDate: Calendar = Calendar.getInstance()
@@ -60,10 +66,27 @@ class DJStatisticsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dj_statistics)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.statistics_main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.navigation_view)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        userId = intent.getIntExtra("user_id", -1)
+        if (userId == -1) {
+            Toast.makeText(this, "User ID nije pronaden!", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+
+        setupNavigationMenu(navigationView)
+
+        val btnBack = findViewById<Button>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish() // Close the activity and return to the previous screen
         }
 
         startDateSelection = findViewById(R.id.et_dj_statistics_start_date)
@@ -85,6 +108,29 @@ class DJStatisticsActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupNavigationMenu(navigationView: NavigationView) {
+        val menu = navigationView.menu
+        menu.findItem(R.id.nav_login)?.isVisible = false
+        menu.findItem(R.id.nav_registration)?.isVisible = false
+        menu.findItem(R.id.nav_djstatistics)?.isVisible = true
+
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_my_profile -> {
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_djstatistics -> {
+                    val intent = Intent(this, DJStatisticsActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
     fun onDateRangeSelected() {
         fetchGigsAndUpdateUI()
         //Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedStartDate.time)}", Toast.LENGTH_SHORT).show()
@@ -94,8 +140,9 @@ class DJStatisticsActivity : AppCompatActivity() {
     private fun fetchGigsAndUpdateUI() {
         val startDate = sdfDate2.format(selectedStartDate.time)
         val endDate = sdfDate2.format(selectedEndDate.time)
-        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-        val userId: Int = sharedPreferences.getInt("logged_in_user_id", 0)
+        val intent = Intent(this, DJReviewsActivity::class.java)
+        intent.putExtra("dj_id", userId)
+        startActivity(intent)
         Log.d("DJStatistics", "Šaljem userId i datume: userId: $userId, start date: $startDate, end date: $endDate")
         RetrofitClient.apiService.getGigs(userId, startDate, endDate).enqueue(object : Callback<List<DJGig>> {
             override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {

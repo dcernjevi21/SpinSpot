@@ -3,6 +3,7 @@ package com.example.bassbytecreators
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -93,8 +94,10 @@ class DJStatisticsActivity : AppCompatActivity() {
     private fun fetchGigsAndUpdateUI() {
         val startDate = sdfDate2.format(selectedStartDate.time)
         val endDate = sdfDate2.format(selectedEndDate.time)
-        Log.d("DJStatistics", "Šaljem datum start: $startDate, end: $endDate")
-        RetrofitClient.apiService.getGigs(startDate, endDate).enqueue(object : Callback<List<DJGig>> {
+        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val userId: Int = sharedPreferences.getInt("logged_in_user_id", 0)
+        Log.d("DJStatistics", "Šaljem userId i datume: userId: $userId, start date: $startDate, end date: $endDate")
+        RetrofitClient.apiService.getGigs(userId, startDate, endDate).enqueue(object : Callback<List<DJGig>> {
             override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
                 Log.d("API_CALL", "URL: ${call.request()}")
                 if (response.isSuccessful) {

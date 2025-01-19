@@ -61,14 +61,14 @@ class DJMyProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Personal Details section
         findViewById<LinearLayout>(R.id.llDJPersonalDetailsRow).setOnClickListener {
             Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
         }
 
-        // Settings section
         findViewById<LinearLayout>(R.id.llSettingsRow).setOnClickListener {
-            Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SettingsActivity::class.java)
+            intent.putExtra("user_id", userId)
+            startActivity(intent)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.bassbytecreators
+package com.example.bassbytecreators.entities
 
 data class User(
     val email: String,

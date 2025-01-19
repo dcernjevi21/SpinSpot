@@ -1,11 +1,13 @@
 package com.example.bassbytecreators
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -17,10 +19,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
-    //navigation drawer
-    lateinit var navDrawerLayout: DrawerLayout
-    lateinit var navView: NavigationView
-    //za dodavanje gaže
+    private var userRole: String? = null
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
     private lateinit var btnAddGig: FloatingActionButton
     private lateinit var txt1: TextView
     private lateinit var txt2: TextView
@@ -34,34 +35,71 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
         setContentView(R.layout.activity_main)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        //navigation drawer
-        navDrawerLayout = findViewById(R.id.nav_drawer_layout)
+
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer()
 
-
-        //pretrazivanje DJ-eva
         val intent = Intent(this, SearchActivity::class.java)
         val gumbic: Button = findViewById(R.id.button)
-        gumbic.setOnClickListener{
+        gumbic.setOnClickListener {
             startActivity(intent)
         }
 
-        //za dodavanje gaže
         btnAddGig = findViewById(R.id.fab_add_gig)
         btnAddGig.setOnClickListener {
             showDialog()
         }
     }
 
-    //dijalog za dodavanje gaže
+    private fun setupNavigationDrawer() {
+        userRole = intent.getStringExtra("USER_ROLE")
+        val menu = navView.menu
+
+        // Skrij prijavu i registraciju
+        menu.findItem(R.id.nav_login)?.isVisible = false
+        menu.findItem(R.id.nav_registration)?.isVisible = false
+
+        // DJ statistika
+        menu.findItem(R.id.nav_djstatistics)?.isVisible = userRole == "DJ"
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_my_profile -> {
+                    when (userRole) {
+                        "DJ" -> {
+                            val intent = Intent(this, DJMyProfileActivity::class.java)
+                            val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                                .getInt("logged_in_user_id", -1)
+                            intent.putExtra("user_id", userId)
+                            startActivity(intent)
+                        }
+                        "Korisnik" -> {
+                            Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_djstatistics -> {
+                    val intent = Intent(this, DJStatisticsActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
     private fun showDialog() {
         val newAddGigDialogView = LayoutInflater
             .from(this@MainActivity)
@@ -94,6 +132,3 @@ class MainActivity : AppCompatActivity() {
         dialogHelper.activateDateTimeListeners()
     }
 }
-
-
-

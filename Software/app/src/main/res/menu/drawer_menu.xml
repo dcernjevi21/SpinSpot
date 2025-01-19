@@ -13,6 +13,8 @@
         android:id="@+id/nav_djstatistics"
         android:title="DJ statistika" />
         <!-- android:icon="@drawable/ic_dj_statistics" -->
-
-
+    <item
+        android:id="@+id/nav_my_profile"
+        android:title="@string/my_profile"
+        android:icon="@drawable/ic_baseline_account_circle_24" />
 </menu>

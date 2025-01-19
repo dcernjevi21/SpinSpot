@@ -24,12 +24,18 @@ class DJDetailActivity : AppCompatActivity(){
         Log.d("DJ ID u detaljima", djId.toString())
         RetrofitClient.apiService.getDj(djId.toString()).enqueue(object : Callback<List<DJperson>> {
 
-
             override fun onResponse(
                 call: Call<List<DJperson>>,
                 response: Response<List<DJperson>>
             ) {
                 Log.d("Dj osoba", response.body().toString())
+                if (response.isSuccessful) {
+                    val dj = response.body()?.get(0)
+                    findViewById<TextView>(R.id.djName).text = dj?.dj_name
+                    findViewById<TextView>(R.id.djGenre).text = dj?.genres
+                    findViewById<TextView>(R.id.djBiography).text = dj?.biography
+
+                }
             }
 
             override fun onFailure(call: Call<List<DJperson>>, t: Throwable) {

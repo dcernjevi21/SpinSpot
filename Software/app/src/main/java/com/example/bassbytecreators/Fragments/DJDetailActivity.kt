@@ -1,10 +1,14 @@
 package com.example.bassbytecreators.Fragments
 
+import GigAdapter
 import com.example.bassbytecreators.R
 import android.widget.TextView
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.DJperson
 import com.example.bassbytecreators.helpers.RetrofitClient
 import retrofit2.Retrofit
@@ -13,11 +17,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DJDetailActivity : AppCompatActivity(){
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var gigAdapter: GigAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dj_detail)
-
-        // Dobivanje podataka iz Intenta
+        recyclerView = findViewById(R.id.gigsRecyclerView)
+        //recyclerView.layoutManager = LinearLayoutManager(this)
+        // Dobivanje podataka iz I  ntenta
         val djName = intent.getStringExtra("DJ_NAME")
         val djGenre = intent.getStringExtra("DJ_GENRE")
         val djId = intent.getStringExtra("DJ_ID")
@@ -45,5 +53,23 @@ class DJDetailActivity : AppCompatActivity(){
         // Postavljanje podataka u tekstualne prikaze
         findViewById<TextView>(R.id.djName).text = djName
         findViewById<TextView>(R.id.djGenre).text = djGenre
+    }
+
+    private fun fetchUpcomingGigs(djId: Int) {
+        RetrofitClient.apiService.getUpcomingGigs(djId).enqueue(object : Callback<List<DJGig>> {
+            override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
+                if (response.isSuccessful) {
+                    val gigs = response.body() ?: emptyList()
+                    gigAdapter = GigAdapter(gigs)
+                    recyclerView.adapter = gigAdapter
+                } else {
+                    //Toast.makeText(this@UpcomingGigsActivity, "Failed to load data", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<DJGig>>, t: Throwable) {
+                //Toast.makeText(this@UpcomingGigsActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

@@ -22,5 +22,10 @@ interface ApiService {
     fun getDJs(
         @Query("name") name: String?
     ): Call<List<DJperson>>
+
+    @GET("get_upcoming_gigs.php")
+    fun getUpcomingGigs(
+        @Query("id") djId: Int
+    ): Call<List<DJGig>>
 }
 

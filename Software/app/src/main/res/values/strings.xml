@@ -36,6 +36,9 @@
     <string name="personal_details">Osobni podaci</string>
     <string name="my_profile">Moj profil</string>
     <string name="settings">Postavke</string>
+    <string name="deleteAcc">Izbriši račun</string>
+    <string name="odjaviSe">Odjavi se</string>
+    <string name="verzijaAplikacije">Verzija aplikacije: 1.0.0</string>
     <string-array name="user_types">
         <item>Odaberi ulogu</item>
         <item>Korisnik</item>

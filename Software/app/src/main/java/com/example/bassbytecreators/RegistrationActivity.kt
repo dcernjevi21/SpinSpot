@@ -31,6 +31,10 @@ class RegistrationActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.navigation_view)
 
+        val menu = navigationView.menu
+        menu.findItem(R.id.nav_my_profile)?.isVisible = false
+        menu.findItem(R.id.nav_djstatistics)?.isVisible = false
+
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_login -> {

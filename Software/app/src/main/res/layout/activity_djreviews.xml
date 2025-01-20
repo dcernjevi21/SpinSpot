@@ -24,10 +24,11 @@
 
     <Button
         android:id="@+id/btnBack"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/povratak"
-        android:backgroundTint="@color/purple_500"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/natrag"
+        android:layout_marginBottom="30dp"
         android:textColor="@android:color/white"
         android:textSize="15sp"
         android:textStyle="bold" />

@@ -24,10 +24,9 @@ class DJReviewsActivity : AppCompatActivity() {
 
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener {
-            finish() // Close the activity and return to the previous screen
+            finish()
         }
 
-        // Get DJ ID from Intent
         val djId = intent.getIntExtra("dj_id", 1)
 
         if (djId != -1) {

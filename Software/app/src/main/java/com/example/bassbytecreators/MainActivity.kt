@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private var userRole: String? = null
@@ -67,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_login)?.isVisible = false
         menu.findItem(R.id.nav_registration)?.isVisible = false
 
-        // DJ statistika
         menu.findItem(R.id.nav_djstatistics)?.isVisible = userRole == "DJ"
 
         navView.setNavigationItemSelectedListener { menuItem ->
@@ -96,6 +96,14 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, DJStatisticsActivity::class.java)
                     startActivity(intent)
                     drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_main -> {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Već jeste na početnom ekranu.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     true
                 }
                 else -> false

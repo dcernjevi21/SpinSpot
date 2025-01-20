@@ -44,6 +44,12 @@ class UserMyProfileActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.nav_main -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout.closeDrawers()
+                    true
+                }
                 R.id.nav_my_profile -> {
                     drawerLayout.closeDrawers()
                     true

@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         val menu = navigationView.menu
         menu.findItem(R.id.nav_my_profile)?.isVisible = false
         menu.findItem(R.id.nav_djstatistics)?.isVisible = false
+        menu.findItem(R.id.nav_main)?.isVisible = false
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -42,14 +43,18 @@ class LoginActivity : AppCompatActivity() {
                         "Već ste na ekranu za prijavu.",
                         Snackbar.LENGTH_SHORT
                     ).show()
+                    true
                 }
                 R.id.nav_registration -> {
                     val intent = Intent(this, RegistrationActivity::class.java)
                     startActivity(intent)
                     drawerLayout.closeDrawers()
+                    true
                 }
+                else -> false
             }
-            true
+
+
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login_layout)) { v, insets ->

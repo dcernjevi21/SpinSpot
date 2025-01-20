@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -45,7 +44,6 @@ class AddGigsActivity : AppCompatActivity() {
     private lateinit var txt5: TextView
     private lateinit var txt6: TextView
     private lateinit var txt7: TextView
-    private lateinit var txt8: TextView
     private lateinit var txt10: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -165,6 +163,7 @@ class AddGigsActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_login)?.isVisible = false
         menu.findItem(R.id.nav_registration)?.isVisible = false
         menu.findItem(R.id.nav_djstatistics)?.isVisible = true
+        menu.findItem(R.id.nav_addgigs)?.isVisible = false
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -178,16 +177,7 @@ class AddGigsActivity : AppCompatActivity() {
                     val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
                         .getInt("logged_in_user_id", -1) // Dohvati userId
                     intent.putExtra("user_id", userId) // Proslijedi userId
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-
-                R.id.nav_addgigs -> {
-                    val intent = Intent(this, AddGigsActivity::class.java)
-                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                        .getInt("logged_in_user_id", -1) // Dohvati userId
-                    intent.putExtra("user_id", userId) // Proslijedi userId
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                     startActivity(intent)
                     drawerLayout.closeDrawers()
                     true
@@ -198,4 +188,3 @@ class AddGigsActivity : AppCompatActivity() {
         }
     }
 }
-

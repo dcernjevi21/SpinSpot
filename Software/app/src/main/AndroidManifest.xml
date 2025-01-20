@@ -25,6 +25,9 @@
             android:exported="false"
             android:launchMode="singleTop"/>
         <activity
+            android:name=".DJPersonalDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserPersonalDetailsActivity"
             android:exported="false" />
         <activity

@@ -5,6 +5,7 @@ import com.example.bassbytecreators.R
 import android.widget.TextView
 import android.os.Bundle
 import android.util.Log
+import android.widget.CalendarView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -19,13 +20,14 @@ import retrofit2.Response
 class DJDetailActivity : AppCompatActivity(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var gigAdapter: GigAdapter
-
+    private lateinit var calendar: CalendarView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dj_detail)
         recyclerView = findViewById(R.id.gigsRecyclerView)
         //recyclerView.layoutManager = LinearLayoutManager(this)
         // Dobivanje podataka iz I  ntenta
+        calendar = findViewById(R.id.calendarView)
         val djName = intent.getStringExtra("DJ_NAME")
         val djGenre = intent.getStringExtra("DJ_GENRE")
         val djId = intent.getStringExtra("DJ_ID")

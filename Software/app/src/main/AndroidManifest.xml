@@ -25,6 +25,12 @@
             android:exported="false"
             android:launchMode="singleTop"/>
         <activity
+            android:name=".UserPersonalDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserMyProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:launchMode="singleTop"/>

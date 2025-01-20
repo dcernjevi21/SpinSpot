@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_registration"
         android:title="@string/registration" />
     <item
+        android:id="@+id/nav_main"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Početna" />
+    <item
         android:id="@+id/nav_djstatistics"
         android:icon="@drawable/ic_dj_statistics"
         android:title="@string/dj_statitistics" />

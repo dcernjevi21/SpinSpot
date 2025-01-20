@@ -7,8 +7,10 @@ import com.example.bassbytecreators.entities.User
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 interface ApiService {
@@ -47,12 +49,22 @@ interface ApiService {
 
     @GET("users.php")
     fun loginUser(
+        @Query("action") action: String = "login",
         @Query("username") username: String,
         @Query("password") password: String
     ): Call<User>
 
+    @GET("users.php")
+    fun getUser(@Query("action") action: String = "get_user", @Query("user_id") userId: Int): Call<User>
+
+    @DELETE("users.php")
+    fun deleteUser(@Query("user_id") userId: Int): Call<ResponseBody>
+
     @POST("users.php")
     fun registerUser(@Body user: User): Call<ResponseBody>
+
+    @PUT("users.php")
+    fun updateUser(@Body user: User): Call<ResponseBody>
 
     @POST("reviews.php")
     fun submitReview(@Body review: Review): Call<ResponseBody>

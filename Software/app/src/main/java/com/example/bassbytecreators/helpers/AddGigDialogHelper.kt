@@ -21,7 +21,8 @@ class AddGigDialogHelper(private val view: View) {
 
     private val spinner = view.findViewById<Spinner>(R.id.spn_add_djgig_gigType)
     private val dateSelection = view.findViewById<EditText>(R.id.et_add_djgig_dialog_date)
-    private val timeSelection = view.findViewById<EditText>(R.id.et_add_djgig_dialog_gigStartTime)
+    private val startTimeSelection = view.findViewById<EditText>(R.id.et_add_djgig_dialog_gigStartTime)
+    private val endTimeSelection = view.findViewById<EditText>(R.id.et_add_djgig_dialog_gigEndTime)
 
     fun activateDateTimeListeners() {
         dateSelection.setOnFocusChangeListener { view, hasFocus ->
@@ -39,20 +40,8 @@ class AddGigDialogHelper(private val view: View) {
                 view.clearFocus()
             }
         }
-        timeSelection.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                TimePickerDialog(
-                    view.context, { _, hourOfDay, minute ->
-                        selectedDateTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
-                        selectedDateTime.set(Calendar.MINUTE, minute)
-                        timeSelection.setText(sdfTime.format(selectedDateTime.time).toString())
-                    },
-                    selectedDateTime.get(Calendar.HOUR_OF_DAY),
-                    selectedDateTime.get(Calendar.MINUTE), true
-                ).show()
-                view.clearFocus()
-            }
-        }
+        setupTimePicker(startTimeSelection)
+        setupTimePicker(endTimeSelection)
     }
 
     fun buildGig(): DJGig {
@@ -60,6 +49,8 @@ class AddGigDialogHelper(private val view: View) {
         val gigTypeEt = view.findViewById<Spinner>(R.id.spn_add_djgig_gigType)
         val nameEt = view.findViewById<EditText>(R.id.et_add_djgig_dialog_name)
         val descriptionEt = view.findViewById<EditText>(R.id.et_add_djgig_dialog_description)
+        val startTime = view.findViewById<EditText>(R.id.et_add_djgig_dialog_gigStartTime)
+        val endTime = view.findViewById<EditText>(R.id.et_add_djgig_dialog_gigEndTime)
 
         val feeEt = view.findViewById<EditText>(R.id.et_add_djgig_dialog_gigFee)
         var feeDouble: Double
@@ -79,7 +70,6 @@ class AddGigDialogHelper(private val view: View) {
         }
 
         val dateOnly = sdfDate.format(selectedDateTime.time)
-        val timeOnly = sdfTime.format(selectedDateTime.time)
 
         return DJGig(
             gigDate = dateOnly,
@@ -87,9 +77,26 @@ class AddGigDialogHelper(private val view: View) {
             gigType = gigTypeEt.selectedItem.toString(),
             description = descriptionEt.text.toString(),
             name = nameEt.text.toString(),
-            gigStartTime = timeOnly,
-            gigEndTime = timeOnly,
+            gigStartTime = startTime.text.toString(),
+            gigEndTime = endTime.text.toString(),
             gigFee = feeDouble
         )
+    }
+
+    private fun setupTimePicker(editText: EditText) {
+        editText.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                TimePickerDialog(
+                    view.context, { _, hourOfDay, minute ->
+                        selectedDateTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                        selectedDateTime.set(Calendar.MINUTE, minute)
+                        editText.setText(sdfTime.format(selectedDateTime.time).toString())
+                    },
+                    selectedDateTime.get(Calendar.HOUR_OF_DAY),
+                    selectedDateTime.get(Calendar.MINUTE), true
+                ).show()
+                view.clearFocus()
+            }
+        }
     }
 }

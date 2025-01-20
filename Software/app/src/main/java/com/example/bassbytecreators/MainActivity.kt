@@ -28,15 +28,6 @@ class MainActivity : AppCompatActivity() {
     private var userRole: String? = null
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
-    private lateinit var btnAddGig: FloatingActionButton
-    private lateinit var txt1: TextView
-    private lateinit var txt2: TextView
-    private lateinit var txt3: TextView
-    private lateinit var txt4: TextView
-    private lateinit var txt5: TextView
-    private lateinit var txt6: TextView
-    private lateinit var txt7: TextView
-    private lateinit var txt8: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,6 +87,20 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_djstatistics -> {
                     val intent = Intent(this, DJStatisticsActivity::class.java)
+                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                        .getInt("logged_in_user_id", -1) // Dohvati userId
+                    intent.putExtra("user_id", userId) // Proslijedi userId
+
+                    startActivity(intent)
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_addgigs -> {
+                    val intent = Intent(this, AddGigsActivity::class.java)
+                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                        .getInt("logged_in_user_id", -1) // Dohvati userId
+                    intent.putExtra("user_id", userId) // Proslijedi userId
+
                     startActivity(intent)
                     drawerLayout.closeDrawers()
                     true

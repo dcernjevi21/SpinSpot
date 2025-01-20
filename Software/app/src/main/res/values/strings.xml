@@ -5,6 +5,7 @@
     <string name="gigType"> Tip </string>
     <string name="gig_host_name"> Ime organizatora </string>
     <string name="gig_start_time"> Početak </string>
+    <string name="gig_end_time"> Kraj </string>
     <string-array name="gig_types">
         <item> Klub </item>
         <item> Privatni događaj </item>

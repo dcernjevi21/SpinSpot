@@ -47,7 +47,9 @@ class DJMyProfileActivity : BaseActivity() {
         }
 
         findViewById<LinearLayout>(R.id.llDJPersonalDetailsRow).setOnClickListener {
-            Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DJPersonalDetailsActivity::class.java)
+            intent.putExtra("user_id", userId)
+            startActivity(intent)
         }
 
         findViewById<LinearLayout>(R.id.llSettingsRow).setOnClickListener {

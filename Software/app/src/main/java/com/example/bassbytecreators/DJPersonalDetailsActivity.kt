@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserPersonalDetailsActivity : AppCompatActivity() {
+class DJPersonalDetailsActivity : AppCompatActivity() {
     private var userId: Int = -1
     private lateinit var etUsername: EditText
     private lateinit var etFirstLastName: EditText
@@ -68,7 +68,7 @@ class UserPersonalDetailsActivity : AppCompatActivity() {
                     }
                 } else {
                     Toast.makeText(
-                        this@UserPersonalDetailsActivity,
+                        this@DJPersonalDetailsActivity,
                         "Greška prilikom dohvaćanja podataka",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -77,7 +77,7 @@ class UserPersonalDetailsActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 Toast.makeText(
-                    this@UserPersonalDetailsActivity,
+                    this@DJPersonalDetailsActivity,
                     "Greška prilikom povezivanja sa serverom",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -102,21 +102,21 @@ class UserPersonalDetailsActivity : AppCompatActivity() {
             first_last_name = firstLastName,
             email = email,
             password = if (password.isNotEmpty()) password else null,
-            role = "Korisnik"
+            role = "DJ"
         )
 
         RetrofitClient.apiService.updateUser(updatedUser).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     Toast.makeText(
-                        this@UserPersonalDetailsActivity,
+                        this@DJPersonalDetailsActivity,
                         "Podaci uspješno ažurirani",
                         Toast.LENGTH_SHORT
                     ).show()
                     finish()
                 } else {
                     Toast.makeText(
-                        this@UserPersonalDetailsActivity,
+                        this@DJPersonalDetailsActivity,
                         "Greška prilikom ažuriranja podataka",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -125,7 +125,7 @@ class UserPersonalDetailsActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Toast.makeText(
-                    this@UserPersonalDetailsActivity,
+                    this@DJPersonalDetailsActivity,
                     "Greška prilikom povezivanja sa serverom",
                     Toast.LENGTH_SHORT
                 ).show()

@@ -112,6 +112,15 @@
                 android:textColor="@color/black" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="210dp"
+            android:padding="12dp"
+            android:text="@string/natrag"
+            android:textSize="18sp" />
 
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView

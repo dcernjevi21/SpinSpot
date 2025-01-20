@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -21,6 +22,7 @@ class SettingsActivity : AppCompatActivity() {
 
         val deleteAccountLayout = findViewById<LinearLayout>(R.id.llDeleteAccount)
         val logoutLayout = findViewById<LinearLayout>(R.id.llLogout)
+        val btnBack = findViewById<Button>(R.id.btnBack)
 
         deleteAccountLayout.setOnClickListener {
             showDeleteAccountConfirmation()
@@ -28,6 +30,10 @@ class SettingsActivity : AppCompatActivity() {
 
         logoutLayout.setOnClickListener {
             logout()
+        }
+
+        btnBack.setOnClickListener {
+            finish()
         }
     }
 

@@ -14,7 +14,7 @@
 
     <string name="home">Početna</string>
 
-    <string name="unesite_mail">Unesite mail</string>
+    <string name="unesite_mail">Unesite email</string>
     <string name="unesite_lozinku">Unesite lozinku</string>
     <string name="prijavi_se">Prijavi se</string>
     <string name="prijava_reg_link">Nemaš račun? Registriraj se ovdje</string>
@@ -39,6 +39,9 @@
     <string name="deleteAcc">Izbriši račun</string>
     <string name="odjaviSe">Odjavi se</string>
     <string name="verzijaAplikacije">Verzija aplikacije: 1.0.0</string>
+    <string name="nova_lozinka">Nova lozinka (neobavezno)</string>
+    <string name="spremi_promjene">Spremi promjene</string>
+    <string name="natrag">Natrag</string>
     <string-array name="user_types">
         <item>Odaberi ulogu</item>
         <item>Korisnik</item>

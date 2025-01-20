@@ -2,6 +2,7 @@ package com.example.bassbytecreators
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,11 @@ class DJMyProfileActivity : AppCompatActivity() {
             Toast.makeText(this, "User ID nije pronaden!", Toast.LENGTH_SHORT).show()
             finish()
             return
+        }
+
+        val btnBack = findViewById<Button>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish()
         }
 
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -54,7 +60,7 @@ class DJMyProfileActivity : AppCompatActivity() {
     }
 
     private fun setupProfileElements() {
-        // Reviews section
+
         findViewById<LinearLayout>(R.id.llProfileReviewsRow).setOnClickListener {
             val intent = Intent(this, DJReviewsActivity::class.java)
             intent.putExtra("dj_id", userId)

@@ -82,6 +82,17 @@
         android:textSize="16sp"
         android:textColor="@color/black"
         android:gravity="center"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="220dp"/>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:text="@string/natrag"
+        android:textSize="18sp" />
 
 </LinearLayout>

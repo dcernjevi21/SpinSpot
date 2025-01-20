@@ -12,12 +12,18 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("get_gigs_stats.php")
+    @GET("gigs.php")
     fun getGigs(
         @Query("user_id") userId: Int,
         @Query("start_date") startDate: String,
         @Query("end_date") endDate: String
     ): Call<List<DJGig>>
+
+    @POST("gigs.php")
+    fun addNewGig(
+        @Body newGig: DJGig,
+        @Query("user_id") userId: Int): Call<ResponseBody>
+
 
     @GET("get_single_dj.php")
     fun getDj(

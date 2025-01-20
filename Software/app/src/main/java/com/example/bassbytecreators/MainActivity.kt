@@ -41,7 +41,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        scheduleNotificationWorker()
+        val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+            .getInt("logged_in_user_id", -1)
+        Log.d("MainActivity", "User ID za slanje notifikacija: ${userId}")
+        scheduleNotificationWorker(userId)
 
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
@@ -120,10 +123,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun scheduleNotificationWorker() {
+    private fun scheduleNotificationWorker(userId: Int) {
         val workManager = WorkManager.getInstance(applicationContext)
 
         val workRequest = PeriodicWorkRequestBuilder<DJGigWorker>(1, TimeUnit.DAYS)
+            .setInputData(workDataOf("userId" to userId))
             .build()
 
         workManager.enqueueUniquePeriodicWork(

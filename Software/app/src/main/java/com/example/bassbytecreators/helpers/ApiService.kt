@@ -15,9 +15,12 @@ import retrofit2.http.Query
 
 interface ApiService {
 
+    @GET("gigs.php")
+    fun getGigs(
+        @Query("user_id") userId: Int,
+
     @GET("get_gigs_stats.php")
     fun getGigsStats(
-    @Query("user_id") userId: Int,
         @Query("start_date") startDate: String,
         @Query("end_date") endDate: String
     ): Call<List<DJGig>>

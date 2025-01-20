@@ -119,11 +119,4 @@ class SettingsActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun showError(message: String) {
-        AlertDialog.Builder(this)
-            .setTitle("Greška")
-            .setMessage(message)
-            .setPositiveButton("OK", null)
-            .show()
-    }
 }

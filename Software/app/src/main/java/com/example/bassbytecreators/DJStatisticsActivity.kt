@@ -1,5 +1,6 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DatePickerDialog
@@ -35,9 +36,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DJStatisticsActivity : AppCompatActivity() {
+class DJStatisticsActivity : BaseActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
     private var userId: Int = -1
 
     private val selectedStartDate: Calendar = Calendar.getInstance()
@@ -60,7 +61,7 @@ class DJStatisticsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dj_statistics)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.navigation_view)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.nav_view)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -74,9 +75,8 @@ class DJStatisticsActivity : AppCompatActivity() {
         }
 
         drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
-
-        setupNavigationMenu(navigationView)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
 
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener {
@@ -102,45 +102,7 @@ class DJStatisticsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupNavigationMenu(navigationView: NavigationView) {
-        val menu = navigationView.menu
-        menu.findItem(R.id.nav_login)?.isVisible = false
-        menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = false
-        menu.findItem(R.id.nav_addgigs)?.isVisible = true
-
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_my_profile -> {
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                R.id.nav_djstatistics -> {
-                    val intent = Intent(this, DJStatisticsActivity::class.java)
-                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                        .getInt("logged_in_user_id", -1) // Dohvati userId
-                    intent.putExtra("user_id", userId) // Proslijedi userId
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                R.id.nav_addgigs -> {
-                    val intent = Intent(this, AddGigsActivity::class.java)
-                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                        .getInt("logged_in_user_id", -1) // Dohvati userId
-                    intent.putExtra("user_id", userId) // Proslijedi userId
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-    fun onDateRangeSelected() {
+    private fun onDateRangeSelected() {
         fetchGigsAndUpdateUI()
         //Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedStartDate.time)}", Toast.LENGTH_SHORT).show()
         //Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedEndDate.time)}", Toast.LENGTH_LONG).show()

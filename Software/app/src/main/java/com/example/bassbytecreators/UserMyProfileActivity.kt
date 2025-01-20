@@ -1,5 +1,6 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
-class UserMyProfileActivity : AppCompatActivity() {
-    private lateinit var drawerLayout: DrawerLayout
+class UserMyProfileActivity : BaseActivity() {
+    private lateinit var navView: NavigationView
     private var userId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +30,10 @@ class UserMyProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        drawerLayout = findViewById(R.id.nav_drawer)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
 
-        setupNavigationMenu(navigationView)
         setupProfileElements()
     }
 

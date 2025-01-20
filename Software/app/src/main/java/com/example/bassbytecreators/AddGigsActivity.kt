@@ -1,5 +1,6 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -29,10 +30,10 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class AddGigsActivity : AppCompatActivity() {
+class AddGigsActivity : BaseActivity() {
     private var userId: Int = -1
 
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
     private var sdfDate  = SimpleDateFormat("dd.MM.yyyy", Locale.US)
     private var sdfDate2 = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
@@ -64,9 +65,9 @@ class AddGigsActivity : AppCompatActivity() {
         }
 
         drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        navView = findViewById(R.id.navigation_view)
 
-        setupNavigationMenu(navigationView)
+        setupNavigationDrawer(navView)
 
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener {
@@ -156,35 +157,5 @@ class AddGigsActivity : AppCompatActivity() {
                 ).show()
             }
         })
-    }
-
-    private fun setupNavigationMenu(navigationView: NavigationView) {
-        val menu = navigationView.menu
-        menu.findItem(R.id.nav_login)?.isVisible = false
-        menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = true
-        menu.findItem(R.id.nav_addgigs)?.isVisible = false
-
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_my_profile -> {
-                    drawerLayout.closeDrawers()
-                    true
-                }
-
-                R.id.nav_djstatistics -> {
-                    val intent = Intent(this, DJStatisticsActivity::class.java)
-                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                        .getInt("logged_in_user_id", -1) // Dohvati userId
-                    intent.putExtra("user_id", userId) // Proslijedi userId
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-
-                else -> false
-            }
-        }
     }
 }

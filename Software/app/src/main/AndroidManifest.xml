@@ -58,6 +58,9 @@
             android:name=".SearchActivity"
             android:exported="true" />
         <activity
+            android:name=".Fragments.DJDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:launchMode="singleTop">

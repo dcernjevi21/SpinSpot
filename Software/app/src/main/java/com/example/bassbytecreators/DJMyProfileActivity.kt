@@ -1,5 +1,6 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
-class DJMyProfileActivity : AppCompatActivity() {
-    private lateinit var drawerLayout: DrawerLayout
+class DJMyProfileActivity : BaseActivity() {
+    private lateinit var navView: NavigationView
     private var userId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,41 +30,13 @@ class DJMyProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        drawerLayout = findViewById(R.id.nav_drawer)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
 
-        setupNavigationMenu(navigationView)
         setupProfileElements()
     }
 
-    private fun setupNavigationMenu(navigationView: NavigationView) {
-        val menu = navigationView.menu
-        menu.findItem(R.id.nav_login)?.isVisible = false
-        menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = true
-
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_main -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                R.id.nav_my_profile -> {
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                R.id.nav_djstatistics -> {
-                    val intent = Intent(this, DJStatisticsActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
 
     private fun setupProfileElements() {
 

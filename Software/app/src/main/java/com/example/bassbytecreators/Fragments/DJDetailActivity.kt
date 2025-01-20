@@ -32,7 +32,7 @@ import java.util.Date
 class DJDetailActivity : AppCompatActivity(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var gigAdapter: GigAdapter
-    private var djId =  0
+    private var id_od_dja =  ""
     private lateinit var calendar: CalendarView
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +46,8 @@ class DJDetailActivity : AppCompatActivity(){
         gigAdapter = GigAdapter(emptyList())
         val djName = intent.getStringExtra("DJ_NAME")
         val djGenre = intent.getStringExtra("DJ_GENRE")
-        val djId = intent.getStringExtra("DJ_ID")
+        var djId = intent.getStringExtra("DJ_ID")
+        id_od_dja = intent.getStringExtra("DJ_ID").toString()
         Log.d("DJ ID u detaljima", djId.toString())
         btnChooseMonth.setOnClickListener {
             showMonthPickerDialog()
@@ -64,8 +65,8 @@ class DJDetailActivity : AppCompatActivity(){
                     findViewById<TextView>(R.id.djName).text = dj?.dj_name
                     findViewById<TextView>(R.id.djGenre).text = dj?.genres
                     findViewById<TextView>(R.id.djBiography).text = dj?.biography
-                    val id = dj?.user_id
-
+                    var id = dj?.user_id
+                    djId = id.toString()
                     if (id != null) {
                         Log.d("DJ id za gažu je", id.toString())
                         fetchUpcomingGigs(id)
@@ -118,6 +119,22 @@ class DJDetailActivity : AppCompatActivity(){
         val (prviDan, ZadnjiDan) = PrviIzadnjiDanUMjesecu(currentYear, month)
         Log.d("prvi dan", prviDan.toString())
         Log.d("zadnji dan", ZadnjiDan.toString())
+        Log.d("Dj id za gažu", id_od_dja)
+        RetrofitClient.apiService.getUpcomingGigsInMonth(
+            prviDan.toString(),
+            ZadnjiDan.toString(),id_od_dja).enqueue(object: Callback<List<DJGig>>{
+            override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
+                val gigs = response.body() ?: emptyList()
+
+                gigAdapter.updateList(gigs)
+                Log.d("Upcoming gigs that month", gigAdapter.gigs.toString())
+                recyclerView.adapter = gigAdapter
+            }
+
+            override fun onFailure(call: Call<List<DJGig>>, t: Throwable) {
+                Log.d("Error", "nije ucitao Gaze")
+            }
+        })
 
     }
 

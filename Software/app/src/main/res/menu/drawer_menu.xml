@@ -10,9 +10,19 @@
         android:icon="@drawable/ic_registration"
         android:title="Registracija" />
     <item
+        android:id="@+id/nav_main"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Početna" />
+    <item
         android:id="@+id/nav_djstatistics"
         android:title="DJ statistika" />
         <!-- android:icon="@drawable/ic_dj_statistics" -->
-
-
+    <item
+        android:id="@+id/nav_addgigs"
+        android:title="Dodaj gažu" />
+    <!-- android:icon="@drawable/ic_add_gigs" -->
+    <item
+        android:id="@+id/nav_my_profile"
+        android:title="@string/my_profile"
+        android:icon="@drawable/ic_baseline_account_circle_24" />
 </menu>

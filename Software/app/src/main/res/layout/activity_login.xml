@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/etEmailPrijava"
+            android:id="@+id/etUsernamePrijava"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
@@ -34,7 +34,7 @@
             android:background="@drawable/text_border"
             android:ems="10"
             android:padding="12dp"
-            android:hint="@string/unesite_mail"
+            android:hint="@string/unesite_korisnicko_ime"
             android:autofillHints="emailAddress"
             android:inputType="textEmailAddress"
             android:minHeight="55dp"
@@ -60,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmailPrijava" />
+            app:layout_constraintTop_toBottomOf="@+id/etUsernamePrijava" />
 
         <Button
             android:id="@+id/btnPrijava"

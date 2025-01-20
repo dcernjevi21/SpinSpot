@@ -12,7 +12,6 @@ import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -27,9 +26,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.reflect.Type
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 //za rad s bazom
@@ -112,7 +109,8 @@ class DJStatisticsActivity : AppCompatActivity() {
         val menu = navigationView.menu
         menu.findItem(R.id.nav_login)?.isVisible = false
         menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = true
+        menu.findItem(R.id.nav_djstatistics)?.isVisible = false
+        menu.findItem(R.id.nav_addgigs)?.isVisible = true
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -122,6 +120,20 @@ class DJStatisticsActivity : AppCompatActivity() {
                 }
                 R.id.nav_djstatistics -> {
                     val intent = Intent(this, DJStatisticsActivity::class.java)
+                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                        .getInt("logged_in_user_id", -1) // Dohvati userId
+                    intent.putExtra("user_id", userId) // Proslijedi userId
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    startActivity(intent)
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_addgigs -> {
+                    val intent = Intent(this, AddGigsActivity::class.java)
+                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                        .getInt("logged_in_user_id", -1) // Dohvati userId
+                    intent.putExtra("user_id", userId) // Proslijedi userId
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
                     startActivity(intent)
                     drawerLayout.closeDrawers()
                     true
@@ -144,7 +156,7 @@ class DJStatisticsActivity : AppCompatActivity() {
         intent.putExtra("dj_id", userId)
         startActivity(intent)
         Log.d("DJStatistics", "Šaljem userId i datume: userId: $userId, start date: $startDate, end date: $endDate")
-        RetrofitClient.apiService.getGigs(userId, startDate, endDate).enqueue(object : Callback<List<DJGig>> {
+        apiService.getGigsStats(userId, startDate, endDate).enqueue(object : Callback<List<DJGig>> {
             override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
                 Log.d("API_CALL", "URL: ${call.request()}")
                 if (response.isSuccessful) {
@@ -315,7 +327,6 @@ class DJStatisticsActivity : AppCompatActivity() {
         }
     }
 
-
     fun activateDateRangeListeners() {
         startDateSelection.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
@@ -323,7 +334,9 @@ class DJStatisticsActivity : AppCompatActivity() {
                     view.context,
                     { _, year, monthOfYear, dayOfMonth ->
                         selectedStartDate.set(year, monthOfYear, dayOfMonth)
-                        startDateSelection.setText(sdfDate.format(selectedStartDate.time).toString())
+                        startDateSelection.setText(
+                            sdfDate.format(selectedStartDate.time).toString()
+                        )
                         endDateSelection.requestFocus()
                     },
                     selectedStartDate.get(Calendar.YEAR),
@@ -331,30 +344,6 @@ class DJStatisticsActivity : AppCompatActivity() {
                     selectedStartDate.get(Calendar.DAY_OF_MONTH)
                 ).show()
                 view.clearFocus()
-
-    private fun fetchGigsAndUpdateUI() {
-        val startDate = sdfDate2.format(selectedStartDate.time)
-        val endDate = sdfDate2.format(selectedEndDate.time)
-        Log.d("DJStatistics", "Šaljem datum start: $startDate, end: $endDate")
-        RetrofitClient.apiService.getGigsStats(startDate, endDate).enqueue(object : Callback<List<DJGig>> {
-            override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
-                Log.d("API_CALL", "URL: ${call.request()}")
-                if (response.isSuccessful) {
-                    val gigs = response.body()
-                    if (gigs != null) {
-                        gigs.forEach {
-                            Log.d("DJStatistics", "Ispis gigova redom: ${it.gigFee}, ${it.gigType}, ${it.gigDate}")
-                        }
-                        updateUIWithGigs(gigs)
-                    }
-                } else {
-                    Log.e("API_ERROR", "Greška kod odgovora: ${response.code()} - ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<List<DJGig>>, t: Throwable) {
-                Log.e("API_ERROR", "Greška kod povezivanja s API-jem: ${t.message}")
-                t.printStackTrace()
             }
         }
 
@@ -380,6 +369,5 @@ class DJStatisticsActivity : AppCompatActivity() {
                 view.clearFocus()
             }
         }
-
     }
 }

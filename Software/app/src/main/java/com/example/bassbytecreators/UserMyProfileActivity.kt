@@ -9,13 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
-class DJMyProfileActivity : AppCompatActivity() {
+class UserMyProfileActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private var userId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_djmy_profile)
+        setContentView(R.layout.activity_user_my_profile)
 
         userId = intent.getIntExtra("user_id", -1)
         if (userId == -1) {
@@ -40,7 +40,7 @@ class DJMyProfileActivity : AppCompatActivity() {
         val menu = navigationView.menu
         menu.findItem(R.id.nav_login)?.isVisible = false
         menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = true
+        menu.findItem(R.id.nav_djstatistics)?.isVisible = false
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -54,12 +54,6 @@ class DJMyProfileActivity : AppCompatActivity() {
                     drawerLayout.closeDrawers()
                     true
                 }
-                R.id.nav_djstatistics -> {
-                    val intent = Intent(this, DJStatisticsActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
                 else -> false
             }
         }
@@ -67,17 +61,13 @@ class DJMyProfileActivity : AppCompatActivity() {
 
     private fun setupProfileElements() {
 
-        findViewById<LinearLayout>(R.id.llProfileReviewsRow).setOnClickListener {
-            val intent = Intent(this, DJReviewsActivity::class.java)
-            intent.putExtra("dj_id", userId)
+        findViewById<LinearLayout>(R.id.llUserPersonalDetailsRow).setOnClickListener {
+            val intent = Intent(this, UserPersonalDetailsActivity::class.java)
+            intent.putExtra("user_id", userId)
             startActivity(intent)
         }
 
-        findViewById<LinearLayout>(R.id.llDJPersonalDetailsRow).setOnClickListener {
-            Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
-        }
-
-        findViewById<LinearLayout>(R.id.llSettingsRow).setOnClickListener {
+        findViewById<LinearLayout>(R.id.llUserSettingsRow).setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             intent.putExtra("user_id", userId)
             startActivity(intent)

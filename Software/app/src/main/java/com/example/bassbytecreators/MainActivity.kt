@@ -23,6 +23,7 @@ import com.example.bassbytecreators.helpers.AddGigDialogHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import java.util.concurrent.TimeUnit
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private var userRole: String? = null
@@ -64,8 +65,8 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_login)?.isVisible = false
         menu.findItem(R.id.nav_registration)?.isVisible = false
 
-        // DJ statistika
         menu.findItem(R.id.nav_djstatistics)?.isVisible = userRole == "DJ"
+        menu.findItem(R.id.nav_addgigs)?.isVisible = userRole == "DJ"
 
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -79,7 +80,11 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                         }
                         "Korisnik" -> {
-                            Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, UserMyProfileActivity::class.java)
+                            val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                                .getInt("logged_in_user_id", -1)
+                            intent.putExtra("user_id", userId)
+                            startActivity(intent)
                         }
                     }
                     drawerLayout.closeDrawers()
@@ -103,6 +108,14 @@ class MainActivity : AppCompatActivity() {
 
                     startActivity(intent)
                     drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_main -> {
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Već jeste na početnom ekranu.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     true
                 }
                 else -> false

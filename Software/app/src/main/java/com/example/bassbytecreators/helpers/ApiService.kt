@@ -27,5 +27,12 @@ interface ApiService {
     fun getUpcomingGigs(
         @Query("id") djId: Int
     ): Call<List<DJGig>>
+
+    @GET("gigs.php")
+    fun getUpcomingGigsInMonth(
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String,
+        @Query("user_id") id: String
+    ): Call<List<DJGig>>
 }
 

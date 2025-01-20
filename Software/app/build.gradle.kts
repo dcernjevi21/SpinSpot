@@ -39,6 +39,7 @@ android {
 
 
 dependencies {
+    implementation(libs.androidx.ui.android)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

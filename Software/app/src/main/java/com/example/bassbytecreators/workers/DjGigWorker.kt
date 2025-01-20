@@ -20,11 +20,19 @@ class DJGigWorker(context: Context, params: WorkerParameters) : CoroutineWorker(
 
     override suspend fun doWork(): Result {
 
+        // Dohvati userId iz SharedPreferences
+        val sharedPreferences = applicationContext.getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getInt("logged_in_user_id", -1)
+
+        if (userId == -1) {
+            Log.e("DJGigWorker", "Nije pronađen userId u SharedPreferences. Prekidam rad.")
+            return Result.failure()
+        }
         // Dohvaćanje gaža
         val djGigs = fetchGigs(userId)
 
         if (djGigs.isEmpty()) {
-            Log.e("WORKER_ERROR", "Nije pronađena nijedna gaža za userId: $userId")
+            Log.e("DJGigWorker", "Nije pronađena nijedna gaža za userId: $userId")
             return Result.failure()
         }
 
@@ -55,7 +63,7 @@ class DJGigWorker(context: Context, params: WorkerParameters) : CoroutineWorker(
         // Provjera dozvole za notifikacije
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (applicationContext.checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                Log.e("NotificationError", "Dozvola za slanje notifikacija nije odobrena.")
+                Log.e("DJGigWorker", "Dozvola za slanje notifikacija nije odobrena.")
                 return
             }
         }
@@ -89,7 +97,7 @@ class DJGigWorker(context: Context, params: WorkerParameters) : CoroutineWorker(
             try {
                 RetrofitClient.apiService.getGigs(userId)
             } catch (e: Exception) {
-                Log.e("API_ERROR", "Greška kod dohvaćanja gaža: ${e.message}", e)
+                Log.e("DJGigWorker", "Greška kod dohvaćanja gaža: ${e.message}", e)
                 emptyList()
             }
         }

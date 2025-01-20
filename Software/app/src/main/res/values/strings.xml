@@ -40,6 +40,10 @@
     <string name="deleteAcc">Izbriši račun</string>
     <string name="odjaviSe">Odjavi se</string>
     <string name="verzijaAplikacije">Verzija aplikacije: 1.0.0</string>
+    <string name="login">Prijava</string>
+    <string name="registration">Registracija</string>
+    <string name="dj_statitistics">DJ statistika</string>
+    <string name="add_gig">Dodaj gažu</string>
     <string-array name="user_types">
         <item>Odaberi ulogu</item>
         <item>Korisnik</item>

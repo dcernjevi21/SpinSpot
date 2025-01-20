@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.CalendarView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.DJperson
@@ -27,10 +28,11 @@ class DJDetailActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dj_detail)
         recyclerView = findViewById(R.id.gigsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         //recyclerView.layoutManager = LinearLayoutManager(this)
         // Dobivanje podataka iz I  ntenta
         calendar = findViewById(R.id.calendarView)
-
+        gigAdapter = GigAdapter(emptyList())
         val djName = intent.getStringExtra("DJ_NAME")
         val djGenre = intent.getStringExtra("DJ_GENRE")
         val djId = intent.getStringExtra("DJ_ID")
@@ -47,7 +49,12 @@ class DJDetailActivity : AppCompatActivity(){
                     findViewById<TextView>(R.id.djName).text = dj?.dj_name
                     findViewById<TextView>(R.id.djGenre).text = dj?.genres
                     findViewById<TextView>(R.id.djBiography).text = dj?.biography
+                    val id = dj?.user_id
 
+                    if (id != null) {
+                        Log.d("DJ id za gažu je", id.toString())
+                        fetchUpcomingGigs(id)
+                    }
                 }
             }
 
@@ -65,10 +72,13 @@ class DJDetailActivity : AppCompatActivity(){
             override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
                 if (response.isSuccessful) {
                     val gigs = response.body() ?: emptyList()
-                    gigAdapter = GigAdapter(gigs)
+
+                    gigAdapter.updateList(gigs)
+                    Log.d("Upcoming gigs", gigAdapter.gigs.toString())
                     recyclerView.adapter = gigAdapter
+
                 } else {
-                    //Toast.makeText(this@UpcomingGigsActivity, "Failed to load data", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText("Failed to load data", Toast.LENGTH_SHORT).show()
                 }
             }
 

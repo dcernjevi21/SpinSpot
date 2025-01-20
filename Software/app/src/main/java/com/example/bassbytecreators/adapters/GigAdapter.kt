@@ -1,3 +1,4 @@
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -6,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.R
 import com.example.bassbytecreators.entities.DJGig
 
-class GigAdapter(private val gigs: List<DJGig>) : RecyclerView.Adapter<GigAdapter.GigViewHolder>() {
+class GigAdapter(public var gigs: List<DJGig>) : RecyclerView.Adapter<GigAdapter.GigViewHolder>() {
 
     inner class GigViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvLocation: TextView = view.findViewById(R.id.tvLocation)
@@ -24,6 +25,12 @@ class GigAdapter(private val gigs: List<DJGig>) : RecyclerView.Adapter<GigAdapte
         holder.tvLocation.text = gig.location
         holder.tvDate.text = gig.gigDate
         holder.tvPrice.text = "$${gig.gigFee}"
+    }
+
+    fun updateList(newList: List<DJGig>) {
+        gigs = newList
+        Log.d("azurirana lista je", newList.toString())
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = gigs.size

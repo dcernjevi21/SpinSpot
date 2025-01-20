@@ -105,7 +105,6 @@ class RegistrationActivity : AppCompatActivity() {
                         Snackbar.LENGTH_LONG
                     ).show()
 
-                    // Navigate to LoginActivity
                     val intent = Intent(this@RegistrationActivity, LoginActivity::class.java)
                     startActivity(intent)
                     finish()

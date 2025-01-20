@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -83,7 +82,11 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                         }
                         "Korisnik" -> {
-                            Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, UserMyProfileActivity::class.java)
+                            val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+                                .getInt("logged_in_user_id", -1)
+                            intent.putExtra("user_id", userId)
+                            startActivity(intent)
                         }
                     }
                     drawerLayout.closeDrawers()

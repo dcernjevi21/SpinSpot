@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_registration)?.isVisible = false
 
         menu.findItem(R.id.nav_djstatistics)?.isVisible = userRole == "DJ"
+        menu.findItem(R.id.nav_addgigs)?.isVisible = userRole == "DJ"
 
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {

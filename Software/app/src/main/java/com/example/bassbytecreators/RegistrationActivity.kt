@@ -35,6 +35,7 @@ class RegistrationActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_my_profile)?.isVisible = false
         menu.findItem(R.id.nav_djstatistics)?.isVisible = false
         menu.findItem(R.id.nav_main)?.isVisible = false
+        menu.findItem(R.id.nav_addgigs)?.isVisible = false
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {

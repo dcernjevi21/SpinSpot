@@ -315,6 +315,7 @@ class DJStatisticsActivity : AppCompatActivity() {
         }
     }
 
+
     fun activateDateRangeListeners() {
         startDateSelection.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
@@ -330,6 +331,30 @@ class DJStatisticsActivity : AppCompatActivity() {
                     selectedStartDate.get(Calendar.DAY_OF_MONTH)
                 ).show()
                 view.clearFocus()
+
+    private fun fetchGigsAndUpdateUI() {
+        val startDate = sdfDate2.format(selectedStartDate.time)
+        val endDate = sdfDate2.format(selectedEndDate.time)
+        Log.d("DJStatistics", "Šaljem datum start: $startDate, end: $endDate")
+        RetrofitClient.apiService.getGigsStats(startDate, endDate).enqueue(object : Callback<List<DJGig>> {
+            override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
+                Log.d("API_CALL", "URL: ${call.request()}")
+                if (response.isSuccessful) {
+                    val gigs = response.body()
+                    if (gigs != null) {
+                        gigs.forEach {
+                            Log.d("DJStatistics", "Ispis gigova redom: ${it.gigFee}, ${it.gigType}, ${it.gigDate}")
+                        }
+                        updateUIWithGigs(gigs)
+                    }
+                } else {
+                    Log.e("API_ERROR", "Greška kod odgovora: ${response.code()} - ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<DJGig>>, t: Throwable) {
+                Log.e("API_ERROR", "Greška kod povezivanja s API-jem: ${t.message}")
+                t.printStackTrace()
             }
         }
 

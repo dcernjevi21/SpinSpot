@@ -49,8 +49,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    //za zakazivanje zadataka
+    //for task scheduling zakazivanje zadataka
     implementation ("androidx.work:work-runtime-ktx:2.8.1")
+    // Kotlin Coroutines Core
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    // Kotlin Coroutines Android (za korištenje u Android kontekstu)
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

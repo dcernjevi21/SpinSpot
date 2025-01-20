@@ -66,6 +66,17 @@
         android:layout_height="wrap_content"
         android:importantForAutofill="no"
         android:inputType="time" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/et_add_djgig_dialog_gigEndTime"
+        android:text="@string/gig_end_time" />
+    <EditText
+        android:id="@+id/et_add_djgig_dialog_gigEndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="time" />
 
     <TextView
         android:layout_width="match_parent"

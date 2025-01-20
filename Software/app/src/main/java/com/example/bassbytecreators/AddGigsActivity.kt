@@ -1,5 +1,6 @@
 package com.example.bassbytecreators
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,19 +12,32 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
+import com.example.bassbytecreators.helpers.RetrofitClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class AddGigsActivity : AppCompatActivity() {
     private var userId: Int = -1
 
     private lateinit var drawerLayout: DrawerLayout
+    private var sdfDate  = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+    private var sdfDate2 = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
-    private lateinit var btnAddGig: FloatingActionButton
+    private lateinit var fabAddGig: FloatingActionButton
     private lateinit var txt1: TextView
     private lateinit var txt2: TextView
     private lateinit var txt3: TextView
@@ -32,6 +46,7 @@ class AddGigsActivity : AppCompatActivity() {
     private lateinit var txt6: TextView
     private lateinit var txt7: TextView
     private lateinit var txt8: TextView
+    private lateinit var txt10: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,15 +72,16 @@ class AddGigsActivity : AppCompatActivity() {
 
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener {
-            finish() // Close the activity and return to the previous screen
+            finish()
         }
 
-        btnAddGig = findViewById(R.id.fab_add_gig)
-        btnAddGig.setOnClickListener {
+        fabAddGig = findViewById(R.id.fab_add_gig)
+        fabAddGig.setOnClickListener {
             showDialog()
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showDialog() {
         val newAddGigDialogView = LayoutInflater
             .from(this@AddGigsActivity)
@@ -75,30 +91,73 @@ class AddGigsActivity : AppCompatActivity() {
             .setView(newAddGigDialogView)
             .setTitle(getString(R.string.add_new_gig))
             .setPositiveButton(getString(R.string.add_new_gig)) { _, _ ->
-                val newGig = dialogHelper.buildGig()
-                Log.d(
-                    "ispis",
-                    "Gig Info: Date: ${newGig.gigDate}, Location: ${newGig.location}, Type: ${newGig.gigType}, Name: ${newGig.name}, Start Time: ${newGig.gigStartTime}, Fee: ${newGig.gigFee}"
-                )
+                var newGig = dialogHelper.buildGig()
+
+                //za provjeru na zaslonu
                 txt1 = findViewById(R.id.textView2)
                 txt2 = findViewById(R.id.textView3)
                 txt3 = findViewById(R.id.textView4)
                 txt4 = findViewById(R.id.textView5)
                 txt5 = findViewById(R.id.textView6)
+                txt10 = findViewById(R.id.textView10) //kraj
                 txt6 = findViewById(R.id.textView7)
-                txt7 = findViewById(R.id.textView8)
-                txt8 = findViewById(R.id.textView9)
-                txt1.text = newGig.gigDate
-                txt2.text = newGig.location
-                txt3.text = newGig.gigType
-                txt4.text = newGig.name
-                txt5.text = newGig.gigStartTime
-                txt6.text = newGig.gigFee.toString()
-                txt7.text = newGig.gigEndTime
-                txt8.text = newGig.description
+                txt7 = findViewById(R.id.textView8) //opis
+                txt1.text = "${txt1.text}: ${newGig.gigDate}"
+                txt2.text = "${txt2.text}: ${newGig.location}"
+                txt3.text = "${txt3.text}: ${newGig.gigType}"
+                txt4.text = "${txt4.text}: ${newGig.name}"
+                txt5.text = "${txt5.text}: ${newGig.gigStartTime}"
+                txt10.text = "${txt10.text}: ${newGig.gigEndTime}"
+                txt6.text = "${txt6.text}: ${newGig.gigFee.toString()}"
+                txt7.text = "${txt7.text}: ${newGig.description}"
+
+
+                try {
+                    val parsedDate = sdfDate.parse(newGig.gigDate)
+                    val formattedDate = sdfDate2.format(parsedDate!!)
+                    newGig.gigDate = formattedDate
+                } catch (e: ParseException) {
+                    Log.e("AddGigs", "Greška pri parsiranju datuma: ${e.message}")
+                }
+                addNewGig(newGig, userId)
             }
             .show()
         dialogHelper.activateDateTimeListeners()
+    }
+
+    private fun addNewGig(newGig: DJGig, userId: Int) {
+        Log.d(
+            "AddGigs",
+            "GigActivity: Date: ${newGig.gigDate}, Location: ${newGig.location}, Type: ${newGig.gigType}, Name: ${newGig.name}, Start Time: ${newGig.gigStartTime}, End Time: ${newGig.gigEndTime}, Fee: ${newGig.gigFee}, Description: ${newGig.description}"
+        )
+        RetrofitClient.apiService.addNewGig(newGig, userId).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    Log.d("AddGigs", "Response: ${response.body()?.string()}")
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Uspješno dodavanje gaža!",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                } else {
+                    Log.e("AddGigs", "Error: ${response.code()} - ${response.errorBody()?.string()}")
+                    Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Greška kod dodavanje gaža: ${response.message()}",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("AddGigs", "Connection error: ${t.message}")
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Greška kod spajanja na server.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        })
     }
 
     private fun setupNavigationMenu(navigationView: NavigationView) {
@@ -123,6 +182,7 @@ class AddGigsActivity : AppCompatActivity() {
                     drawerLayout.closeDrawers()
                     true
                 }
+
                 R.id.nav_addgigs -> {
                     val intent = Intent(this, AddGigsActivity::class.java)
                     val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
@@ -138,3 +198,4 @@ class AddGigsActivity : AppCompatActivity() {
         }
     }
 }
+

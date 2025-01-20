@@ -8,7 +8,7 @@ data class DJGig(
     @SerializedName("Name")
     val name: String,
     @SerializedName("date")
-    val gigDate: String,
+    var gigDate: String,
     @SerializedName("location")
     val location: String,
     @SerializedName("type")
@@ -16,9 +16,9 @@ data class DJGig(
     @SerializedName("description")
     val description: String,
     @SerializedName("start_time")
-    val gigStartTime: String,
+    var gigStartTime: String,
     @SerializedName("end_time")
-    val gigEndTime: String,
+    var gigEndTime: String,
     @SerializedName("fee")
     val gigFee: Double
 )

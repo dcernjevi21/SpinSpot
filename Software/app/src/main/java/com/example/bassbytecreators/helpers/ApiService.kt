@@ -50,7 +50,13 @@ interface ApiService {
         @Query("id") djId: Int
     ): Call<List<DJGig>>
 
-    @GET("users.php")
+     @GET("gigs.php")
+    fun getUpcomingGigsInMonth(
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String,
+        @Query("user_id") id: String
+    ): Call<List<DJGig>>
+     @GET("users.php")
     fun loginUser(
         @Query("action") action: String = "login",
         @Query("username") username: String,
@@ -74,5 +80,5 @@ interface ApiService {
 
     @GET("reviews.php")
     fun fetchReviews(@Query("dj_id") djId: Int): Call<List<Review>>
-}
+      }
 

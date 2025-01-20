@@ -16,6 +16,8 @@ import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
+import java.util.Date
 
 class DJDetailActivity : AppCompatActivity(){
     private lateinit var recyclerView: RecyclerView
@@ -28,6 +30,7 @@ class DJDetailActivity : AppCompatActivity(){
         //recyclerView.layoutManager = LinearLayoutManager(this)
         // Dobivanje podataka iz I  ntenta
         calendar = findViewById(R.id.calendarView)
+
         val djName = intent.getStringExtra("DJ_NAME")
         val djGenre = intent.getStringExtra("DJ_GENRE")
         val djId = intent.getStringExtra("DJ_ID")

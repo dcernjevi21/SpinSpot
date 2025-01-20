@@ -1,5 +1,6 @@
 package com.example.bassbytecreators
 
+import DJGigWorker
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,9 +15,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private var userRole: String? = null
@@ -43,6 +49,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+            .getInt("logged_in_user_id", -1)
+        Log.d("MainActivity", "User ID za slanje notifikacija: ${userId}")
+        scheduleNotificationWorker(userId)
 
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
@@ -52,11 +62,6 @@ class MainActivity : AppCompatActivity() {
         val gumbic: Button = findViewById(R.id.button)
         gumbic.setOnClickListener {
             startActivity(intent)
-        }
-
-        btnAddGig = findViewById(R.id.fab_add_gig)
-        btnAddGig.setOnClickListener {
-            showDialog()
         }
     }
 
@@ -100,35 +105,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDialog() {
-        val newAddGigDialogView = LayoutInflater
-            .from(this@MainActivity)
-            .inflate(R.layout.add_djgig_dialog, null)
-        val dialogHelper = AddGigDialogHelper(newAddGigDialogView)
-        AlertDialog.Builder(this@MainActivity)
-            .setView(newAddGigDialogView)
-            .setTitle(getString(R.string.add_new_gig))
-            .setPositiveButton(getString(R.string.add_new_gig)) { _, _ ->
-                val newGig = dialogHelper.buildGig()
-                Log.d("ispis", "Gig Info: Date: ${newGig.gigDate}, Location: ${newGig.location}, Type: ${newGig.gigType}, Name: ${newGig.name}, Start Time: ${newGig.gigStartTime}, Fee: ${newGig.gigFee}")
-                txt1 = findViewById(R.id.textView2)
-                txt2 = findViewById(R.id.textView3)
-                txt3 = findViewById(R.id.textView4)
-                txt4 = findViewById(R.id.textView5)
-                txt5 = findViewById(R.id.textView6)
-                txt6 = findViewById(R.id.textView7)
-                txt7 = findViewById(R.id.textView8)
-                txt8 = findViewById(R.id.textView9)
-                txt1.text = newGig.gigDate
-                txt2.text = newGig.location
-                txt3.text = newGig.gigType
-                txt4.text = newGig.name
-                txt5.text = newGig.gigStartTime
-                txt6.text = newGig.gigFee.toString()
-                txt7.text = newGig.gigEndTime
-                txt8.text = newGig.description
-            }
-            .show()
-        dialogHelper.activateDateTimeListeners()
+    private fun scheduleNotificationWorker(userId: Int) {
+        val workManager = WorkManager.getInstance(applicationContext)
+
+        val workRequest = PeriodicWorkRequestBuilder<DJGigWorker>(1, TimeUnit.DAYS)
+            .setInputData(workDataOf("userId" to userId))
+            .build()
+
+        workManager.enqueueUniquePeriodicWork(
+            "DJGigNotifications",
+            ExistingPeriodicWorkPolicy.UPDATE,
+            workRequest
+        )
     }
 }

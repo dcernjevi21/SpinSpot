@@ -241,7 +241,7 @@ class DJStatisticsActivity : AppCompatActivity() {
         val startDate = sdfDate2.format(selectedStartDate.time)
         val endDate = sdfDate2.format(selectedEndDate.time)
         Log.d("DJStatistics", "Šaljem datum start: $startDate, end: $endDate")
-        RetrofitClient.apiService.getGigs(startDate, endDate).enqueue(object : Callback<List<DJGig>> {
+        RetrofitClient.apiService.getGigsStats(startDate, endDate).enqueue(object : Callback<List<DJGig>> {
             override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
                 Log.d("API_CALL", "URL: ${call.request()}")
                 if (response.isSuccessful) {

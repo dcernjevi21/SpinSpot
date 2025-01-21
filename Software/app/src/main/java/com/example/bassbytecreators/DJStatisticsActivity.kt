@@ -29,7 +29,7 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 import com.example.bassbytecreators.entities.DJGig
-import com.example.bassbytecreators.helpers.RetrofitClient.apiService
+import com.example.bassbytecreators.ws.RetrofitClient.apiService
 import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback

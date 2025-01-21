@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.adapters.ReviewAdapter
 import com.example.bassbytecreators.entities.Review
-import com.example.bassbytecreators.helpers.RetrofitClient
+import com.example.bassbytecreators.ws.RetrofitClient
 import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback

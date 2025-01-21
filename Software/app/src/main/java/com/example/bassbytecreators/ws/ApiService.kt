@@ -1,4 +1,4 @@
-package com.example.bassbytecreators.helpers
+package com.example.bassbytecreators.ws
 
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.DJperson

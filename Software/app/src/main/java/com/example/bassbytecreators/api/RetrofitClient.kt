@@ -1,4 +1,4 @@
-package com.example.bassbytecreators.ws
+package com.example.bassbytecreators.api
 
 import okhttp3.Credentials
 import okhttp3.Interceptor

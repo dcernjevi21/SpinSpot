@@ -14,7 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
-import com.example.bassbytecreators.ws.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar

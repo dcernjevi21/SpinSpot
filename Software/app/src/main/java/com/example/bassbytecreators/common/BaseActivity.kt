@@ -38,7 +38,6 @@ abstract class BaseActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_my_profile)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_search)?.isVisible = isLoggedIn
 
-        // Sakrij "Add Gigs" i "Statistics" za korisnike (userRole == "Korisnik")
         if (userRole == "Korisnik") {
             menu.findItem(R.id.nav_addgigs)?.isVisible = false
             menu.findItem(R.id.nav_djstatistics)?.isVisible = false

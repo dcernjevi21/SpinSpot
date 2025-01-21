@@ -25,7 +25,7 @@ import androidx.work.workDataOf
 import com.example.bassbytecreators.ReviewActivity
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.DJperson
-import com.example.bassbytecreators.ws.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -50,7 +50,7 @@ class DJDetailActivity : BaseActivity(){
         recyclerView = findViewById(R.id.gigsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         //recyclerView.layoutManager = LinearLayoutManager(this)
-        // Dobivanje podataka iz I  ntenta
+        // Dobivanje podataka iz Intenta
         val btnChooseMonth: Button = findViewById<Button>(R.id.btnChooseMonth)
         val btnReviewDJ: Button = findViewById<Button>(R.id.btnReviewDJ)
         gigAdapter = GigAdapter(emptyList())

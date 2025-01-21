@@ -11,7 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.bassbytecreators.entities.DJGig
-import com.example.bassbytecreators.ws.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import java.text.SimpleDateFormat
 import java.util.*

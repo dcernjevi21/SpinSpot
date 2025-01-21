@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.adapters.SearchAdapter
 import com.example.bassbytecreators.entities.DJperson
-import com.example.bassbytecreators.ws.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
 import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback

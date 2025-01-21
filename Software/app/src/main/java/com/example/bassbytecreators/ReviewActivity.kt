@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RatingBar
 import com.example.bassbytecreators.entities.Review
-import com.example.bassbytecreators.ws.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.ResponseBody

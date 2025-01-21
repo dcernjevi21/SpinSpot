@@ -4,27 +4,20 @@ import BaseActivity
 import DJGigWorker
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.example.bassbytecreators.helpers.AddGigDialogHelper
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import java.util.concurrent.TimeUnit
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : BaseActivity() {
     private lateinit var navView: NavigationView
@@ -40,6 +33,12 @@ class MainActivity : BaseActivity() {
             insets
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1001)
+            }
+        }
+
         val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
             .getInt("logged_in_user_id", -1)
         Log.d("MainActivity", "User ID za slanje notifikacija: ${userId}")
@@ -48,12 +47,6 @@ class MainActivity : BaseActivity() {
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)
-
-        val intent = Intent(this, SearchActivity::class.java)
-        val gumbic: Button = findViewById(R.id.button)
-        gumbic.setOnClickListener {
-            startActivity(intent)
-        }
     }
 
     private fun scheduleNotificationWorker(userId: Int) {

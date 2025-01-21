@@ -1,8 +1,6 @@
 package com.example.bassbytecreators
 
 import BaseActivity
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -23,7 +21,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -80,11 +77,6 @@ class DJStatisticsActivity : BaseActivity() {
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)
-
-        val btnBack = findViewById<Button>(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish()
-        }
 
         startDateSelection = findViewById(R.id.et_dj_statistics_start_date)
         endDateSelection = findViewById(R.id.et_dj_statistics_end_date)
@@ -255,7 +247,6 @@ class DJStatisticsActivity : BaseActivity() {
         }
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -263,25 +254,12 @@ class DJStatisticsActivity : BaseActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        // on below line we are checking if the
-        // request code is equal to permission code.
         if (requestCode == PERMISSION_CODE) {
-
-            // on below line we are checking if result size is > 0
             if (grantResults.size > 0) {
-
-                // on below line we are checking
-                // if both the permissions are granted.
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1]
                     == PackageManager.PERMISSION_GRANTED) {
-
-                    // if permissions are granted we are displaying a toast message.
                     Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show()
-
                 } else {
-
-                    // if permissions are not granted we are
-                    // displaying a toast message as permission denied.
                     Toast.makeText(this, "Permission Denied..", Toast.LENGTH_SHORT).show()
                     finish()
                 }

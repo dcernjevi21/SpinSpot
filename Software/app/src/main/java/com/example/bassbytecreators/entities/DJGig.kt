@@ -2,11 +2,23 @@ package com.example.bassbytecreators.entities
 
 import java.util.Date
 
+import com.google.gson.annotations.SerializedName
+
 data class DJGig(
-    val gigDate : String,
-    val location : String,
+    @SerializedName("Name")
+    val name: String,
+    @SerializedName("date")
+    var gigDate: String,
+    @SerializedName("location")
+    val location: String,
+    @SerializedName("type")
     val gigType: String,
-    val name : String,
-    val gigStartTime : String,
-    val gigFee : Double,
-    )
+    @SerializedName("description")
+    val description: String,
+    @SerializedName("start_time")
+    var gigStartTime: String,
+    @SerializedName("end_time")
+    var gigEndTime: String,
+    @SerializedName("fee")
+    val gigFee: Double
+)

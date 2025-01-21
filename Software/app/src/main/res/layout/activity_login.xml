@@ -2,7 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/nav_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/etEmailPrijava"
+            android:id="@+id/etUsernamePrijava"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
@@ -34,7 +34,7 @@
             android:background="@drawable/text_border"
             android:ems="10"
             android:padding="12dp"
-            android:hint="@string/unesite_mail"
+            android:hint="@string/unesite_korisnicko_ime"
             android:autofillHints="emailAddress"
             android:inputType="textEmailAddress"
             android:minHeight="55dp"
@@ -60,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmailPrijava" />
+            app:layout_constraintTop_toBottomOf="@+id/etUsernamePrijava" />
 
         <Button
             android:id="@+id/btnPrijava"
@@ -94,7 +94,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

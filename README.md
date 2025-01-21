@@ -30,7 +30,7 @@ Opišite osnovnu buduću arhitekturu programskog proizvoda. Obratite pozornost d
 | F06 | Recenziranje DJ-eva | Korisnici mogu ostavljati recenzije i ocjene za DJ-eve nakon njihovih nastupa, a DJ-evi mogu pratiti povratne informacije kako bi se poboljšali.| Emanuel Valec |
 | F07 | Izvještavanje korisnika o budućim događajima | Korisnici mogu postaviti notifikacije za nadolazeće DJ nastupe ili događanja prema njihovim interesima (omiljeni DJ, omiljeni žanr). | Dominik Černjević |
 | F08 | Plaćanje za narudžbu pjesme Paypalom | Korisnici mogu naručiti pjesmu od DJ-a tijekom nastupa putem aplikacije i izvršiti online plaćanje preko Paypala. Prije nego se obavi prijenos sredstava DJ mora odobriti zahtjev, ukoliko odbije rezervirana sredstva sve otključavaju korisniku. | Nikola Huzjak |
-| F09 | Osnovna implementacija profila DJ-a | DJ može na svoj profil postaviti profilnu sliku i baner, dodati svoju biografiju, žanrove koje svira i sl. Korisnik na svojem profilu može postaviti profilnu sliku te preference i sl. | Emanuel Valec |
+| F09 | Osnovna implementacija profila | DJ može na svoj profil postaviti profilnu sliku i baner, dodati svoju biografiju, žanrove koje svira i sl. Korisnik na svojem profilu može postaviti profilnu sliku te preference i sl. | Emanuel Valec |
 
 
 ## Tehnologije i oprema 

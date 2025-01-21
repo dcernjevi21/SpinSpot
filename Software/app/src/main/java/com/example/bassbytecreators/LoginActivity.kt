@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.bassbytecreators.Fragments.DJDetailActivity
 import com.example.bassbytecreators.entities.User
 import com.example.bassbytecreators.helpers.RetrofitClient
 import com.google.android.material.navigation.NavigationView
@@ -111,7 +112,7 @@ class LoginActivity : AppCompatActivity() {
 
                         when (user.role) {
                             "DJ" -> {
-                                navigateToMainActivity("DJ")
+                                navigateToDJDetailsActivity("DJ")
                             }
                             "Korisnik" -> {
                                 navigateToMainActivity("Korisnik")
@@ -158,4 +159,26 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    private fun navigateToDJDetailsActivity(role: String) {
+        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val userId = sharedPreferences.getInt("logged_in_user_id", -1)
+
+        if (userId != -1) {
+            val intent = Intent(this, DJDetailActivity::class.java).apply {
+                putExtra("DJ_ID", userId.toString()) // Pass user_id as DJ_ID
+                putExtra("USER_ROLE", role)         // Pass the role
+            }
+            startActivity(intent)
+            finish()
+        } else {
+            Log.e("LoginActivity", "User ID not found in shared preferences.")
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                "Greška: Korisnički ID nije pronađen.",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+    }
+
 }

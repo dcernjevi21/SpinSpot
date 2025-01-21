@@ -58,6 +58,8 @@
     <string name="searchDJ">Pretraživanje DJ-eva</string>
     <string name="date">Datum</string>
     <string name="description">Opis</string>
+    <string name="ostavi_recenziju">Ostavi recenziju</string>
+    <string name="odaberi_mjesec">Odaberi mjesec</string>
     <string-array name="user_types">
         <item>Odaberi ulogu</item>
         <item>Korisnik</item>

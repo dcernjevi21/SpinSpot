@@ -3,6 +3,8 @@ package com.example.bassbytecreators.Fragments
 import BaseActivity
 import GigAdapter
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import com.example.bassbytecreators.R
 import android.widget.TextView
@@ -11,13 +13,18 @@ import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.CalendarView
+import android.widget.LinearLayout
 import android.widget.NumberPicker
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bassbytecreators.ReviewActivity
+import com.example.bassbytecreators.UserPersonalDetailsActivity
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.DJperson
 import com.example.bassbytecreators.helpers.RetrofitClient
+import com.google.android.material.snackbar.Snackbar
+import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,12 +46,35 @@ class DJDetailActivity : BaseActivity(){
         //recyclerView.layoutManager = LinearLayoutManager(this)
         // Dobivanje podataka iz I  ntenta
         val btnChooseMonth: Button = findViewById<Button>(R.id.btnChooseMonth)
+        val btnReviewDJ: Button = findViewById<Button>(R.id.btnReviewDJ)
         gigAdapter = GigAdapter(emptyList())
         val djName = intent.getStringExtra("DJ_NAME")
         val djGenre = intent.getStringExtra("DJ_GENRE")
         var djId = intent.getStringExtra("DJ_ID")
         id_od_dja = intent.getStringExtra("DJ_ID").toString()
+        val dj_id = intent.getStringExtra("DJ_ID")?.toIntOrNull() ?: -1
         Log.d("DJ ID u detaljima", djId.toString())
+        val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+            .getInt("logged_in_user_id", -1)
+        btnReviewDJ.setOnClickListener {
+            Log.d("DJDetailActivity", "dj_id: $djId, user_id: $userId")
+            if(dj_id != userId)
+            {
+                val intent = Intent(this, ReviewActivity::class.java)
+                intent.putExtra("dj_id", dj_id)
+                intent.putExtra("user_id", userId)
+                startActivity(intent)
+            }
+            else
+            {
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Ne možete ocijeniti samog sebe.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+
+        }
         btnChooseMonth.setOnClickListener {
             showMonthPickerDialog()
         }

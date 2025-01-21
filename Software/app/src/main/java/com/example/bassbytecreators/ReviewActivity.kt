@@ -2,6 +2,7 @@ package com.example.bassbytecreators
 
 import BaseActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RatingBar
@@ -27,6 +28,7 @@ class ReviewActivity : BaseActivity() {
 
         val djId = intent.getIntExtra("dj_id", -1)
         val userId = intent.getIntExtra("user_id", -1)
+        Log.d("ReviewActivity", "dj_id: $djId, user_id: $userId")
 
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)

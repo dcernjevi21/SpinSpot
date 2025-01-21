@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Odaberi mjesec" />
+            android:text="@string/odaberi_mjesec" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gigsRecyclerView"
             android:layout_width="match_parent"
@@ -75,6 +75,12 @@
             android:scrollbars="vertical"
             android:clipToPadding="false" />
 
+        <Button
+            android:id="@+id/btnReviewDJ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/ostavi_recenziju" />
 
     </LinearLayout>
 </ScrollView>

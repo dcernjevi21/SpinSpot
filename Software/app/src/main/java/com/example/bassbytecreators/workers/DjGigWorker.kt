@@ -91,7 +91,6 @@ class DJGigWorker(context: Context, params: WorkerParameters) : CoroutineWorker(
         }, 10000) // Odgoda od 10 sekundi (8000 ms)
     }
 
-
     private suspend fun fetchGigs(userId: Int): List<DJGig> {
         return withContext(Dispatchers.IO) {
             try {

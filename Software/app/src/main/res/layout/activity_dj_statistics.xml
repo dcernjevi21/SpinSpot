@@ -16,7 +16,7 @@
             android:id="@+id/tvStatistikaNaslov"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:gravity="center"
             android:text="@string/statistics"
             android:textStyle="bold"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
             android:text="@string/startDate"
             app:layout_constraintEnd_toEndOf="parent"
@@ -110,26 +110,15 @@
             android:id="@+id/btnGenerirajPdf"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="160dp"
             android:text="@string/generatePdf"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_gig_type" />
-
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="@string/back"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnGenerirajPdf" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

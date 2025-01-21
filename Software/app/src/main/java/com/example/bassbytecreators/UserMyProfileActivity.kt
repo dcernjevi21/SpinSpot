@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
 class UserMyProfileActivity : BaseActivity() {
@@ -30,34 +28,11 @@ class UserMyProfileActivity : BaseActivity() {
             finish()
         }
 
-        drawerLayout = findViewById(R.id.nav_drawer)
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)
 
         setupProfileElements()
-    }
-
-    private fun setupNavigationMenu(navigationView: NavigationView) {
-        val menu = navigationView.menu
-        menu.findItem(R.id.nav_login)?.isVisible = false
-        menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = false
-
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_main -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                R.id.nav_my_profile -> {
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
     private fun setupProfileElements() {

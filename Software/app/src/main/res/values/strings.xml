@@ -26,7 +26,7 @@
     <string name="unesite_ime_prezime">Unesite ime i prezime</string>
     <string name="unesite_korisnicko_ime">Unesite korisničko ime</string>
     <string name="objavi_recenziju">Objavi recenziju</string>
-    <string name="napisite_svoju_recenziju">Napišite svoju recenziju...</string>
+    <string name="napisite_svoju_recenziju">Napišite svoju recenziju…</string>
     <string name="recenzije_dj_a">Vaše recenzije</string>
     <string name="povratak">Povratak</string>
     <string name="reviewer_name">Reviewer Name</string>
@@ -47,6 +47,17 @@
     <string name="nova_lozinka">Nova lozinka (neobavezno)</string>
     <string name="spremi_promjene">Spremi promjene</string>
     <string name="natrag">Natrag</string>
+    <string name="statistics">Statistika</string>
+    <string name="startDate">Odaberite početni datum</string>
+    <string name="endDate">Odaberite završni datum</string>
+    <string name="gigCount">Vaš broj gaži iznosi:</string>
+    <string name="totalEarnings">Ukupna zarada:</string>
+    <string name="mostCommonGigType">Najčešći tip gaže:</string>
+    <string name="generatePdf">Generate PDF</string>
+    <string name="back">Povratak</string>
+    <string name="searchDJ">Pretraživanje DJ-eva</string>
+    <string name="date">Datum</string>
+    <string name="description">Opis</string>
     <string-array name="user_types">
         <item>Odaberi ulogu</item>
         <item>Korisnik</item>

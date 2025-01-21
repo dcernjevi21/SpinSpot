@@ -28,8 +28,8 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
 
         val menu = navigationView.menu
         menu.findItem(R.id.nav_my_profile)?.isVisible = false

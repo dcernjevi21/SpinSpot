@@ -1,5 +1,6 @@
 package com.example.bassbytecreators.Fragments
 
+import BaseActivity
 import GigAdapter
 import android.app.Dialog
 import android.os.Build
@@ -11,25 +12,20 @@ import android.view.Window
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.NumberPicker
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.window.Dialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.DJperson
 import com.example.bassbytecreators.helpers.RetrofitClient
-import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.Calendar
-import java.util.Date
 
-class DJDetailActivity : AppCompatActivity(){
+class DJDetailActivity : BaseActivity(){
     private lateinit var recyclerView: RecyclerView
     private lateinit var gigAdapter: GigAdapter
     private var id_od_dja =  ""

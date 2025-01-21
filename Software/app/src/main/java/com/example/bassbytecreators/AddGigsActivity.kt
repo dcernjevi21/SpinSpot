@@ -2,8 +2,6 @@ package com.example.bassbytecreators
 
 import BaseActivity
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,10 +10,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
 import com.example.bassbytecreators.helpers.RetrofitClient
@@ -64,8 +60,8 @@ class AddGigsActivity : BaseActivity() {
             return
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.navigation_view)
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
 
         setupNavigationDrawer(navView)
 

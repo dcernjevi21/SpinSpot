@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
 class DJMyProfileActivity : BaseActivity() {
@@ -30,7 +28,7 @@ class DJMyProfileActivity : BaseActivity() {
             finish()
         }
 
-        drawerLayout = findViewById(R.id.nav_drawer)
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)
 

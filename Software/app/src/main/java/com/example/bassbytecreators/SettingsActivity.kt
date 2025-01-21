@@ -1,5 +1,6 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,17 +9,23 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import com.example.bassbytecreators.helpers.RetrofitClient
+import com.google.android.material.navigation.NavigationView
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : BaseActivity() {
+    private lateinit var navView: NavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
 
         val deleteAccountLayout = findViewById<LinearLayout>(R.id.llDeleteAccount)
         val logoutLayout = findViewById<LinearLayout>(R.id.llLogout)
@@ -118,7 +125,6 @@ class SettingsActivity : AppCompatActivity() {
     private fun logout() {
         val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
         sharedPreferences.edit().clear().apply()
-
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

@@ -1,20 +1,25 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.adapters.ReviewAdapter
 import com.example.bassbytecreators.entities.Review
 import com.example.bassbytecreators.helpers.RetrofitClient
+import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DJReviewsActivity : AppCompatActivity() {
+class DJReviewsActivity : BaseActivity() {
+
+    private lateinit var navView: NavigationView
+    private var djId: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_djreviews)
@@ -22,17 +27,20 @@ class DJReviewsActivity : AppCompatActivity() {
         val recyclerViewReviews = findViewById<RecyclerView>(R.id.recyclerViewReviews)
         recyclerViewReviews.layoutManager = LinearLayoutManager(this)
 
-        val btnBack = findViewById<Button>(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish()
-        }
-
-        val djId = intent.getIntExtra("dj_id", 1)
-
+        djId = intent.getIntExtra("dj_id", 1)
         if (djId != -1) {
             fetchReviews(djId, recyclerViewReviews)
         } else {
             Toast.makeText(this, "Greška: dj_id nije pronađen!", Toast.LENGTH_LONG).show()
+            finish()
+        }
+
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
+
+        val btnBack = findViewById<Button>(R.id.btnBack)
+        btnBack.setOnClickListener {
             finish()
         }
     }

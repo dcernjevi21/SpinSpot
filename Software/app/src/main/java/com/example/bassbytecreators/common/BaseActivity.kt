@@ -96,7 +96,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 startActivity(intent)
                 drawerLayout.closeDrawers()
                 true
-            }
+                }
 
                 R.id.nav_login -> {
                     val intent = Intent(this, LoginActivity::class.java)

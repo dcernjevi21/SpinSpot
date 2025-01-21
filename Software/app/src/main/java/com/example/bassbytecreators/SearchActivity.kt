@@ -5,18 +5,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Menu
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.adapters.SearchAdapter
 import com.example.bassbytecreators.entities.DJperson
-import com.example.bassbytecreators.helpers.MockDataLoader
 import com.example.bassbytecreators.helpers.RetrofitClient
 import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
@@ -35,7 +29,7 @@ class SearchActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dj_search_layout)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)
 

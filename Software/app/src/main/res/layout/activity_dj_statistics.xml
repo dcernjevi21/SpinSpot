@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/nav_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
@@ -18,23 +18,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Statistika"
+            android:text="@string/statistics"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Početni datum -->
         <TextView
             android:id="@+id/tv_dj_statistics_start_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:text="Odaberite početni datum"
+            android:text="@string/startDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvStatistikaNaslov" />
+            app:layout_constraintTop_toBottomOf="@id/tvStatistikaNaslov"
+            android:labelFor="@id/et_dj_statistics_start_date" />
 
         <EditText
             android:id="@+id/et_dj_statistics_start_date"
@@ -45,16 +45,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Završni datum -->
         <TextView
             android:id="@+id/tv_dj_statistics_end_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Odaberite završni datum"
+            android:text="@string/endDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_dj_statistics_start_date" />
-
+            app:layout_constraintTop_toBottomOf="@id/et_dj_statistics_start_date"
+            android:labelFor="@id/et_dj_statistics_end_date" />
         <EditText
             android:id="@+id/et_dj_statistics_end_date"
             android:layout_width="250dp"
@@ -71,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-            android:text="Vaš broj gaži iznosi:"
+            android:text="@string/gigCount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_dj_statistics_end_date" />
 
@@ -81,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Ukupna zarada:"
+            android:text="@string/totalEarnings"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_gig_number" />
 
@@ -91,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Najčešći tip gaže:"
+            android:text="@string/mostCommonGigType"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_zarada" />
 
@@ -101,7 +100,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:text="Generate PDF"
+            android:text="@string/generatePdf"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +111,7 @@
             android:id="@+id/btnBack"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Povratak"
+            android:text="@string/back"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +120,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- NavigationView -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

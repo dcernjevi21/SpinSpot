@@ -1,18 +1,8 @@
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.bassbytecreators.AddGigsActivity
-import com.example.bassbytecreators.DJMyProfileActivity
-import com.example.bassbytecreators.DJStatisticsActivity
-import com.example.bassbytecreators.Fragments.DJDetailActivity
-import com.example.bassbytecreators.LoginActivity
-import com.example.bassbytecreators.MainActivity
+import androidx.navigation.findNavController
 import com.example.bassbytecreators.R
-import com.example.bassbytecreators.RegistrationActivity
-import com.example.bassbytecreators.SearchActivity
-import com.example.bassbytecreators.UserMyProfileActivity
 import com.google.android.material.navigation.NavigationView
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -24,6 +14,26 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun setupNavigationDrawer(navigationView: NavigationView) {
+        val navController = findNavController(R.id.fragment_container)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                /*R.id.nav_my_profile -> {
+                    navController.navigate(R.id.profileFragment)
+                    true
+                }*/
+
+                R.id.nav_addgigs -> {
+                    navController.navigate(R.id.addGigsFragment)
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+}
+
+    /*fun setupNavigationDrawer(navigationView: NavigationView) {
         val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
             .getInt("logged_in_user_id", -1)
 
@@ -131,4 +141,4 @@ abstract class BaseActivity : AppCompatActivity() {
             }
         }
     }
-}
+}*/

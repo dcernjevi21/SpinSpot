@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DjStatisticsFragment">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/nav_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SearchActivity"
+        android:background="@color/md_theme_background">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Naslov -->
+            <TextView
+                android:id="@+id/tvStatistikaNaslov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="@string/statistics"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="@color/md_theme_primary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_dj_statistics_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:textSize="20sp"
+                android:textColor="@color/md_theme_onBackground"
+                android:text="@string/startDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvStatistikaNaslov"
+                android:labelFor="@id/et_dj_statistics_start_date" />
+
+            <EditText
+                android:id="@+id/et_dj_statistics_start_date"
+                android:layout_width="250dp"
+                android:layout_height="42dp"
+                android:inputType="date"
+                android:background="@color/md_theme_surface"
+                android:textColor="@color/md_theme_onSurface"
+                android:padding="8dp"
+                android:elevation="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_start_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_dj_statistics_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/endDate"
+                android:textSize="20sp"
+                android:textColor="@color/md_theme_onBackground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_dj_statistics_start_date"
+                android:labelFor="@id/et_dj_statistics_end_date" />
+
+            <EditText
+                android:id="@+id/et_dj_statistics_end_date"
+                android:layout_width="250dp"
+                android:layout_height="42dp"
+                android:inputType="date"
+                android:background="@color/md_theme_surface"
+                android:textColor="@color/md_theme_onSurface"
+                android:padding="8dp"
+                android:elevation="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_end_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Statistike -->
+            <TextView
+                android:id="@+id/tv_dj_statistics_gig_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:textSize="20sp"
+                android:textColor="@color/md_theme_onBackground"
+                android:text="@string/gigCount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_dj_statistics_end_date" />
+
+            <TextView
+                android:id="@+id/tv_dj_statistics_zarada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:textSize="20sp"
+                android:textColor="@color/md_theme_onBackground"
+                android:text="@string/totalEarnings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_gig_number" />
+
+            <TextView
+                android:id="@+id/tv_dj_statistics_gig_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:textSize="20sp"
+                android:textColor="@color/md_theme_onBackground"
+                android:text="@string/mostCommonGigType"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_zarada" />
+
+            <!-- Gumb za PDF -->
+            <Button
+                android:id="@+id/btnGenerirajPdf"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="160dp"
+                android:text="@string/generatePdf"
+                android:textAllCaps="false"
+                android:background="@color/md_theme_primary"
+                android:textColor="@color/md_theme_onPrimary"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_gig_type" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/md_theme_surface"
+            app:itemTextColor="@color/md_theme_onSurface"
+            app:itemIconTint="@color/md_theme_primary"
+            app:menu="@menu/drawer_menu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</FrameLayout>

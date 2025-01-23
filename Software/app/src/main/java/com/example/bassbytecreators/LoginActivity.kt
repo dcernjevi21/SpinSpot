@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.example.bassbytecreators.Fragments.DJDetailActivity
 import com.example.bassbytecreators.entities.User
 import com.example.bassbytecreators.api.RetrofitClient
 import com.google.android.material.navigation.NavigationView
@@ -165,7 +164,7 @@ class LoginActivity : AppCompatActivity() {
         val userId = sharedPreferences.getInt("logged_in_user_id", -1)
 
         if (userId != -1) {
-            val intent = Intent(this, DJDetailActivity::class.java).apply {
+            val intent = Intent(this, MainActivity::class.java).apply {
                 putExtra("DJ_ID", userId.toString()) // Pass user_id as DJ_ID
                 putExtra("USER_ROLE", role)         // Pass the role
             }

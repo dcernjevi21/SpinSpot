@@ -60,7 +60,7 @@
             android:name=".SearchActivity"
             android:exported="true" />
         <activity
-            android:name=".Fragments.DJDetailActivity"
+            android:name=".fragments.DJDetailActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"

@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bassbytecreators.Fragments.DJDetailActivity
+import com.example.bassbytecreators.fragments.DJDetailActivity
 import com.example.bassbytecreators.R
-import com.example.bassbytecreators.adapters.SearchAdapter.DJViewHolder
 import com.example.bassbytecreators.entities.DJperson
 
 class SearchAdapter(private var djList: List<DJperson>):  RecyclerView.Adapter<SearchAdapter.DJViewHolder>(){

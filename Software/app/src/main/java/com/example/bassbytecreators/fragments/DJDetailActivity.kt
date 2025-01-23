@@ -1,4 +1,4 @@
-package com.example.bassbytecreators.Fragments
+package com.example.bassbytecreators.fragments
 import BaseActivity
 import DJGigWorker
 import GigAdapter

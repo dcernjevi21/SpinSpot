@@ -12,6 +12,7 @@ import com.applandeo.materialcalendarview.CalendarDay
 import com.applandeo.materialcalendarview.EventDay
 import com.example.bassbytecreators.R
 import com.example.bassbytecreators.api.RetrofitClient
+import com.example.bassbytecreators.entities.Date
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,27 +27,37 @@ class CalendarFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("Sheggy Obavijest", "Došli smo do OnCreateView calendarFragment")
         return inflater.inflate(R.layout.calendar_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("Sheggy Obavijest", "Došli smo do OnViewCreated calendarFragment")
         calendarView = view.findViewById(R.id.calendarView)
         fetchDatesFromApi()
     }
 
     private fun fetchDatesFromApi() {
+        Log.d("Sheggy Obavijest", "Došli smo do fetchDatesFromApi ppočetak")
         try {
-            RetrofitClient.apiService.getAllGigsDates().enqueue(object: Callback<List<String>> {
+            RetrofitClient.apiService.getAllGigsDates().enqueue(object: Callback<List<Date>> {
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onResponse(
-                    call: Call<List<String>>,
-                    response: Response<List<String>>
+                    call: Call<List<Date>>,
+                    response: Response<List<Date>>
                 ) {
-                    Log.d("Dates", response.body().toString())
+                    Log.d("datumi zahtjeva", response.body().toString())
+                    if (response.isSuccessful) {
+                        val dates = response.body() ?: emptyList()
+                        val eventDays = parseDatesToEventDays(dates.map { it.date })
+                        Log.d("Event dani", eventDays.toString())
+                        updateCalendar(eventDays)
+                    }
                 }
 
-                override fun onFailure(call: Call<List<String>>, t: Throwable) {
-                    TODO("Not yet implemented")
+                override fun onFailure(call: Call<List<Date>>, t: Throwable) {
+                    Log.d("Sheggy error", t.toString())
                 }
             })
             //val dates = ApiService.getDates() // Pretpostavka: API vraća List<String>

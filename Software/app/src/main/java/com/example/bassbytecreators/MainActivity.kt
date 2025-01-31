@@ -1,6 +1,7 @@
 package com.example.bassbytecreators
 
 import BaseActivity
+import CalendarFragment
 import DJGigWorker
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,7 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
@@ -42,24 +44,28 @@ class MainActivity : BaseActivity() {
         val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
             .getInt("logged_in_user_id", -1)
         Log.d("MainActivity", "User ID za slanje notifikacija: ${userId}")
-        scheduleNotificationWorker(userId)
+        //scheduleNotificationWorker(userId)
 
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, CalendarFragment())
+            .commit()
+    }
     }
 
     private fun scheduleNotificationWorker(userId: Int) {
-        val workManager = WorkManager.getInstance(applicationContext)
+        //val workManager = WorkManager.getInstance(applicationContext)
 
         val workRequest = PeriodicWorkRequestBuilder<DJGigWorker>(1, TimeUnit.DAYS)
             .setInputData(workDataOf("userId" to userId))
             .build()
 
-        workManager.enqueueUniquePeriodicWork(
-            "DJGigNotifications",
-            ExistingPeriodicWorkPolicy.UPDATE,
-            workRequest
-        )
+        //workManager.enqueueUniquePeriodicWork(
+        //    "DJGigNotifications",
+        //    ExistingPeriodicWorkPolicy.UPDATE,
+        //    workRequest
+        //)
     }
-}
+

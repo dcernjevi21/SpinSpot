@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     //id("org.jetbrains.kotlin.android")
+    //id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -28,7 +29,7 @@ android {
         }
     }
     compileOptions {
-
+        //coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -40,7 +41,9 @@ android {
 
 dependencies {
     implementation(libs.androidx.ui.android)
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    implementation ("io.github.wojciechosak:calendar:1.0.1")
+    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.1")
+    implementation("com.kizitonwose.calendar:view:2.0.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

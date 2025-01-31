@@ -1,6 +1,6 @@
 pluginManagement {
     repositories {
-        maven { url = uri("https://jitpack.io") }
+        maven { url = uri("https://repo.maven.apache.org/maven2/") }
         google {
             content {
                 includeGroupByRegex("com\\.android.*")

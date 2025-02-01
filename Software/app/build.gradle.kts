@@ -41,9 +41,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.ui.android)
-    implementation ("io.github.wojciechosak:calendar:1.0.1")
-    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.1")
-    implementation("com.kizitonwose.calendar:view:2.0.1")
+    implementation ("com.applandeo:material-calendar-view:1.9.0-rc03")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

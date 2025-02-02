@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".SearchActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:background  ="@color/blue_primary"
+        android:title="@string/statistics"
+        android:titleTextColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,18 +29,18 @@
             android:id="@+id/llUserProfileTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
             android:layout_marginTop="38dp"
             android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             android:padding="12dp">
 
             <ImageView
                 android:id="@+id/ivIconUserProfile"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_baseline_account_login"
-                android:contentDescription="@string/my_profile" />
+                android:contentDescription="@string/my_profile"
+                android:src="@drawable/ic_baseline_account_login" />
 
             <TextView
                 android:id="@+id/tvUserProfileTitle"
@@ -51,12 +62,13 @@
             android:id="@+id/enableNotifications"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:layout_marginBottom="22dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginBottom="0dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
 
 
             <ImageView
@@ -86,14 +98,14 @@
             android:id="@+id/llDeleteAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="12dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="11dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="11dp"
-            android:layout_marginBottom="11dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
 
 
             <ImageView
@@ -106,8 +118,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/deleteAcc"
-                android:textSize="22sp"
-                android:textColor="@color/blue_primary" />
+                android:textColor="@color/blue_primary"
+                android:textSize="22sp" />
         </LinearLayout>
 
         <View
@@ -119,12 +131,12 @@
             android:id="@+id/llLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="12dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="11dp">
 
@@ -138,8 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/odjaviSe"
-                android:textSize="22sp"
-                android:textColor="@color/blue_primary" />
+                android:textColor="@color/blue_primary"
+                android:textSize="22sp" />
         </LinearLayout>
 
         <View
@@ -151,12 +163,12 @@
             android:id="@+id/tvAppVersion"
             android:layout_width="match_parent"
             android:layout_height="40sp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="220dp"
+            android:gravity="center"
             android:text="@string/verzijaAplikacije"
             android:textSize="20sp"
-            android:textColor="@color/blue_primary"
-            android:gravity="center"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="220dp"/>
+            android:textColor="@color/blue_primary"/>
 
     </LinearLayout>
 

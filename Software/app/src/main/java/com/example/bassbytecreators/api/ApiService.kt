@@ -48,10 +48,6 @@ interface ApiService {
     @GET("get_all_gigs.php")
     fun getAllGigs(): Call<List<DJGig>>
 
-    @GET("get_all_gigs_dates.php")
-    fun getAllGigsDates() : Call<List<String>>
-
-
     @GET("get_DJs.php")
     fun getDJs(
         @Query("name") name: String?

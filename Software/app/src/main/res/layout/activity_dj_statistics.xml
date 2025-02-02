@@ -6,7 +6,7 @@
     android:id="@+id/nav_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_theme_background"
+    android:background="@color/black"
     tools:context=".DJStatisticsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:background  ="@color/blue_primary"
+            android:background ="@color/blue_primary"
             android:title="@string/statistics"
             android:titleTextColor="@color/white"
             app:layout_constraintTop_toTopOf="parent"

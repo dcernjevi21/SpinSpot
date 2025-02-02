@@ -11,19 +11,40 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@color/white">
+        android:background="@color/black">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/llUserPersonalDetailsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvDJMyProfileTitle"
-            android:padding="12dp"
-            android:text="@string/my_profile"
-            android:textSize="30sp"
-            android:textColor="@color/black"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="38dp"
             android:gravity="center"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="20dp"/>
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/ivIconUserPersonalDetailsTitle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:contentDescription="@string/personal_details_icon"
+                android:src="@drawable/ic_baseline_account_login" />
+
+            <TextView
+                android:id="@+id/tvUserMyProfileTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/my_profile"
+                android:textColor="@color/blue_primary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue_primary"/>
 
         <LinearLayout
             android:id="@+id/llUserPersonalDetailsRow"
@@ -35,13 +56,14 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginBottom="22dp">
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="11dp">
 
             <ImageView
-                android:id="@+id/ivIconDJPersonalDetails"
+                android:id="@+id/ivUserPersonalDetailsIcon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_baseline_account_circle_24"
+                android:src="@drawable/ic_baseline_account_login"
                 android:contentDescription="@string/personal_details_icon" />
 
             <TextView
@@ -51,8 +73,13 @@
                 android:layout_marginStart="16dp"
                 android:text="@string/personal_details"
                 android:textSize="22sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/blue_primary" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue_primary"/>
 
         <LinearLayout
             android:id="@+id/llUserSettingsRow"
@@ -64,7 +91,8 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginBottom="8dp">
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="11dp">
 
             <ImageView
                 android:id="@+id/ivIconSettings"
@@ -80,21 +108,16 @@
                 android:layout_marginStart="16dp"
                 android:text="@string/settings"
                 android:textSize="22sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/blue_primary" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="310dp"
-            android:padding="12dp"
-            android:text="@string/natrag"
-            android:textSize="18sp" />
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue_primary"/>
 
     </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

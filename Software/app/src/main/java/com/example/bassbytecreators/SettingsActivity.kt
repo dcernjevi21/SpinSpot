@@ -29,7 +29,6 @@ class SettingsActivity : BaseActivity() {
 
         val deleteAccountLayout = findViewById<LinearLayout>(R.id.llDeleteAccount)
         val logoutLayout = findViewById<LinearLayout>(R.id.llLogout)
-        val btnBack = findViewById<Button>(R.id.btnBack)
 
         deleteAccountLayout.setOnClickListener {
             showDeleteAccountConfirmation()
@@ -37,10 +36,6 @@ class SettingsActivity : BaseActivity() {
 
         logoutLayout.setOnClickListener {
             logout()
-        }
-
-        btnBack.setOnClickListener {
-            finish()
         }
     }
 

@@ -83,6 +83,12 @@
                 android:scrollbars="vertical"
                 android:clipToPadding="false" />
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView2"
+                android:name="com.example.bassbytecreators.Fragments.DjCalendarFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/btnReviewDJ"
                 android:layout_width="match_parent"

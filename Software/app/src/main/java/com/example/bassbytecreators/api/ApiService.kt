@@ -2,6 +2,7 @@ package com.example.bassbytecreators.api
 
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.DJperson
+import com.example.bassbytecreators.entities.Date
 import com.example.bassbytecreators.entities.Review
 import com.example.bassbytecreators.entities.User
 import okhttp3.ResponseBody
@@ -22,6 +23,8 @@ interface ApiService {
         @Query("end_date") endDate: String
     ): Call<List<DJGig>>
 
+    @GET("get_all_gigs_dates.php")
+    fun getAllGigsDates() : Call<List<Date>>
 
     @POST("gigs.php")
     fun addNewGig(
@@ -32,15 +35,29 @@ interface ApiService {
     suspend fun getGigs(
         @Query("user_id") userId: Int): List<DJGig>
 
+    @GET("gigs.php")
+    fun getGigsSync(
+        @Query("user_id") userId: Int): Call<List<DJGig>>
+
+
+
     @GET("get_single_dj.php")
     fun getDj(
         @Query("id") id: String
     ): Call<List<DJperson>>
 
+    @GET("get_all_gigs.php")
+    fun getAllGigs(): Call<List<DJGig>>
+
+    @GET("get_all_gigs_dates.php")
+    fun getAllGigsDates() : Call<List<String>>
+
+
     @GET("get_DJs.php")
     fun getDJs(
         @Query("name") name: String?
     ): Call<List<DJperson>>
+
 
     @GET("get_upcoming_gigs.php")
     fun getUpcomingGigs(

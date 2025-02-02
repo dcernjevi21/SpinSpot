@@ -1,23 +1,30 @@
 // CalendarFragment.kt
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.applandeo.materialcalendarview.CalendarView
 import com.applandeo.materialcalendarview.EventDay
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import com.example.bassbytecreators.R
 import com.example.bassbytecreators.api.RetrofitClient
 import com.example.bassbytecreators.api.RetrofitClient.apiService
 import com.example.bassbytecreators.entities.DJGig
+import com.example.bassbytecreators.entities.EventsDates
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CalendarFragment : Fragment() {
@@ -40,6 +47,41 @@ class CalendarFragment : Fragment() {
         calendarView = view.findViewById(R.id.calendarView)
         Log.d("Retrofit", "Došli smo do retrofita1")
         fetchAndDisplayDates()
+        calendarView.setOnDayClickListener(object : OnDayClickListener {
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onDayClick(eventDay: EventDay) {
+                val date = eventDay.calendar.time
+                val formattedDate = LocalDate.of(
+                    eventDay.calendar.get(Calendar.YEAR),
+                    eventDay.calendar.get(Calendar.MONTH) + 1,
+                    eventDay.calendar.get(Calendar.DAY_OF_MONTH)
+                ).format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-DD"))
+                Log.d("Datum je ", formattedDate)
+
+
+                fetchEventsForDate(formattedDate)
+            }
+        })
+    }
+
+    private fun fetchEventsForDate(formattedDate: String) {
+        RetrofitClient.apiService.getEventsForDate(formattedDate).enqueue(object : Callback<List<EventsDates>> {
+            override fun onResponse(
+                call: Call<List<EventsDates>>,
+                response: Response<List<EventsDates>>
+            ) {
+                if (response.isSuccessful) {
+                    val events = response.body() ?: emptyList()
+                    EventDialog(formattedDate, events).show(childFragmentManager, "EventDialog")
+                } else {
+                    Log.d("Sheggy greska", "Neuspješan odgovor: ${response.errorBody()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<EventsDates>>, t: Throwable) {
+                Log.d("Sheggy greska", t.message.toString())
+            }
+        })
     }
 
     private fun fetchAndDisplayDates()  {

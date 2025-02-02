@@ -48,6 +48,7 @@ class MainActivity : BaseActivity() {
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)
+        //komentar
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragmentContainerView, CalendarFragment(), "rageComicList")

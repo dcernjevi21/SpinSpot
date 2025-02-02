@@ -65,11 +65,6 @@ class AddGigsActivity : BaseActivity() {
 
         setupNavigationDrawer(navView)
 
-        val btnBack = findViewById<Button>(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish()
-        }
-
         fabAddGig = findViewById(R.id.fab_add_gig)
         fabAddGig.setOnClickListener {
             showDialog()
@@ -88,23 +83,24 @@ class AddGigsActivity : BaseActivity() {
             .setPositiveButton(getString(R.string.add_new_gig)) { _, _ ->
                 var newGig = dialogHelper.buildGig()
 
-                //za provjeru na zaslonu
-                txt1 = findViewById(R.id.textView2)
-                txt2 = findViewById(R.id.textView3)
-                txt3 = findViewById(R.id.textView4)
-                txt4 = findViewById(R.id.textView5)
-                txt5 = findViewById(R.id.textView6)
-                txt10 = findViewById(R.id.textView10) //kraj
-                txt6 = findViewById(R.id.textView7)
-                txt7 = findViewById(R.id.textView8) //opis
-                txt1.text = "${txt1.text}: ${newGig.gigDate}"
-                txt2.text = "${txt2.text}: ${newGig.location}"
-                txt3.text = "${txt3.text}: ${newGig.gigType}"
-                txt4.text = "${txt4.text}: ${newGig.name}"
-                txt5.text = "${txt5.text}: ${newGig.gigStartTime}"
-                txt10.text = "${txt10.text}: ${newGig.gigEndTime}"
-                txt6.text = "${txt6.text}: ${newGig.gigFee.toString()}"
-                txt7.text = "${txt7.text}: ${newGig.description}"
+                val tvDate = findViewById<TextView>(R.id.textViewDate)
+                val tvLocation = findViewById<TextView>(R.id.textViewLocation)
+                val tvGigType = findViewById<TextView>(R.id.textViewGigType)
+                val tvGigHost = findViewById<TextView>(R.id.textViewGigHost)
+                val tvStartTime = findViewById<TextView>(R.id.textViewStartTime)
+                val tvEndTime = findViewById<TextView>(R.id.textViewEndTime)
+                val tvGigFee = findViewById<TextView>(R.id.textViewGigFee)
+                val tvDescription = findViewById<TextView>(R.id.textViewDescription)
+
+// Postavi tekst u TextView-ove s opisima i vrednostima iz newGig
+                tvDate.text = "Datum: ${newGig.gigDate}"
+                tvLocation.text = "Lokacija: ${newGig.location}"
+                tvGigType.text = "Tip: ${newGig.gigType}"
+                tvGigHost.text = "Host: ${newGig.name}"
+                tvStartTime.text = "Početak: ${newGig.gigStartTime}"
+                tvEndTime.text = "Kraj: ${newGig.gigEndTime}"
+                tvGigFee.text = "Naknada: ${newGig.gigFee} €"
+                tvDescription.text = "Opis: ${newGig.description}"
 
 
                 try {

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,60 +11,82 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         tools:context=".ReviewActivity">
 
-        <TextView
-            android:id="@+id/tvPublishReviewTitle"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/llReviewTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
-            android:layout_marginBottom="223dp"
+            android:layout_marginTop="80dp"
             android:gravity="center"
-            android:text="@string/objavi_recenziju"
-            android:textSize="35sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/etReviewOpis"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivReviewIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_baseline_checklist_24"
+                android:contentDescription="@string/objavi_recenziju" />
+
+            <TextView
+                android:id="@+id/tvPublishReviewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/objavi_recenziju"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue_primary" />
+        </LinearLayout>
 
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="92dp"
+            android:layout_marginTop="80dp"
             android:numStars="5"
             android:stepSize="1"
+            android:progressTint="@color/blue_primary"
+            android:progressBackgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPublishReviewTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/llReviewTitle" />
 
         <EditText
             android:id="@+id/etReviewOpis"
             android:layout_width="328dp"
             android:layout_height="0dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="229dp"
             android:gravity="top"
             android:hint="@string/napisite_svoju_recenziju"
+            android:textColorHint="#90FFFFFF"
             android:inputType="textMultiLine"
             android:minLines="4"
+            android:textColor="@color/white"
+            android:padding="20dp"
+            android:background="@drawable/item_border"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPublishReviewTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSubmitReview"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="50dp"
-            android:text="@string/objavi_recenziju"
+            android:layout_marginBottom="80dp"
+            android:text="Objavi"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:padding="12dp"
+            android:backgroundTint="@color/blue_primary"
+            app:cornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

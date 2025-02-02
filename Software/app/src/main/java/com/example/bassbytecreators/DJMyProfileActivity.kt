@@ -24,11 +24,6 @@ class DJMyProfileActivity : BaseActivity() {
             return
         }
 
-        val btnBack = findViewById<Button>(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish()
-        }
-
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)

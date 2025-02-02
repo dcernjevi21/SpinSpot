@@ -1,0 +1,14 @@
+<!-- calendar_dot_indicator.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:top="35dp"
+        android:left="15dp"
+        android:right="15dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/md_theme_primary_mediumContrast" />
+            <size
+                android:width="8dp"
+                android:height="8dp" />
+        </shape>
+    </item>
+</layer-list>

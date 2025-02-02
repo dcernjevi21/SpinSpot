@@ -9,6 +9,7 @@ import com.example.bassbytecreators.DJStatisticsActivity
 import com.example.bassbytecreators.Fragments.DJDetailActivity
 import com.example.bassbytecreators.LoginActivity
 import com.example.bassbytecreators.MainActivity
+import com.example.bassbytecreators.OrderSongActivity
 import com.example.bassbytecreators.R
 import com.example.bassbytecreators.RegistrationActivity
 import com.example.bassbytecreators.SearchActivity
@@ -68,6 +69,14 @@ abstract class BaseActivity : AppCompatActivity() {
                     drawerLayout.closeDrawers()
                     true
                 }
+                R.id.nav_order_song -> {
+                    val intent = Intent(this, OrderSongActivity::class.java)
+                    intent.putExtra("user_id", userId)
+                    startActivity(intent)
+                    drawerLayout.closeDrawers()
+                    true
+                }
+
                 R.id.nav_djstatistics -> {
                     val intent = Intent(this, DJStatisticsActivity::class.java)
                     intent.putExtra("user_id", userId)

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/nav_drawer_layout">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Naziv DJ-a -->
+    <TextView
+        android:id="@+id/djName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Naziv DJ-a"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Žanr DJ-a -->
+    <TextView
+        android:id="@+id/djGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Žanr"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp" />
+
+    <!-- Gumb za naručivanje pjesme -->
+    <Button
+        android:id="@+id/btnOrderSong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Naruči pjesmu"
+        android:layout_marginTop="24dp"
+        android:padding="16dp" />
+
+</LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

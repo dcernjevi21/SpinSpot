@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/alt_route/baseline_alt_route_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/back_hand/baseline_back_hand_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="baseline_alt_route_24" />
+                            <entry key="outputName" value="baseline_back_hand_24" />
                             <entry key="sourceFile" value="C:\Users\Nikola\AndroidStudioProjects\rampu24-bassbyte-creators\rampu24-bassbyte-creators" />
                           </map>
                         </option>

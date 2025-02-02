@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Polje za unos imena pjesme -->
+    <EditText
+        android:id="@+id/etSongName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ime pjesme"
+        android:inputType="text" />
+
+    <!-- Polje za unos cijene -->
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cijena (€)"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="16dp" />
+
+    <!-- Gumb za potvrdu narudžbe -->
+    <Button
+        android:id="@+id/btnConfirmOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Potvrdi narudžbu"
+        android:layout_marginTop="24dp" />
+
+</LinearLayout>

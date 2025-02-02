@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Naziv DJ-a -->
+    <TextView
+        android:id="@+id/djName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Naziv DJ-a"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Žanr DJ-a -->
+    <TextView
+        android:id="@+id/djGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Žanr"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp" />
+
+</LinearLayout>

@@ -23,8 +23,6 @@ interface ApiService {
         @Query("end_date") endDate: String
     ): Call<List<DJGig>>
 
-    @GET("get_all_gigs_dates.php")
-    fun getAllGigsDates() : Call<List<Date>>
 
     @POST("gigs.php")
     fun addNewGig(

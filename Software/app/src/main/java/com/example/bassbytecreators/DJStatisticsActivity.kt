@@ -1,9 +1,7 @@
 package com.example.bassbytecreators
 
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import BaseActivity
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Canvas
@@ -11,39 +9,35 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.icu.util.Calendar
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.reflect.Type
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
-
-//za rad s bazom
-import com.example.bassbytecreators.helpers.RetrofitClient
 import com.example.bassbytecreators.entities.DJGig
-import com.example.bassbytecreators.helpers.RetrofitClient.apiService
+import com.example.bassbytecreators.api.RetrofitClient.apiService
 import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DJStatisticsActivity : AppCompatActivity() {
+class DJStatisticsActivity : BaseActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
     private var userId: Int = -1
 
     private val selectedStartDate: Calendar = Calendar.getInstance()
@@ -62,11 +56,12 @@ class DJStatisticsActivity : AppCompatActivity() {
     // constant code for runtime permissions.
     var PERMISSION_CODE = 101
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dj_statistics)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.navigation_view)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.nav_view)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -79,15 +74,9 @@ class DJStatisticsActivity : AppCompatActivity() {
             return
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
-
-        setupNavigationMenu(navigationView)
-
-        val btnBack = findViewById<Button>(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish() // Close the activity and return to the previous screen
-        }
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
 
         startDateSelection = findViewById(R.id.et_dj_statistics_start_date)
         endDateSelection = findViewById(R.id.et_dj_statistics_end_date)
@@ -108,30 +97,7 @@ class DJStatisticsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupNavigationMenu(navigationView: NavigationView) {
-        val menu = navigationView.menu
-        menu.findItem(R.id.nav_login)?.isVisible = false
-        menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = true
-
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_my_profile -> {
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                R.id.nav_djstatistics -> {
-                    val intent = Intent(this, DJStatisticsActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-    fun onDateRangeSelected() {
+    private fun onDateRangeSelected() {
         fetchGigsAndUpdateUI()
         //Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedStartDate.time)}", Toast.LENGTH_SHORT).show()
         //Toast.makeText(this, "Datum odabran: ${sdfDate.format(selectedEndDate.time)}", Toast.LENGTH_LONG).show()
@@ -140,11 +106,8 @@ class DJStatisticsActivity : AppCompatActivity() {
     private fun fetchGigsAndUpdateUI() {
         val startDate = sdfDate2.format(selectedStartDate.time)
         val endDate = sdfDate2.format(selectedEndDate.time)
-        val intent = Intent(this, DJReviewsActivity::class.java)
-        intent.putExtra("dj_id", userId)
-        startActivity(intent)
         Log.d("DJStatistics", "Šaljem userId i datume: userId: $userId, start date: $startDate, end date: $endDate")
-        RetrofitClient.apiService.getGigs(userId, startDate, endDate).enqueue(object : Callback<List<DJGig>> {
+        apiService.getGigsStats(userId, startDate, endDate).enqueue(object : Callback<List<DJGig>> {
             override fun onResponse(call: Call<List<DJGig>>, response: Response<List<DJGig>>) {
                 Log.d("API_CALL", "URL: ${call.request()}")
                 if (response.isSuccessful) {
@@ -270,16 +233,18 @@ class DJStatisticsActivity : AppCompatActivity() {
         pdfDocument.close()
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     fun checkPermission(): Boolean {
-        var writeStoragePermission = ContextCompat.checkSelfPermission(applicationContext, READ_EXTERNAL_STORAGE)
-
-        var readStoragePermission = ContextCompat.checkSelfPermission(applicationContext, READ_EXTERNAL_STORAGE)
-
-        return writeStoragePermission == PackageManager.PERMISSION_GRANTED && readStoragePermission == PackageManager.PERMISSION_GRANTED
+        return Environment.isExternalStorageManager()
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     fun requestPermission() {
-        ActivityCompat.requestPermissions(this, arrayOf(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE), PERMISSION_CODE)
+        if (!Environment.isExternalStorageManager()) {
+            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+            intent.data = Uri.parse("package:" + applicationContext.packageName)
+            startActivity(intent)
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -289,25 +254,12 @@ class DJStatisticsActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        // on below line we are checking if the
-        // request code is equal to permission code.
         if (requestCode == PERMISSION_CODE) {
-
-            // on below line we are checking if result size is > 0
             if (grantResults.size > 0) {
-
-                // on below line we are checking
-                // if both the permissions are granted.
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1]
                     == PackageManager.PERMISSION_GRANTED) {
-
-                    // if permissions are granted we are displaying a toast message.
                     Toast.makeText(this, "Permission Granted..", Toast.LENGTH_SHORT).show()
-
                 } else {
-
-                    // if permissions are not granted we are
-                    // displaying a toast message as permission denied.
                     Toast.makeText(this, "Permission Denied..", Toast.LENGTH_SHORT).show()
                     finish()
                 }
@@ -322,7 +274,9 @@ class DJStatisticsActivity : AppCompatActivity() {
                     view.context,
                     { _, year, monthOfYear, dayOfMonth ->
                         selectedStartDate.set(year, monthOfYear, dayOfMonth)
-                        startDateSelection.setText(sdfDate.format(selectedStartDate.time).toString())
+                        startDateSelection.setText(
+                            sdfDate.format(selectedStartDate.time).toString()
+                        )
                         endDateSelection.requestFocus()
                     },
                     selectedStartDate.get(Calendar.YEAR),
@@ -355,6 +309,5 @@ class DJStatisticsActivity : AppCompatActivity() {
                 view.clearFocus()
             }
         }
-
     }
 }

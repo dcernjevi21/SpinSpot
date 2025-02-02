@@ -1,19 +1,23 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RatingBar
-import androidx.appcompat.app.AppCompatActivity
 import com.example.bassbytecreators.entities.Review
-import com.example.bassbytecreators.helpers.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ReviewActivity : AppCompatActivity() {
+class ReviewActivity : BaseActivity() {
+    private lateinit var navView: NavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_review)
@@ -24,6 +28,11 @@ class ReviewActivity : AppCompatActivity() {
 
         val djId = intent.getIntExtra("dj_id", -1)
         val userId = intent.getIntExtra("user_id", -1)
+        Log.d("ReviewActivity", "dj_id: $djId, user_id: $userId")
+
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
 
         btnSubmitReview.setOnClickListener {
             val rating = ratingBar.rating.toInt()

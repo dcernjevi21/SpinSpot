@@ -1,27 +1,24 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Menu
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bassbytecreators.adapters.SearchAdapter
 import com.example.bassbytecreators.entities.DJperson
-import com.example.bassbytecreators.helpers.MockDataLoader
-import com.example.bassbytecreators.helpers.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
+import com.google.android.material.navigation.NavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : BaseActivity() {
+    private lateinit var navView: NavigationView
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchEditText: EditText
     private lateinit var djAdapter: SearchAdapter
@@ -31,6 +28,11 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dj_search_layout)
+
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
+
         recyclerView = findViewById(R.id.dj_recyclerview_search)
         searchEditText = findViewById(R.id.pretrazivanjeTekst)
 

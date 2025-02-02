@@ -1,11 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/nav_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DJStatisticsActivity">
+    tools:context=".SearchActivity"
+    android:background="@color/md_theme_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,50 +18,63 @@
             android:id="@+id/tvStatistikaNaslov"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:gravity="center"
-            android:text="Statistika"
-            android:textSize="20sp"
+            android:text="@string/statistics"
             android:textStyle="bold"
+            android:textSize="40sp"
+            android:textColor="@color/md_theme_primary"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Početni datum -->
         <TextView
             android:id="@+id/tv_dj_statistics_start_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:text="Odaberite početni datum"
+            android:textSize="20sp"
+            android:textColor="@color/md_theme_onBackground"
+            android:text="@string/startDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvStatistikaNaslov" />
+            app:layout_constraintTop_toBottomOf="@id/tvStatistikaNaslov"
+            android:labelFor="@id/et_dj_statistics_start_date" />
 
         <EditText
             android:id="@+id/et_dj_statistics_start_date"
             android:layout_width="250dp"
             android:layout_height="42dp"
             android:inputType="date"
+            android:background="@color/md_theme_surface"
+            android:textColor="@color/md_theme_onSurface"
+            android:padding="8dp"
+            android:elevation="4dp"
             app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_start_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Završni datum -->
         <TextView
             android:id="@+id/tv_dj_statistics_end_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Odaberite završni datum"
+            android:text="@string/endDate"
+            android:textSize="20sp"
+            android:textColor="@color/md_theme_onBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_dj_statistics_start_date" />
+            app:layout_constraintTop_toBottomOf="@id/et_dj_statistics_start_date"
+            android:labelFor="@id/et_dj_statistics_end_date" />
 
         <EditText
             android:id="@+id/et_dj_statistics_end_date"
             android:layout_width="250dp"
             android:layout_height="42dp"
             android:inputType="date"
+            android:background="@color/md_theme_surface"
+            android:textColor="@color/md_theme_onSurface"
+            android:padding="8dp"
+            android:elevation="4dp"
             app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_end_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -71,7 +86,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-            android:text="Vaš broj gaži iznosi:"
+            android:textSize="20sp"
+            android:textColor="@color/md_theme_onBackground"
+            android:text="@string/gigCount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_dj_statistics_end_date" />
 
@@ -81,7 +98,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Ukupna zarada:"
+            android:textSize="20sp"
+            android:textColor="@color/md_theme_onBackground"
+            android:text="@string/totalEarnings"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_gig_number" />
 
@@ -91,7 +110,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="Najčešći tip gaže:"
+            android:textSize="20sp"
+            android:textColor="@color/md_theme_onBackground"
+            android:text="@string/mostCommonGigType"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_zarada" />
 
@@ -100,33 +121,27 @@
             android:id="@+id/btnGenerirajPdf"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="Generate PDF"
+            android:layout_marginTop="160dp"
+            android:text="@string/generatePdf"
             android:textAllCaps="false"
+            android:background="@color/md_theme_primary"
+            android:textColor="@color/md_theme_onPrimary"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_dj_statistics_gig_type" />
 
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="Povratak"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnGenerirajPdf" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- NavigationView -->
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/md_theme_surface"
+        app:itemTextColor="@color/md_theme_onSurface"
+        app:itemIconTint="@color/md_theme_primary"
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

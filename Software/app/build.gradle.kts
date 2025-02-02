@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     //id("org.jetbrains.kotlin.android")
+    //id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -28,6 +29,7 @@ android {
         }
     }
     compileOptions {
+        //coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -36,8 +38,10 @@ android {
     }
 }
 
-dependencies {
 
+dependencies {
+    implementation(libs.androidx.ui.android)
+    implementation ("com.applandeo:material-calendar-view:1.9.0-rc03")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -49,8 +53,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    //za zakazivanje zadataka
+    //for task scheduling zakazivanje zadataka
     implementation ("androidx.work:work-runtime-ktx:2.8.1")
+    // Kotlin Coroutines Core
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    // Kotlin Coroutines Android (za korištenje u Android kontekstu)
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

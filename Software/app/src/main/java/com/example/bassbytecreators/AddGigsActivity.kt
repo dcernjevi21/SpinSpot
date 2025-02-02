@@ -1,8 +1,7 @@
 package com.example.bassbytecreators
 
+import BaseActivity
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,14 +10,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.helpers.AddGigDialogHelper
-import com.example.bassbytecreators.helpers.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -30,10 +26,10 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class AddGigsActivity : AppCompatActivity() {
+class AddGigsActivity : BaseActivity() {
     private var userId: Int = -1
 
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
     private var sdfDate  = SimpleDateFormat("dd.MM.yyyy", Locale.US)
     private var sdfDate2 = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
@@ -45,7 +41,6 @@ class AddGigsActivity : AppCompatActivity() {
     private lateinit var txt5: TextView
     private lateinit var txt6: TextView
     private lateinit var txt7: TextView
-    private lateinit var txt8: TextView
     private lateinit var txt10: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,10 +60,10 @@ class AddGigsActivity : AppCompatActivity() {
             return
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
 
-        setupNavigationMenu(navigationView)
+        setupNavigationDrawer(navView)
 
         val btnBack = findViewById<Button>(R.id.btnBack)
         btnBack.setOnClickListener {
@@ -159,43 +154,4 @@ class AddGigsActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun setupNavigationMenu(navigationView: NavigationView) {
-        val menu = navigationView.menu
-        menu.findItem(R.id.nav_login)?.isVisible = false
-        menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = true
-
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_my_profile -> {
-                    drawerLayout.closeDrawers()
-                    true
-                }
-
-                R.id.nav_djstatistics -> {
-                    val intent = Intent(this, DJStatisticsActivity::class.java)
-                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                        .getInt("logged_in_user_id", -1) // Dohvati userId
-                    intent.putExtra("user_id", userId) // Proslijedi userId
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-
-                R.id.nav_addgigs -> {
-                    val intent = Intent(this, AddGigsActivity::class.java)
-                    val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-                        .getInt("logged_in_user_id", -1) // Dohvati userId
-                    intent.putExtra("user_id", userId) // Proslijedi userId
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-
-                else -> false
-            }
-        }
-    }
 }
-

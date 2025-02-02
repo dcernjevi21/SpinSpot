@@ -1,15 +1,16 @@
 package com.example.bassbytecreators
 
+import BaseActivity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 
-class DJMyProfileActivity : AppCompatActivity() {
-    private lateinit var drawerLayout: DrawerLayout
+class DJMyProfileActivity : BaseActivity() {
+    private lateinit var navView: NavigationView
     private var userId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,52 +24,37 @@ class DJMyProfileActivity : AppCompatActivity() {
             return
         }
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        val btnBack = findViewById<Button>(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish()
+        }
 
-        setupNavigationMenu(navigationView)
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
+
         setupProfileElements()
     }
 
-    private fun setupNavigationMenu(navigationView: NavigationView) {
-        val menu = navigationView.menu
-        menu.findItem(R.id.nav_login)?.isVisible = false
-        menu.findItem(R.id.nav_registration)?.isVisible = false
-        menu.findItem(R.id.nav_djstatistics)?.isVisible = true
-
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_my_profile -> {
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                R.id.nav_djstatistics -> {
-                    val intent = Intent(this, DJStatisticsActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawers()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
 
     private fun setupProfileElements() {
-        // Reviews section
+
         findViewById<LinearLayout>(R.id.llProfileReviewsRow).setOnClickListener {
             val intent = Intent(this, DJReviewsActivity::class.java)
             intent.putExtra("dj_id", userId)
             startActivity(intent)
         }
 
-        // Personal Details section
         findViewById<LinearLayout>(R.id.llDJPersonalDetailsRow).setOnClickListener {
-            Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DJPersonalDetailsActivity::class.java)
+            intent.putExtra("user_id", userId)
+            startActivity(intent)
         }
 
-        // Settings section
         findViewById<LinearLayout>(R.id.llSettingsRow).setOnClickListener {
-            Toast.makeText(this, "Dolazi uskoro...", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SettingsActivity::class.java)
+            intent.putExtra("user_id", userId)
+            startActivity(intent)
         }
     }
 }

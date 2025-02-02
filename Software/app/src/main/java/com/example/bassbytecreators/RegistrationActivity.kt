@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.entities.User
-import com.example.bassbytecreators.helpers.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import okhttp3.ResponseBody
@@ -28,12 +28,16 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
 
         val menu = navigationView.menu
         menu.findItem(R.id.nav_my_profile)?.isVisible = false
         menu.findItem(R.id.nav_djstatistics)?.isVisible = false
+        menu.findItem(R.id.nav_main)?.isVisible = false
+        menu.findItem(R.id.nav_addgigs)?.isVisible = false
+        menu.findItem(R.id.nav_search)?.isVisible = false
+
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -41,7 +45,7 @@ class RegistrationActivity : AppCompatActivity() {
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     drawerLayout.closeDrawers()
-
+                    true
                 }
                 R.id.nav_registration -> {
                     Snackbar.make(
@@ -49,9 +53,10 @@ class RegistrationActivity : AppCompatActivity() {
                         "Već ste na ekranu za registraciju.",
                         Snackbar.LENGTH_SHORT
                     ).show()
+                    true
                 }
+                else -> false
             }
-            true
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.registration_layout)) { v, insets ->
@@ -105,7 +110,6 @@ class RegistrationActivity : AppCompatActivity() {
                         Snackbar.LENGTH_LONG
                     ).show()
 
-                    // Navigate to LoginActivity
                     val intent = Intent(this@RegistrationActivity, LoginActivity::class.java)
                     startActivity(intent)
                     finish()

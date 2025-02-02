@@ -87,7 +87,7 @@ class CalendarFragment : Fragment() {
         return dates.map { calendar ->
             EventDay(calendar, indicator!!).apply {
                 // Opcija za bojanje cijelog dana
-                EventDay(calendar, R.color.purple_500)
+                EventDay(calendar, R.color.purple_501)
             }
         }
     }

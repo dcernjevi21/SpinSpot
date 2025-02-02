@@ -1,3 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-</resources>
+    <!-- Stil za EditText elemente -->
+    <style name="MyEditTextStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:background">@drawable/text_border</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">#90FFFFFF</item>
+        <item name="android:minHeight">55dp</item>
+    </style>
+
+    <!-- Stil za TextView elemente (naslovi i opisi) -->
+    <style name="MyTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <!-- Stil za naslove (veći tekst i bold) -->
+    <style name="MyHeadlineStyle" parent="MyTextViewStyle">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Stil za dugme -->
+    <style name="MyButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">250dp</item>    <item name="android:layout_height">wrap_content</item>    <item name="android:layout_marginTop">60dp</item>   <item name="android:textSize">20sp</item>   <item name="android:textAllCaps">false</item>   <item name="android:backgroundTint">@color/blue_primary</item>   <item name="android:textColor">@color/white</item></style>
+    </resources>

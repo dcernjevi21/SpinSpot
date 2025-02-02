@@ -1,6 +1,7 @@
 package com.example.bassbytecreators
 
 import BaseActivity
+import CalendarFragment
 import DJGigWorker
 import android.content.Context
 import android.content.Intent
@@ -47,6 +48,10 @@ class MainActivity : BaseActivity() {
         drawerLayout = findViewById(R.id.nav_drawer_layout)
         navView = findViewById(R.id.nav_view)
         setupNavigationDrawer(navView)
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContainerView, CalendarFragment(), "rageComicList")
+            .commit()
     }
 
     private fun scheduleNotificationWorker(userId: Int) {

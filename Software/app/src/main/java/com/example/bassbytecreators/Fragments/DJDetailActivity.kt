@@ -1,10 +1,11 @@
 package com.example.bassbytecreators.Fragments
-
 import BaseActivity
+import DJGigWorker
 import GigAdapter
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import com.example.bassbytecreators.R
 import android.widget.TextView
@@ -13,26 +14,31 @@ import android.util.Log
 import android.view.Window
 import android.widget.Button
 import android.widget.CalendarView
-import android.widget.LinearLayout
 import android.widget.NumberPicker
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.example.bassbytecreators.ReviewActivity
-import com.example.bassbytecreators.UserPersonalDetailsActivity
 import com.example.bassbytecreators.entities.DJGig
 import com.example.bassbytecreators.entities.DJperson
-import com.example.bassbytecreators.helpers.RetrofitClient
+import com.example.bassbytecreators.api.RetrofitClient
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
 class DJDetailActivity : BaseActivity(){
+    private lateinit var navView: NavigationView
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var gigAdapter: GigAdapter
     private var id_od_dja =  ""
@@ -44,7 +50,7 @@ class DJDetailActivity : BaseActivity(){
         recyclerView = findViewById(R.id.gigsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         //recyclerView.layoutManager = LinearLayoutManager(this)
-        // Dobivanje podataka iz I  ntenta
+        // Dobivanje podataka iz Intenta
         val btnChooseMonth: Button = findViewById<Button>(R.id.btnChooseMonth)
         val btnReviewDJ: Button = findViewById<Button>(R.id.btnReviewDJ)
         gigAdapter = GigAdapter(emptyList())
@@ -56,6 +62,18 @@ class DJDetailActivity : BaseActivity(){
         Log.d("DJ ID u detaljima", djId.toString())
         val userId = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
             .getInt("logged_in_user_id", -1)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 1001)
+            }
+        }
+        scheduleNotificationWorker(userId)
+
+        drawerLayout = findViewById(R.id.nav_drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        setupNavigationDrawer(navView)
+
         btnReviewDJ.setOnClickListener {
             Log.d("DJDetailActivity", "dj_id: $djId, user_id: $userId")
             if(dj_id != userId)
@@ -79,7 +97,6 @@ class DJDetailActivity : BaseActivity(){
             showMonthPickerDialog()
         }
         RetrofitClient.apiService.getDj(djId.toString()).enqueue(object : Callback<List<DJperson>> {
-
             override fun onResponse(
                 call: Call<List<DJperson>>,
                 response: Response<List<DJperson>>
@@ -99,7 +116,6 @@ class DJDetailActivity : BaseActivity(){
                     }
                 }
             }
-
             override fun onFailure(call: Call<List<DJperson>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
@@ -191,5 +207,17 @@ class DJDetailActivity : BaseActivity(){
         val lastDay = yearMonth.atEndOfMonth()
         return Pair(firstDay, lastDay)
     }
+    private fun scheduleNotificationWorker(userId: Int) {
+        val workManager = WorkManager.getInstance(applicationContext)
 
+        val workRequest = PeriodicWorkRequestBuilder<DJGigWorker>(1, TimeUnit.DAYS)
+            .setInputData(workDataOf("userId" to userId))
+            .build()
+
+        workManager.enqueueUniquePeriodicWork(
+            "DJGigNotifications",
+            ExistingPeriodicWorkPolicy.UPDATE,
+            workRequest
+        )
+    }
 }

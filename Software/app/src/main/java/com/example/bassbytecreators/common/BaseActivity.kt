@@ -6,6 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.bassbytecreators.AddGigsActivity
 import com.example.bassbytecreators.DJMyProfileActivity
 import com.example.bassbytecreators.DJStatisticsActivity
+import com.example.bassbytecreators.Fragments.DJDetailActivity
 import com.example.bassbytecreators.LoginActivity
 import com.example.bassbytecreators.MainActivity
 import com.example.bassbytecreators.R
@@ -37,7 +38,6 @@ abstract class BaseActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_my_profile)?.isVisible = isLoggedIn
         menu.findItem(R.id.nav_search)?.isVisible = isLoggedIn
 
-        // Sakrij "Add Gigs" i "Statistics" za korisnike (userRole == "Korisnik")
         if (userRole == "Korisnik") {
             menu.findItem(R.id.nav_addgigs)?.isVisible = false
             menu.findItem(R.id.nav_djstatistics)?.isVisible = false
@@ -87,11 +87,22 @@ abstract class BaseActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_main -> {
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("user_id", userId)
-                    intent.putExtra("USER_ROLE", userRole)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                    startActivity(intent)
+                    when (userRole) {
+                    "DJ" -> {
+                        val intent = Intent(this, DJDetailActivity::class.java)
+                        intent.putExtra("user_id", userId)
+                        intent.putExtra("USER_ROLE", userRole)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                        startActivity(intent)
+                    }
+                    "Korisnik" -> {
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("user_id", userId)
+                        intent.putExtra("USER_ROLE", userRole)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                        startActivity(intent)
+                    }
+                }
                     drawerLayout.closeDrawers()
                     true
                 }

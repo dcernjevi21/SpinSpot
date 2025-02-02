@@ -28,6 +28,36 @@
             android:layout_marginTop="20dp"/>
 
         <LinearLayout
+            android:id="@+id/enableNotifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="22dp">
+
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_search" />
+
+            <CheckBox
+                android:id="@+id/enableNotificationsCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:buttonTint="@color/blue_primary"
+                android:checked="false"
+                android:text="Aktiviraj notifikacije"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/llDeleteAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,6 +68,7 @@
             android:clickable="true"
             android:focusable="true"
             android:layout_marginBottom="22dp">
+
 
             <ImageView
                 android:layout_width="48dp"

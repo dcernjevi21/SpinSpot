@@ -43,16 +43,11 @@ class UserPersonalDetailsActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         btnSaveChanges = findViewById(R.id.btnSaveChanges)
-        btnBack = findViewById(R.id.btnBack)
     }
 
     private fun setupClickListeners() {
         btnSaveChanges.setOnClickListener {
             updateUserData()
-        }
-
-        btnBack.setOnClickListener {
-            finish()
         }
     }
 

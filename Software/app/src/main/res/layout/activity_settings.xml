@@ -44,7 +44,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:background="@color/blue_primary" />
 
         <LinearLayout
@@ -53,17 +53,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="12dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginBottom="22dp">
+            android:layout_marginBottom="0dp">
 
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_search" />
+                android:src="@drawable/ic_search_blue"
+                android:layout_marginStart="16dp"/>
 
             <CheckBox
                 android:id="@+id/enableNotificationsCheckbox"
@@ -74,9 +74,14 @@
                 android:buttonTint="@color/blue_primary"
                 android:checked="false"
                 android:text="Aktiviraj notifikacije"
-                android:textSize="18sp" />
+                android:textColor="@color/blue_primary"
+                android:layout_marginStart="5dp"
+                android:textSize="22sp" />
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/blue_primary" />
         <LinearLayout
             android:id="@+id/llDeleteAccount"
             android:layout_width="match_parent"
@@ -120,7 +125,7 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="12dp"
             android:layout_marginBottom="11dp">
 
             <ImageView
@@ -145,9 +150,9 @@
         <TextView
             android:id="@+id/tvAppVersion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40sp"
             android:text="@string/verzijaAplikacije"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textColor="@color/blue_primary"
             android:gravity="center"
             android:layout_marginTop="50dp"

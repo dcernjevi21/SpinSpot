@@ -32,6 +32,12 @@ interface ApiService {
     suspend fun getGigs(
         @Query("user_id") userId: Int): List<DJGig>
 
+    @GET("gigs.php")
+    fun getGigsSync(
+        @Query("user_id") userId: Int): Call<List<DJGig>>
+
+
+
     @GET("get_single_dj.php")
     fun getDj(
         @Query("id") id: String

@@ -123,6 +123,12 @@ class DJDetailActivity : BaseActivity(){
         // Postavljanje podataka u tekstualne prikaze
         findViewById<TextView>(R.id.djName).text = djName
         findViewById<TextView>(R.id.djGenre).text = djGenre
+        var fragment = DjCalendarFragment()
+        fragment.fetchAndDisplayDates(id_od_dja)
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContainerView2, fragment)
+            .commit()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
